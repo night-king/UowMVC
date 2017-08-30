@@ -322,7 +322,7 @@
     <Icon>&lt;i class="fa ifa fa-sign-out"&gt;&lt;/i&gt;</Icon>
     <OpenStyle>2</OpenStyle>
     <IsMustSelected>false</IsMustSelected>
-    <URL>/LoginLog/Index</URL>
+    <URL>/LoginLog</URL>
     <ParentID>e772cf98-e193-4a1e-9e45-168a79ba9eec</ParentID>
     <ParentName>控制面板</ParentName>
     <Width>0</Width>
@@ -607,7 +607,7 @@
     <Icon>&lt;i class="fa ifa fa-gears"&gt;&lt;/i&gt;</Icon>
     <OpenStyle>2</OpenStyle>
     <IsMustSelected>false</IsMustSelected>
-    <URL>/Configrution/Index</URL>
+    <URL>/Configrution</URL>
     <ParentID>e772cf98-e193-4a1e-9e45-168a79ba9eec</ParentID>
     <ParentName>控制面板</ParentName>
     <Width>0</Width>
