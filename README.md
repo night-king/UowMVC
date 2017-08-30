@@ -22,10 +22,3 @@ Wiki: https://github.com/night-king/UowMVC/wiki
 2.项目发布后请删除下方“初始化菜单”按钮。
 
 3.欢迎加入讨论组：279717371（敲门砖：UowMVC）
-
-系统预览：
- 1.PC端：
-<img src="http://uowmvc.deepleo.com/1.png"/>
-
-2. 移动端：
-<img src="http://uowmvc.deepleo.com/2.png"/>
