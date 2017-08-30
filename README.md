@@ -1,8 +1,8 @@
 # UowMVC
 
-A simple, lightweight web development framework base on Unit of work pattern. 
+A simple, lightweight ASP.net MVC framework base on Unit of work pattern. 
 
-一个简单的、轻量级的基于Unit of work工作单元模式的web快速开发框架。
+一个简单的、轻量级的基于Unit of work工作单元模式的ASP.net MVC快速开发框架。
 
 Demo: http://uowmvc.deepleo.com  admin 123456
 
