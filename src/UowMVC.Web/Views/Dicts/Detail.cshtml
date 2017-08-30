@@ -1,0 +1,39 @@
+﻿@using UowMVC.Models;
+@model DictViewModel
+@{
+    ViewBag.Title = "";
+}
+
+<form method="post" class="form-horizontal form-bordered">
+    <div class="form-group">
+        <div class="col-sm-12">
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    @Html.HiddenFor(x => x.IndexID)
+    <div class="form-group">
+        @Html.LabelFor(x => x.No, new { @class = "col-sm-3 control-label" })
+        <div class="col-sm-7">
+            <span>@Model.No</span>
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(x => x.Key, new { @class = "col-sm-3 control-label" })
+        <div class="col-sm-7">
+            <span>@Model.Key</span>
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(x => x.Value, new { @class = "col-sm-3 control-label" })
+        <div class="col-sm-7">
+            <span>@Model.Value</span>
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(x => x.Description, new { @class = "col-sm-3 control-label" })
+        <div class="col-sm-7">
+            <span>@Model.Description</span>
+        </div>
+    </div>
+</form>
+

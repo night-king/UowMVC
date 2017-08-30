@@ -1,0 +1,48 @@
+﻿@using UowMVC.Repository;
+@using UowMVC.Domain;
+@using UowMVC.Models;
+@using UowMVC.Web.Helpers;
+
+@{
+    var menus = MenuConfig.Get(User);
+    var url = Request.Url.LocalPath.ToLower();
+    var Model = MenuHelper.Convert(menus, url);
+    <nav id="menu" class="nav-main" role="navigation" style="height:100%">
+        <ul class="nav nav-sidebar" style="padding:0">
+            <div class="panel-body text-center" style="padding:0">
+                <div class="flag" style="height:50px;padding:15px;font-size:15px;color:#fff">
+                    @{
+                        <span>@DateTime.Now.ToString("yyyy年MM月dd日")</span>
+                        string[] Day = new string[] { "星期日", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六" };
+                        string week = Day[Convert.ToInt32(DateTime.Now.DayOfWeek.ToString("d"))].ToString();
+                        <span>@week</span>
+                    }
+                </div>
+            </div>
+            @if (Model != null && Model.Items != null)
+            {
+                foreach (var menu in Model.Items)
+                {
+                    var active = menu.IsActive && url != "/result" ? "active opened nav-expanded" : "";
+                    <li class="nav-parent @active">
+                        <a>
+                            @Html.Raw(menu.Icon) <b>@menu.Text</b>
+                        </a>
+                        @if (menu.Items != null)
+                    {
+                            <ul class="nav nav-children">
+                                @foreach (var page in menu.Items)
+                                {
+                                    var pageActive = page.IsActive && url != "/result" ? "active opened" : "";
+                                    <li class="@pageActive">
+                                        <a onclick="javascript:openPage('@page.Action')" style="cursor:pointer">@Html.Raw(page.Icon)<span class="text"> @page.Text</span></a>
+                                    </li>
+                                }
+                            </ul>
+                        }
+                    </li>
+                }
+            }
+        </ul>
+    </nav>
+}

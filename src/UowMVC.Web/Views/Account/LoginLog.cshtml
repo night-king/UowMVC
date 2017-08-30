@@ -1,0 +1,103 @@
+﻿@using Webdiyer.WebControls.Mvc;
+@using UowMVC.Models;
+@model PagedList<LoginLogViewModel>
+@{
+    ViewBag.Title = "登录日志";
+}
+
+<div class="row">
+    <div class="col-xs-12 text-left ">
+        <div class="panel panel-default">
+            <div class="panel-heading">搜索</div>
+            <div class="panel-body">
+                <form class="form-inline form-bordered">
+                    <div class="form-group">
+                        <span>状态</span>
+                        <select id="result" name="result" class="form-control" size="1" style="width:100px;">
+                            <option value="-1">全部</option>
+                            <option value="1">成功</option>
+                            <option value="0">失败</option>
+                        </select>
+                        <script>
+                            $(function () {
+                                $("#result").val('@ViewBag.result');
+                            })
+                        </script>
+                    </div>
+                    <div class="form-group">
+                        <span>关键词</span>
+                        <input type="text" name="key" class="form-control" placeholder="关键词" value="@ViewBag.key">
+                    </div>
+                    <div class="form-group">
+                        <button class="btn btn-sm btn-info">确定</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-12 col-md-12 col-sm-12">
+        <div class="panel bk-bg-white">
+            <div class="panel-body">
+                <div class="table-responsive">
+                    <table class="single-select-table table table-striped table-responsive table-hover" style="margin-bottom:5px;">
+                        <thead class="active">
+                            <tr>
+                                <th>状态</th>
+                                <th>登录名</th>
+                                <th>IP</th>
+                                <th>归属地</th>
+                                <th>消息</th>
+                                <th>时间</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var m in Model)
+                            {
+                                <tr>
+                                    <td>
+                                        @if (m.Result)
+                                        {
+                                            <span >成功</span>
+                                        }
+                                        else
+                                        {
+                                            <span >失败</span>
+                                        }
+                                    </td>
+                                    <td>@m.UserName</td>
+                                    <td>@m.IP</td>
+                                    <td>@m.Place</td>
+                                    <td>
+                                      @m.Message
+                                    </td>
+                                    <td>@m.CreateAt</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                    <div class="row datatables-footer">
+                        <div class="col-sm-12 col-md-6">
+                            <div class="dataTables_info" id="datatable-default_info" role="status" aria-live="polite">
+                                第 @Model.CurrentPageIndex / @Model.TotalPageCount 页 共计 @Model.TotalItemCount 条
+                            </div>
+                        </div>
+                        <div class="col-sm-12 col-md-6">
+                            <div class="dataTables_paginate paging_bs_normal" id="datatable-default_paginate">
+                                @Html.Pager(Model, new PagerOptions
+                           {
+                               CssClass = "pagination",
+                               ShowMorePagerItems = true,
+                               CurrentPagerItemTemplate = "<li class=\"active\"><a href=\"#\">{0}</a></li>",
+                               PagerItemTemplate = "<li>{0}</li>",
+                               DisabledPagerItemTemplate = "<li class=\"disabled\"><a href=\"#\">{0}</a></li>",
+                           })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,59 @@
+﻿@using UowMVC.Web.Models;
+@using UowMVC.Domain;
+
+@model MailMenuModel
+<div class="panel">
+    <div class="panel-body bk-bg-very-light-gray mailbox-menu">
+        <a href="/Message/New" class="btn btn-primary btn-block">发送消息</a>
+        <ul>
+            <li>
+                <a href="/Message?type=1">
+                    <i class="fa fa fa-envelope"></i> 收件箱
+                    @if (Model.ReceiedNewCount > 0)
+                    {
+                        <span class="label label-primary">@Model.ReceiedNewCount</span>
+                    }
+                </a>
+            </li>
+            <li>
+                <a href="/Message?type=1&tag=1" style="margin-left:26px;">
+                    系统
+                    @if (Model.SystemNewCount > 0)
+                    {
+                        <span class="label  label-warning">@Model.SystemNewCount</span>
+
+                    }
+                </a>
+            </li>
+            <li>
+                <a href="/Message?type=1&tag=2" style="margin-left:26px;">
+                    私人
+                    @if (Model.PrivateNewCount > 0)
+                    {
+                        <span class="label  label-warning">@Model.PrivateNewCount</span>
+                    }
+                   
+                </a>
+            </li>
+            <li>
+                <a href="/Message?type=2"><i class="fa fa-envelope-o"></i>发件箱</a>
+            </li>
+            <li>
+                <a href="/Message?type=3">
+                    <i class="fa fa-folder"></i>草稿箱
+                    @if (Model.DraftCount > 0)
+                    {
+                        <span class="label label-warning">@Model.DraftCount</span>
+                    }
+                </a>
+            </li>
+            <li>
+                <a href="/Friend" style="color:#28a20a"><i class="fa fa-user"></i>联系人</a>
+            </li>
+            <li>
+                <a href="/Message?type=4"><i class="fa fa-trash-o"></i>回收站</a>
+            </li>
+
+        </ul>
+    </div>
+</div>

@@ -1,0 +1,77 @@
+﻿@using UowMVC.Models;
+@using Webdiyer.WebControls.Mvc;
+
+@model PagedList<NewsViewModel>
+@{
+    ViewBag.Title = "资讯管理";
+}
+<div class="row">
+    <div class="col-lg-12">
+        <div class="panel panel-default bk-bg-white">
+            <div class="panel-body">
+                <div class="table-responsive">
+                    <table class="mult-select-table table table-striped table-responsive table-hover" style="margin-bottom:5px;">
+                        <thead class="active">
+                            <tr class="active">
+                                <th><input type="checkbox" class="multi-check-all" />全选</th>
+                                <th>序号</th>
+                                <th>标题</th>
+                                <th>分类</th>
+                                <th>发布时间</th>
+                                <th>操作</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var m in Model)
+                            {
+                                <tr itemid="@m.Id">
+                                    <td><input type="checkbox" /></td>
+                                    <td>@m.Index</td>
+                                    <td>@m.Title</td>
+                                    <td>
+                                        @if (m.Category != null)
+                                        {
+                                            <span>@m.Category.Name</span>
+                                        }
+                                    </td>
+                                    <td>@m.CreateAt</td>
+                                    <td style="padding:4px">
+                                        @Html.Partial("_MenuPartial")
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                    <div class="row datatables-footer">
+                        <div class="col-sm-12 col-md-6">
+                            <div class="dataTables_info" id="datatable-default_info" role="status" aria-live="polite">
+                                @if (Model.Count > 0)
+                                {
+                                    <span>第 @Model.CurrentPageIndex / @Model.TotalPageCount 页 共计 @Model.TotalItemCount 条</span>
+                                }
+                                else
+                                {
+                                    <span>暂无数据</span>
+                                }
+                            </div>
+                        </div>
+                        <div class="col-sm-12 col-md-6">
+                            <div class="dataTables_paginate paging_bs_normal" id="datatable-default_paginate">
+                                @Html.Pager(Model, new PagerOptions
+                                   {
+                                       CssClass = "pagination",
+                                       ShowMorePagerItems = true,
+                                       CurrentPagerItemTemplate = "<li class=\"active\"><a href=\"#\">{0}</a></li>",
+                                       PagerItemTemplate = "<li>{0}</li>",
+                                       DisabledPagerItemTemplate = "<li class=\"disabled\"><a href=\"#\">{0}</a></li>",
+                                   })
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>

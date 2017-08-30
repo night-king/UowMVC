@@ -1,0 +1,68 @@
+﻿@using UowMVC.Web.Models;
+@model ResultModel
+@{
+    ViewBag.Title = "Index";
+}
+<input type="hidden" id="returnUrl" value="@Model.ReturnUrl" />
+@if (Model.State)
+{
+    <div class="panel modal-block-success">
+        <div class="panel-body bk-noradius">
+            <div class="modal-wrapper">
+                <div class="modal-icon">
+                    <i class="fa fa-check"></i>
+                </div>
+                <div class="modal-text">
+                    <h4 class="alert-heading">@Model.Title</h4>
+                    <p>@Model.Message</p>
+                    <p>恭喜，操作已经生效! <span class="last-second" v="1" style="color:rebeccapurple">1s</span> 后自动跳转...</p>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+else
+{
+    <div class="panel modal-block-danger">
+        <div class="panel-body bk-noradius">
+            <div class="modal-wrapper">
+                <div class="modal-icon">
+                    <i class="fa fa-times-circle"></i>
+                </div>
+                <div class="modal-text">
+                    <h4 class="alert-heading">@Model.Title</h4>
+                    <p>@Model.Message</p>
+                    <p>抱歉，操作失败!<span class="last-second" v="10" style="color:rebeccapurple">10s</span> 后自动跳转...</p>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+<script>
+    $(function () {
+        $(window.parent.document).find("#mod-window .modal-dialog").css("height", "150px");
+        $(window.parent.document).find("#mod-window .modal-body").css("height", "149px");
+
+        var rest = parseInt($(".last-second").attr("v"));
+       
+        var t=setInterval(function () {
+            rest--;
+            if (rest <= 0) {
+                clearInterval(t);
+                var returnUrl = $("#returnUrl").val();
+                if (window.parent) {
+                    if (returnUrl) {
+                        window.close();
+                        window.location.href = returnUrl;
+                    } else {
+                        window.close();
+                        window.parent.location.reload();
+                    }
+                } else {
+                    window.location.href = returnUrl ? returnUrl : "/";
+                }
+            }
+            $(".last-second").text(rest + "s");
+        }, 1000);
+    })
+</script>

@@ -1,0 +1,35 @@
+﻿@using UowMVC.Web.Models;
+@model ImportModel
+@{
+    ViewBag.Title = "导入菜单";
+}
+
+<form method="post" class="form-horizontal " id="form-import" enctype="multipart/form-data">
+    <div class="form-group">
+        <div class="col-sm-12">
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(x => x.File, new { @class = "col-sm-3 control-label" })
+        <div class="col-sm-5">
+            <input type="file" id="File" name="File"  accept="application/xml" />
+        </div>
+        <div class="col-sm-4">
+            @Html.ValidationMessageFor(x => x.File, "", new { @class = "error" })
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-sm-9 col-sm-offset-3">
+            <button class="bk-margin-5 btn btn-info" id="btn-import" type="button">提交</button>
+        </div>
+    </div>
+</form>
+<script>
+    $(function () {
+        $("#btn-import").click(function () {
+            $(this).parent().append('<img src="/Images/loading-small.gif"/>');
+            $("#form-import").submit();
+        });
+    })
+</script>

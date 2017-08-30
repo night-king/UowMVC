@@ -1,0 +1,116 @@
+﻿@using UowMVC.Models;
+@using Webdiyer.WebControls.Mvc;
+
+@model PagedList<UserViewModel>
+@{
+    ViewBag.Title = "用户管理";
+}
+
+<link rel="stylesheet" href="~/vender/ztree/style.css" type="text/css">
+<script src="~/vender/ztree/jquery.ztree.core.js"></script>
+
+<div class="row" style="min-height:500px">
+    <div class="col-lg-12 col-md-12 col-sm-12" style="min-height:500px">
+        <div class="panel panel-default" style="height:100%">
+            <div class="panel-body" style="height:100%">
+                <div class="row">
+                    <div class="col-lg-3 col-md-3 col-sm-5" style="padding:0">
+                        <div class="panel panel-default" style="height:100%">
+                            <div class="panel-heading">
+                                <div class="row">
+                                    <div class="col-xs-6 text-left bk-vcenter">
+                                        <span style="color:#777" class="bk-margin-off">@ViewBag.groupbyname</span>
+                                    </div>
+                                    <div class="col-xs-6 bk-vcenter text-right" style="padding-right:0">
+                                        <div class="btn-group">
+                                            <button type="button" class="btn btn-default btn-sm dropdown-toggle btn-circle" data-toggle="dropdown"><span class="caret"></span></button>
+                                            <ul class="dropdown-menu" role="menu" aria-labelledby="btnGroupVerticalDrop1" style="font-size:12px">
+                                                <li><a href="/User?groupby=role">角色视图</a></li>
+                                                <li><a href="/User?groupby=org">组织架构视图</a></li>
+                                                <li><a href="/User?groupby=group">用户组视图</a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="panel-body">
+                                <ul id="treeDiv" class="ztree"></ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-9 col-md-9 col-sm-7">
+                        <div class="table-responsive">
+                            <table class="single-select-table table table-striped table-responsive table-hover" style="margin-bottom:5px;">
+                                <thead>
+                                    <tr  class="active">
+                                        <th>头像</th>
+                                        <th>账户</th>
+                                        <th>称呼</th>
+                                        <th>编号</th>
+                                        <th>手机号</th>
+                                        <th>邮箱</th>
+                                        <th class="center">时间</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var m in Model)
+                                    {
+                                        <tr itemid="@m.Id">
+                                            <td><img src="@m.Avatar" style="height:25px;width:auto;" /></td>
+                                            <td>@m.UserName</td>
+                                            <td>@m.Name</td>
+                                            <td>@m.Num</td>
+                                            <td>@m.PhoneNumber</td>
+                                            <td>@m.Email</td>
+                                            <td>@m.CreateAt</td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                            <div class="row datatables-footer">
+                                <div class="col-sm-12 col-md-6">
+                                    <div class="dataTables_info" id="datatable-default_info" role="status" aria-live="polite">
+                                        第 @Model.CurrentPageIndex / @Model.TotalPageCount 页 共计 @Model.TotalItemCount 条
+                                    </div>
+                                </div>
+                                <div class="col-sm-12 col-md-6">
+                                    <div class="dataTables_paginate paging_bs_normal" id="datatable-default_paginate">
+                                        @Html.Pager(Model, new PagerOptions
+                                   {
+                                       CssClass = "pagination",
+                                       ShowMorePagerItems = true,
+                                       CurrentPagerItemTemplate = "<li class=\"active\"><a href=\"#\">{0}</a></li>",
+                                       PagerItemTemplate = "<li>{0}</li>",
+                                       DisabledPagerItemTemplate = "<li class=\"disabled\"><a href=\"#\">{0}</a></li>",
+                                   })
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    var zTree, rMenu;
+    var selectedId = "@ViewBag.fid";
+
+    var setting = {
+        view: {
+            selectedMulti: false
+        }
+    };
+    $(function () {
+        $.ajax({
+            type: 'POST',
+            url: '/User/getTree?groupby=@ViewBag.groupby&checkedId=@ViewBag.fid',
+            success: function (zNodes) {
+                zTree = $.fn.zTree.init($("#treeDiv"), setting, zNodes);
+                rMenu = $("#rMenu");
+            }
+        });
+    })
+</script>
+

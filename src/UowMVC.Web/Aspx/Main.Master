@@ -1,0 +1,600 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Main.master.cs" Inherits="UowMVC.Web.Aspx.Main" %>
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title></title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, initial-scale=1.0">
+    <!-- start: CSS file-->
+    <!-- Vendor CSS-->
+    <link href="/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="/assets/vendor/skycons/css/skycons.css" rel="stylesheet" />
+    <link href="/assets/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
+    <link href="/assets/vendor/css/pace.preloader.css" rel="stylesheet" />
+
+    <!-- Plugins CSS-->
+    <link href="/assets/plugins/jquery-ui/css/jquery-ui-1.10.4.min.css" rel="stylesheet" />
+    <link href="/assets/plugins/scrollbar/css/mCustomScrollbar.css" rel="stylesheet" />
+    <link href="/assets/plugins/bootkit/css/bootkit.css" rel="stylesheet" />
+    <link href="/assets/plugins/magnific-popup/css/magnific-popup.css" rel="stylesheet" />
+    <link href="/assets/plugins/fullcalendar/css/fullcalendar.css" rel="stylesheet" />
+    <link href="/assets/plugins/jqvmap/jqvmap.css" rel="stylesheet" />
+    <link href="/assets/plugins/jquery-datatables-bs3/css/datatables.css" rel="stylesheet" />
+
+    <!-- Theme CSS -->
+    <link href="/assets/css/jquery.mmenu.css" rel="stylesheet" />
+
+    <!-- Page CSS -->
+    <link href="/assets/css/style.css" rel="stylesheet" />
+    <link href="/assets/css/add-ons.min.css" rel="stylesheet" />
+
+    <!-- end: CSS file-->
+    <!-- Head Libs -->
+    <script src="/assets/plugins/modernizr/js/modernizr.js"></script>
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+        <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <script src="/assets/vendor/js/jquery.min.js"></script>
+    <script src="/assets/vendor/js/jquery-2.1.1.min.js"></script>
+    <script src="/assets/vendor/js/jquery-migrate-1.2.1.min.js"></script>
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body class="pace-done">
+    <form id="form1" runat="server">
+        <div>
+            <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+            </asp:ContentPlaceHolder>
+        </div>
+    </form>
+    <div id="mod-window" tabindex="-1" role="dialog" class="modal fade in" aria-hidden="false" style="display: none;">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <span class="modal-title" style="font-size: 18px;"></span>
+                    <button type="button" data-dismiss="modal" class="close">×</button>
+                </div>
+                <div class="modal-body" style="padding: 0">
+                </div>
+                <div class="modal-footer">
+                </div>
+            </div>
+            <!-- /.modal-content-->
+        </div>
+        <!-- /.modal-dialog-->
+    </div>
+    <div id="icon-window" style="position: fixed; right: 0; bottom: 0; width: 600px; height: 500px; display: none; background-color: #fff; z-index: 9999">
+        <div class="tabs tabs-primary">
+            <ul class="nav nav-tabs">
+                <li class="active">
+                    <a href="#common-icons" data-toggle="tab">常用</a>
+                </li>
+                <li class="">
+                    <a href="#form-icons" data-toggle="tab">表单</a>
+                </li>
+                <li class="">
+                    <a href="#currency-icons" data-toggle="tab">货币</a>
+                </li>
+                <li class="">
+                    <a href="#texteditor-icons" data-toggle="tab">编辑元素</a>
+                </li>
+                <li class="">
+                    <a href="#brand-icons" data-toggle="tab">品牌 </a>
+                </li>
+                <li class="">
+                    <a href="#other-icons" data-toggle="tab">其他</a>
+                </li>
+                <li class="pull-right"><a href="#" onclick="closeIconWindow()"><i class="fa fa-times"></i></a></li>
+            </ul>
+            <div class="tab-content">
+                <div id="common-icons" class="tab-pane active">
+                    <div class="panel-body bk-fg-primary" style="overflow: auto; width: 580px; height: 400px;">
+                        <div class="row fontawesome-icon-list">
+                            <div class="icon-div"><i class="fa ifa fa-dashboard"></i></div>
+                            <div class="icon-div"><i class="fa ifa fa-desktop"></i></div>
+                            <div class="icon-div"><i class="fa ifa fa-home"></i></div>
+                            <div class="icon-div"><i class="fa ifa fa-user"></i></div>
+                            <div class="icon-div"><i class="fa ifa fa-users"></i></div>
+                            <div class="icon-div"><i class="fa ifa fa-plus"></i></div>
+                            <div class="icon-div"><i class="fa ifa fa-plus-circle"></i></div>
+                            <div class="icon-div"><i class="fa ifa fa-plus-square"></i></div>
+                            <div class="icon-div"><i class="fa ifa fa-plus-square-o"></i></div>
+                            <div class="icon-div"><i class="fa ifa fa-pencil"></i></div>
+                            <div class="icon-div"><i class="fa ifa fa-pencil-square"></i></div>
+                            <div class="icon-div"><i class="fa ifa fa-pencil-square-o"></i></div>
+                            <div class="icon-div"><i class="fa ifa fa-trash-o"></i></div>
+                            <div class="icon-div"><i class="fa ifa fa-adjust"></i></div>
+                            <div class="icon-div"><i class="fa ifa fa-anchor"></i></div>
+                            <div class="icon-div"><i class="fa ifa fa-archive"></i></div>
+                            <div class="icon-div"><i class="fa ifa fa-arrows"></i></div>
+                            <div class="icon-div"><i class="fa ifa fa-arrows-h"></i></div>
+                            <div class="icon-div"><i class="fa ifa fa-arrows-v"></i></div>
+                            <div class="icon-div"><i class="fa ifa fa-asterisk"></i></div>
+                            <div class="icon-div"><i class="fa ifa fa-ban"></i></div>
+                            <div class="icon-div"><i class="fa ifa fa-bar-chart-o"></i></div>
+                            <div class="icon-div"><i class="fa ifa fa-barcode"></i></div>
+                            <div class="icon-div"><i class="fa ifa fa-bars"></i></div>
+                            <div class="icon-div"><i class="fa ifa fa-beer"></i></div>
+                            <div class="icon-div"><i class="fa ifa fa-bell"></i></div>
+                            <div class="icon-div"><i class="fa ifa fa-bell-o"></i></div>
+                            <div class="icon-div"><i class="fa ifa fa-bolt"></i></div>
+                            <div class="icon-div"><i class="fa ifa fa-book"></i></div>
+                            <div class="icon-div"><i class="fa ifa fa-bookmark"></i></div>
+                            <div class="icon-div"><i class="fa ifa fa-bookmark-o"></i></div>
+                            <div class="icon-div"><i class="fa ifa fa-briefcase"></i></div>
+                            <div class="icon-div"><i class="fa ifa fa-bug"></i></div>
+                            <div class="icon-div"><i class="fa ifa fa-building-o"></i></div>
+                            <div class="icon-div"><i class="fa ifa fa-bullhorn"></i></div>
+                            <div class="icon-div"><i class="fa ifa fa-bullseye"></i></div>
+                            <div class="icon-div"><i class="fa ifa fa-calendar"></i></div>
+                            <div class="icon-div"><i class="fa ifa fa-calendar-o"></i></div>
+                            <div class="icon-div"><i class="fa ifa fa-camera"></i></div>
+                            <div class="icon-div"><i class="fa ifa fa-camera-retro"></i></div>
+                            <div class="icon-div"><i class="fa ifa fa-caret-square-o-down"></i></div>
+                            <div class="icon-div"><i class="fa ifa fa-caret-square-o-left"></i></div>
+                            <div class="icon-div"><i class="fa ifa fa-caret-square-o-right"></i></div>
+                            <div class="icon-div"><i class="fa ifa fa-caret-square-o-up"></i></div>
+                            <div class="icon-div"><i class="fa ifa fa-certificate"></i></div>
+                            <div class="icon-div"><i class="fa ifa fa-check"></i></div>
+                            <div class="icon-div"><i class="fa ifa fa-check-circle"></i></div>
+                            <div class="icon-div"><i class="fa ifa fa-check-circle-o"></i></div>
+                            <div class="icon-div"><i class="fa ifa fa-check-square"></i></div>
+                            <div class="icon-div"><i class="fa ifa fa-check-square-o"></i></div>
+                            <div class="icon-div"><i class="fa ifa fa-circle"></i></div>
+                            <div class="icon-div"><i class="fa ifa fa-circle-o"></i></div>
+                            <div class="icon-div"><i class="fa ifa fa-clock-o"></i></div>
+                            <div class="icon-div"><i class="fa ifa fa-cloud"></i></div>
+                            <div class="icon-div"><i class="fa ifa fa-cloud-download"></i></div>
+                            <div class="icon-div"><i class="fa ifa fa-cloud-upload"></i></div>
+                            <div class="icon-div"><i class="fa ifa fa-code"></i></div>
+                            <div class="icon-div"><i class="fa ifa fa-code-fork"></i></div>
+                            <div class="icon-div"><i class="fa ifa fa-coffee"></i></div>
+                            <div class="icon-div"><i class="fa ifa fa-cog"></i></div>
+                            <div class="icon-div"><i class="fa ifa fa-cogs"></i></div>
+                            <div class="icon-div"><i class="fa ifa fa-comment"></i></div>
+                            <div class="icon-div"><i class="fa ifa fa-comment-o"></i></div>
+                            <div class="icon-div"><i class="fa ifa fa-comments"></i></div>
+                            <div class="icon-div"><i class="fa ifa fa-comments-o"></i></div>
+                            <div class="icon-div"><i class="fa ifa fa-compass"></i></div>
+                            <div class="icon-div"><i class="fa ifa fa-credit-card"></i></div>
+                            <div class="icon-div"><i class="fa ifa fa-crop"></i></div>
+                            <div class="icon-div"><i class="fa ifa fa-crosshairs"></i></div>
+                            <div class="icon-div"><i class="fa ifa fa-cutlery"></i></div>
+
+                            <div class="icon-div"><i class="fa ifa fa-dot-circle-o"></i></div>
+                            <div class="icon-div"><i class="fa ifa fa-download"></i></div>
+                            <div class="icon-div"><i class="fa ifa fa-edit"></i></div>
+                            <div class="icon-div"><i class="fa ifa fa-ellipsis-h"></i></div>
+                            <div class="icon-div"><i class="fa ifa fa-ellipsis-v"></i></div>
+                            <div class="icon-div"><i class="fa ifa fa-envelope"></i></div>
+                            <div class="icon-div"><i class="fa ifa fa-envelope-o"></i></div>
+                            <div class="icon-div"><i class="fa ifa fa-eraser"></i></div>
+                            <div class="icon-div"><i class="fa ifa fa-exchange"></i></div>
+                            <div class="icon-div"><i class="fa ifa fa-exclamation"></i></div>
+                            <div class="icon-div"><i class="fa ifa fa-exclamation-circle"></i></div>
+                            <div class="icon-div"><i class="fa ifa fa-exclamation-triangle"></i></div>
+                            <div class="icon-div"><i class="fa ifa fa-external-link"></i></div>
+                            <div class="icon-div"><i class="fa ifa fa-external-link-square"></i></div>
+                            <div class="icon-div"><i class="fa ifa fa-eye"></i></div>
+                            <div class="icon-div"><i class="fa ifa fa-eye-slash"></i></div>
+                            <div class="icon-div"><i class="fa ifa fa-female"></i></div>
+                            <div class="icon-div"><i class="fa ifa fa-fighter-jet"></i></div>
+                            <div class="icon-div"><i class="fa ifa fa-film"></i></div>
+                            <div class="icon-div"><i class="fa ifa fa-filter"></i></div>
+                            <div class="icon-div"><i class="fa ifa fa-fire"></i></div>
+                            <div class="icon-div"><i class="fa ifa fa-fire-extinguisher"></i></div>
+                            <div class="icon-div"><i class="fa ifa fa-flag"></i></div>
+                            <div class="icon-div"><i class="fa ifa fa-flag-checkered"></i></div>
+                            <div class="icon-div"><i class="fa ifa fa-flag-o"></i></div>
+                            <div class="icon-div"><i class="fa ifa fa-flash"></i></div>
+                            <div class="icon-div"><i class="fa ifa fa-flask"></i></div>
+                            <div class="icon-div"><i class="fa ifa fa-folder"></i></div>
+                            <div class="icon-div"><i class="fa ifa fa-folder-o"></i></div>
+                            <div class="icon-div"><i class="fa ifa fa-folder-open"></i></div>
+                            <div class="icon-div"><i class="fa ifa fa-folder-open-o"></i></div>
+                            <div class="icon-div"><i class="fa ifa fa-frown-o"></i></div>
+                            <div class="icon-div"><i class="fa ifa fa-gamepad"></i></div>
+                            <div class="icon-div"><i class="fa ifa fa-gavel"></i></div>
+                            <div class="icon-div"><i class="fa ifa fa-gear"></i></div>
+                            <div class="icon-div"><i class="fa ifa fa-gears"></i></div>
+                            <div class="icon-div"><i class="fa ifa fa-gift"></i></div>
+                            <div class="icon-div"><i class="fa ifa fa-glass"></i></div>
+                            <div class="icon-div"><i class="fa ifa fa-globe"></i></div>
+                            <div class="icon-div"><i class="fa ifa fa-group"></i></div>
+                            <div class="icon-div"><i class="fa ifa fa-hdd-o"></i></div>
+                            <div class="icon-div"><i class="fa ifa fa-headphones"></i></div>
+                            <div class="icon-div"><i class="fa ifa fa-heart"></i></div>
+                            <div class="icon-div"><i class="fa ifa fa-heart-o"></i></div>
+
+                            <div class="icon-div"><i class="fa ifa fa-inbox"></i></div>
+                            <div class="icon-div"><i class="fa ifa fa-info"></i></div>
+                            <div class="icon-div"><i class="fa ifa fa-info-circle"></i></div>
+                            <div class="icon-div"><i class="fa ifa fa-key"></i></div>
+                            <div class="icon-div"><i class="fa ifa fa-keyboard-o"></i></div>
+                            <div class="icon-div"><i class="fa ifa fa-laptop"></i></div>
+                            <div class="icon-div"><i class="fa ifa fa-leaf"></i></div>
+                            <div class="icon-div"><i class="fa ifa fa-legal"></i></div>
+                            <div class="icon-div"><i class="fa ifa fa-lemon-o"></i></div>
+                            <div class="icon-div"><i class="fa ifa fa-level-down"></i></div>
+                            <div class="icon-div"><i class="fa ifa fa-level-up"></i></div>
+                            <div class="icon-div"><i class="fa ifa fa-lightbulb-o"></i></div>
+                            <div class="icon-div"><i class="fa ifa fa-location-arrow"></i></div>
+                            <div class="icon-div"><i class="fa ifa fa-lock"></i></div>
+                            <div class="icon-div"><i class="fa ifa fa-magic"></i></div>
+                            <div class="icon-div"><i class="fa ifa fa-magnet"></i></div>
+                            <div class="icon-div"><i class="fa ifa fa-mail-forward"></i></div>
+                            <div class="icon-div"><i class="fa ifa fa-mail-reply"></i></div>
+                            <div class="icon-div"><i class="fa ifa fa-mail-reply-all"></i></div>
+                            <div class="icon-div"><i class="fa ifa fa-male"></i></div>
+                            <div class="icon-div"><i class="fa ifa fa-map-marker"></i></div>
+                            <div class="icon-div"><i class="fa ifa fa-meh-o"></i></div>
+                            <div class="icon-div"><i class="fa ifa fa-microphone"></i></div>
+                            <div class="icon-div"><i class="fa ifa fa-microphone-slash"></i></div>
+                            <div class="icon-div"><i class="fa ifa fa-minus"></i></div>
+                            <div class="icon-div"><i class="fa ifa fa-minus-circle"></i></div>
+                            <div class="icon-div"><i class="fa ifa fa-minus-square"></i></div>
+                            <div class="icon-div"><i class="fa ifa fa-minus-square-o"></i></div>
+                            <div class="icon-div"><i class="fa ifa fa-mobile"></i></div>
+                            <div class="icon-div"><i class="fa ifa fa-mobile-phone"></i></div>
+                            <div class="icon-div"><i class="fa ifa fa-money"></i></div>
+                            <div class="icon-div"><i class="fa ifa fa-moon-o"></i></div>
+                            <div class="icon-div"><i class="fa ifa fa-music"></i></div>
+
+                            <div class="icon-div"><i class="fa ifa fa-phone"></i></div>
+                            <div class="icon-div"><i class="fa ifa fa-phone-square"></i></div>
+                            <div class="icon-div"><i class="fa ifa fa-picture-o"></i></div>
+                            <div class="icon-div"><i class="fa ifa fa-plane"></i></div>
+
+                            <div class="icon-div"><i class="fa ifa fa-power-off"></i></div>
+                            <div class="icon-div"><i class="fa ifa fa-print"></i></div>
+                            <div class="icon-div"><i class="fa ifa fa-puzzle-piece"></i></div>
+                            <div class="icon-div"><i class="fa ifa fa-qrcode"></i></div>
+                            <div class="icon-div"><i class="fa ifa fa-question"></i></div>
+                            <div class="icon-div"><i class="fa ifa fa-question-circle"></i></div>
+                            <div class="icon-div"><i class="fa ifa fa-quote-left"></i></div>
+                            <div class="icon-div"><i class="fa ifa fa-quote-right"></i></div>
+                            <div class="icon-div"><i class="fa ifa fa-random"></i></div>
+                            <div class="icon-div"><i class="fa ifa fa-refresh"></i></div>
+                            <div class="icon-div"><i class="fa ifa fa-reply"></i></div>
+                            <div class="icon-div"><i class="fa ifa fa-reply-all"></i></div>
+                            <div class="icon-div"><i class="fa ifa fa-retweet"></i></div>
+                            <div class="icon-div"><i class="fa ifa fa-road"></i></div>
+                            <div class="icon-div"><i class="fa ifa fa-rocket"></i></div>
+                            <div class="icon-div"><i class="fa ifa fa-rss"></i></div>
+                            <div class="icon-div"><i class="fa ifa fa-rss-square"></i></div>
+                            <div class="icon-div"><i class="fa ifa fa-search"></i></div>
+                            <div class="icon-div"><i class="fa ifa fa-search-minus"></i></div>
+                            <div class="icon-div"><i class="fa ifa fa-search-plus"></i></div>
+                            <div class="icon-div"><i class="fa ifa fa-share"></i></div>
+                            <div class="icon-div"><i class="fa ifa fa-share-square"></i></div>
+                            <div class="icon-div"><i class="fa ifa fa-share-square-o"></i></div>
+                            <div class="icon-div"><i class="fa ifa fa-shield"></i></div>
+                            <div class="icon-div"><i class="fa ifa fa-shopping-cart"></i></div>
+                            <div class="icon-div"><i class="fa ifa fa-sign-in"></i></div>
+                            <div class="icon-div"><i class="fa ifa fa-sign-out"></i></div>
+                            <div class="icon-div"><i class="fa ifa fa-signal"></i></div>
+                            <div class="icon-div"><i class="fa ifa fa-sitemap"></i></div>
+                            <div class="icon-div"><i class="fa ifa fa-smile-o"></i></div>
+                            <div class="icon-div"><i class="fa ifa fa-sort"></i></div>
+                            <div class="icon-div"><i class="fa ifa fa-sort-alpha-asc"></i></div>
+                            <div class="icon-div"><i class="fa ifa fa-sort-alpha-desc"></i></div>
+                            <div class="icon-div"><i class="fa ifa fa-sort-amount-asc"></i></div>
+                            <div class="icon-div"><i class="fa ifa fa-sort-amount-desc"></i></div>
+                            <div class="icon-div"><i class="fa ifa fa-sort-asc"></i></div>
+                            <div class="icon-div"><i class="fa ifa fa-sort-desc"></i></div>
+                            <div class="icon-div"><i class="fa ifa fa-sort-down"></i></div>
+                            <div class="icon-div"><i class="fa ifa fa-sort-numeric-asc"></i></div>
+                            <div class="icon-div"><i class="fa ifa fa-sort-numeric-desc"></i></div>
+                            <div class="icon-div"><i class="fa ifa fa-sort-up"></i></div>
+                            <div class="icon-div"><i class="fa ifa fa-spinner"></i></div>
+                            <div class="icon-div"><i class="fa ifa fa-square"></i></div>
+                            <div class="icon-div"><i class="fa ifa fa-square-o"></i></div>
+                            <div class="icon-div"><i class="fa ifa fa-star"></i></div>
+                            <div class="icon-div"><i class="fa ifa fa-star-half"></i></div>
+                            <div class="icon-div"><i class="fa ifa fa-star-half-empty"></i></div>
+                            <div class="icon-div"><i class="fa ifa fa-star-half-full"></i></div>
+                            <div class="icon-div"><i class="fa ifa fa-star-half-o"></i></div>
+                            <div class="icon-div"><i class="fa ifa fa-star-o"></i></div>
+                            <div class="icon-div"><i class="fa ifa fa-subscript"></i></div>
+                            <div class="icon-div"><i class="fa ifa fa-suitcase"></i></div>
+                            <div class="icon-div"><i class="fa ifa fa-sun-o"></i></div>
+                            <div class="icon-div"><i class="fa ifa fa-superscript"></i></div>
+                            <div class="icon-div"><i class="fa ifa fa-tablet"></i></div>
+                            <div class="icon-div"><i class="fa ifa fa-tachometer"></i></div>
+                            <div class="icon-div"><i class="fa ifa fa-tag"></i></div>
+                            <div class="icon-div"><i class="fa ifa fa-tags"></i></div>
+                            <div class="icon-div"><i class="fa ifa fa-tasks"></i></div>
+                            <div class="icon-div"><i class="fa ifa fa-terminal"></i></div>
+                            <div class="icon-div"><i class="fa ifa fa-thumb-tack"></i></div>
+                            <div class="icon-div"><i class="fa ifa fa-thumbs-down"></i></div>
+                            <div class="icon-div"><i class="fa ifa fa-thumbs-o-down"></i></div>
+                            <div class="icon-div"><i class="fa ifa fa-thumbs-o-up"></i></div>
+                            <div class="icon-div"><i class="fa ifa fa-thumbs-up"></i></div>
+                            <div class="icon-div"><i class="fa ifa fa-ticket"></i></div>
+                            <div class="icon-div"><i class="fa ifa fa-times"></i></div>
+                            <div class="icon-div"><i class="fa ifa fa-times-circle"></i></div>
+                            <div class="icon-div"><i class="fa ifa fa-times-circle-o"></i></div>
+                            <div class="icon-div"><i class="fa ifa fa-tint"></i></div>
+                            <div class="icon-div"><i class="fa ifa fa-toggle-down"></i></div>
+                            <div class="icon-div"><i class="fa ifa fa-toggle-left"></i></div>
+                            <div class="icon-div"><i class="fa ifa fa-toggle-right"></i></div>
+                            <div class="icon-div"><i class="fa ifa fa-toggle-up"></i></div>
+
+                            <div class="icon-div"><i class="fa ifa fa-trophy"></i></div>
+                            <div class="icon-div"><i class="fa ifa fa-truck"></i></div>
+                            <div class="icon-div"><i class="fa ifa fa-umbrella"></i></div>
+                            <div class="icon-div"><i class="fa ifa fa-unlock"></i></div>
+                            <div class="icon-div"><i class="fa ifa fa-unlock-alt"></i></div>
+                            <div class="icon-div"><i class="fa ifa fa-unsorted"></i></div>
+                            <div class="icon-div"><i class="fa ifa fa-upload"></i></div>
+
+                            <div class="icon-div"><i class="fa ifa fa-video-camera"></i></div>
+                            <div class="icon-div"><i class="fa ifa fa-volume-down"></i></div>
+                            <div class="icon-div"><i class="fa ifa fa-volume-off"></i></div>
+                            <div class="icon-div"><i class="fa ifa fa-volume-up"></i></div>
+                            <div class="icon-div"><i class="fa ifa fa-warning"></i></div>
+                            <div class="icon-div"><i class="fa ifa fa-wheelchair"></i></div>
+                            <div class="icon-div"><i class="fa ifa fa-wrench"></i></div>
+                        </div>
+                    </div>
+                </div>
+                <div id="form-icons" class="tab-pane">
+                    <div class="panel-body bk-fg-primary" style="overflow: auto; width: 580px; height: 400px;">
+                        <div class="icon-div"><i class="fa ifa fa-check-square"></i></div>
+                        <div class="icon-div"><i class="fa ifa fa-check-square-o"></i></div>
+                        <div class="icon-div"><i class="fa ifa fa-circle"></i></div>
+                        <div class="icon-div"><i class="fa ifa fa-circle-o"></i></div>
+                        <div class="icon-div"><i class="fa ifa fa-dot-circle-o"></i></div>
+                        <div class="icon-div"><i class="fa ifa fa-minus-square"></i></div>
+                        <div class="icon-div"><i class="fa ifa fa-minus-square-o"></i></div>
+                        <div class="icon-div"><i class="fa ifa fa-plus-square"></i></div>
+                        <div class="icon-div"><i class="fa ifa fa-plus-square-o"></i></div>
+                        <div class="icon-div"><i class="fa ifa fa-square"></i></div>
+                        <div class="icon-div"><i class="fa ifa fa-square-o"></i></div>
+                    </div>
+                </div>
+                <div id="currency-icons" class="tab-pane">
+                    <div class="panel-body bk-fg-primary" style="overflow: auto; width: 580px; height: 400px;">
+                        <div class="icon-div"><i class="fa ifa fa-bitcoin"></i></div>
+                        <div class="icon-div"><i class="fa ifa fa-btc"></i></div>
+                        <div class="icon-div"><i class="fa ifa fa-cny"></i></div>
+                        <div class="icon-div"><i class="fa ifa fa-dollar"></i></div>
+                        <div class="icon-div"><i class="fa ifa fa-eur"></i></div>
+                        <div class="icon-div"><i class="fa ifa fa-euro"></i></div>
+                        <div class="icon-div"><i class="fa ifa fa-gbp"></i></div>
+                        <div class="icon-div"><i class="fa ifa fa-inr"></i></div>
+                        <div class="icon-div"><i class="fa ifa fa-jpy"></i></div>
+                        <div class="icon-div"><i class="fa ifa fa-krw"></i></div>
+                        <div class="icon-div"><i class="fa ifa fa-money"></i></div>
+                        <div class="icon-div"><i class="fa ifa fa-rmb"></i></div>
+                        <div class="icon-div"><i class="fa ifa fa-rouble"></i></div>
+                        <div class="icon-div"><i class="fa ifa fa-rub"></i></div>
+                        <div class="icon-div"><i class="fa ifa fa-ruble"></i></div>
+                        <div class="icon-div"><i class="fa ifa fa-rupee"></i></div>
+                        <div class="icon-div"><i class="fa ifa fa-try"></i></div>
+                        <div class="icon-div"><i class="fa ifa fa-turkish-lira"></i></div>
+                        <div class="icon-div"><i class="fa ifa fa-usd"></i></div>
+                        <div class="icon-div"><i class="fa ifa fa-won"></i></div>
+                        <div class="icon-div"><i class="fa ifa fa-yen"></i></div>
+                    </div>
+                </div>
+                <div id="texteditor-icons" class="tab-pane">
+                    <div class="panel-body bk-fg-primary" style="overflow: auto; width: 580px; height: 400px;">
+                        <div class="icon-div"><i class="fa ifa fa-align-center"></i></div>
+                        <div class="icon-div"><i class="fa ifa fa-align-justify"></i></div>
+                        <div class="icon-div"><i class="fa ifa fa-align-left"></i></div>
+                        <div class="icon-div"><i class="fa ifa fa-align-right"></i></div>
+                        <div class="icon-div"><i class="fa ifa fa-bold"></i></div>
+                        <div class="icon-div"><i class="fa ifa fa-chain"></i></div>
+                        <div class="icon-div"><i class="fa ifa fa-chain-broken"></i></div>
+                        <div class="icon-div"><i class="fa ifa fa-clipboard"></i></div>
+                        <div class="icon-div"><i class="fa ifa fa-columns"></i></div>
+                        <div class="icon-div"><i class="fa ifa fa-copy"></i></div>
+                        <div class="icon-div"><i class="fa ifa fa-cut"></i></div>
+                        <div class="icon-div"><i class="fa ifa fa-dedent"></i></div>
+                        <div class="icon-div"><i class="fa ifa fa-eraser"></i></div>
+                        <div class="icon-div"><i class="fa ifa fa-file"></i></div>
+                        <div class="icon-div"><i class="fa ifa fa-file-o"></i></div>
+                        <div class="icon-div"><i class="fa ifa fa-file-text"></i></div>
+                        <div class="icon-div"><i class="fa ifa fa-file-text-o"></i></div>
+                        <div class="icon-div"><i class="fa ifa fa-files-o"></i></div>
+                        <div class="icon-div"><i class="fa ifa fa-floppy-o"></i></div>
+                        <div class="icon-div"><i class="fa ifa fa-font"></i></div>
+                        <div class="icon-div"><i class="fa ifa fa-indent"></i></div>
+                        <div class="icon-div"><i class="fa ifa fa-italic"></i></div>
+                        <div class="icon-div"><i class="fa ifa fa-link"></i></div>
+                        <div class="icon-div"><i class="fa ifa fa-list"></i></div>
+                        <div class="icon-div"><i class="fa ifa fa-list-alt"></i></div>
+                        <div class="icon-div"><i class="fa ifa fa-list-ol"></i></div>
+                        <div class="icon-div"><i class="fa ifa fa-list-ul"></i></div>
+                        <div class="icon-div"><i class="fa ifa fa-outdent"></i></div>
+                        <div class="icon-div"><i class="fa ifa fa-paperclip"></i></div>
+                        <div class="icon-div"><i class="fa ifa fa-paste"></i></div>
+                        <div class="icon-div"><i class="fa ifa fa-repeat"></i></div>
+                        <div class="icon-div"><i class="fa ifa fa-rotate-left"></i></div>
+                        <div class="icon-div"><i class="fa ifa fa-rotate-right"></i></div>
+                        <div class="icon-div"><i class="fa ifa fa-save"></i></div>
+                        <div class="icon-div"><i class="fa ifa fa-scissors"></i></div>
+                        <div class="icon-div"><i class="fa ifa fa-strikethrough"></i></div>
+                        <div class="icon-div"><i class="fa ifa fa-table"></i></div>
+                        <div class="icon-div"><i class="fa ifa fa-text-height"></i></div>
+                        <div class="icon-div"><i class="fa ifa fa-text-width"></i></div>
+                        <div class="icon-div"><i class="fa ifa fa-th"></i></div>
+                        <div class="icon-div"><i class="fa ifa fa-th-large"></i></div>
+                        <div class="icon-div"><i class="fa ifa fa-th-list"></i></div>
+                        <div class="icon-div"><i class="fa ifa fa-underline"></i></div>
+                        <div class="icon-div"><i class="fa ifa fa-undo"></i></div>
+                        <div class="icon-div"><i class="fa ifa fa-unlink"></i></div>
+
+                    </div>
+                </div>
+                <div id="brand-icons" class="tab-pane">
+                    <div class="panel-body bk-fg-primary" style="overflow: auto; width: 580px; height: 400px;">
+                        <div class="icon-div"><i class="fa ifa fa-adn"></i></div>
+                        <div class="icon-div"><i class="fa ifa fa-android"></i></div>
+                        <div class="icon-div"><i class="fa ifa fa-apple"></i></div>
+                        <div class="icon-div"><i class="fa ifa fa-bitbucket"></i></div>
+                        <div class="icon-div"><i class="fa ifa fa-bitbucket-square"></i></div>
+                        <div class="icon-div"><i class="fa ifa fa-bitcoin"></i></div>
+                        <div class="icon-div"><i class="fa ifa fa-btc"></i></div>
+                        <div class="icon-div"><i class="fa ifa fa-css3"></i></div>
+                        <div class="icon-div"><i class="fa ifa fa-dribbble"></i></div>
+                        <div class="icon-div"><i class="fa ifa fa-dropbox"></i></div>
+                        <div class="icon-div"><i class="fa ifa fa-facebook"></i></div>
+                        <div class="icon-div"><i class="fa ifa fa-facebook-square"></i></div>
+                        <div class="icon-div"><i class="fa ifa fa-flickr"></i></div>
+                        <div class="icon-div"><i class="fa ifa fa-foursquare"></i></div>
+                        <div class="icon-div"><i class="fa ifa fa-github"></i></div>
+                        <div class="icon-div"><i class="fa ifa fa-github-alt"></i></div>
+                        <div class="icon-div"><i class="fa ifa fa-github-square"></i></div>
+                        <div class="icon-div"><i class="fa ifa fa-gittip"></i></div>
+                        <div class="icon-div"><i class="fa ifa fa-google-plus"></i></div>
+                        <div class="icon-div"><i class="fa ifa fa-google-plus-square"></i></div>
+                        <div class="icon-div"><i class="fa ifa fa-html5"></i></div>
+                        <div class="icon-div"><i class="fa ifa fa-instagram"></i></div>
+                        <div class="icon-div"><i class="fa ifa fa-linkedin"></i></div>
+                        <div class="icon-div"><i class="fa ifa fa-linkedin-square"></i></div>
+                        <div class="icon-div"><i class="fa ifa fa-linux"></i></div>
+                        <div class="icon-div"><i class="fa ifa fa-maxcdn"></i></div>
+                        <div class="icon-div"><i class="fa ifa fa-pagelines"></i></div>
+                        <div class="icon-div"><i class="fa ifa fa-pinterest"></i></div>
+                        <div class="icon-div"><i class="fa ifa fa-pinterest-square"></i></div>
+                        <div class="icon-div"><i class="fa ifa fa-renren"></i></div>
+                        <div class="icon-div"><i class="fa ifa fa-skype"></i></div>
+                        <div class="icon-div"><i class="fa ifa fa-stack-exchange"></i></div>
+                        <div class="icon-div"><i class="fa ifa fa-stack-overflow"></i></div>
+                        <div class="icon-div"><i class="fa ifa fa-trello"></i></div>
+                        <div class="icon-div"><i class="fa ifa fa-tumblr"></i></div>
+                        <div class="icon-div"><i class="fa ifa fa-tumblr-square"></i></div>
+                        <div class="icon-div"><i class="fa ifa fa-twitter"></i></div>
+                        <div class="icon-div"><i class="fa ifa fa-twitter-square"></i></div>
+                        <div class="icon-div"><i class="fa ifa fa-vimeo-square"></i></div>
+                        <div class="icon-div"><i class="fa ifa fa-vk"></i></div>
+                        <div class="icon-div"><i class="fa ifa fa-weibo"></i></div>
+                        <div class="icon-div"><i class="fa ifa fa-windows"></i></div>
+                        <div class="icon-div"><i class="fa ifa fa-xing"></i></div>
+                        <div class="icon-div"><i class="fa ifa fa-xing-square"></i></div>
+                        <div class="icon-div"><i class="fa ifa fa-youtube"></i></div>
+                        <div class="icon-div"><i class="fa ifa fa-youtube-play"></i></div>
+                        <div class="icon-div"><i class="fa ifa fa-youtube-square"></i></div>
+                    </div>
+                </div>
+                <div id="other-icons" class="tab-pane">
+                    <div class="panel-body bk-fg-primary" style="overflow: auto; width: 580px; height: 400px;">
+                        <!--Directional Icons-->
+                        <div class="icon-div"><i class="fa ifa fa-angle-double-down"></i></div>
+                        <div class="icon-div"><i class="fa ifa fa-angle-double-left"></i></div>
+                        <div class="icon-div"><i class="fa ifa fa-angle-double-right"></i></div>
+                        <div class="icon-div"><i class="fa ifa fa-angle-double-up"></i></div>
+                        <div class="icon-div"><i class="fa ifa fa-angle-down"></i></div>
+                        <div class="icon-div"><i class="fa ifa fa-angle-left"></i></div>
+                        <div class="icon-div"><i class="fa ifa fa-angle-right"></i></div>
+                        <div class="icon-div"><i class="fa ifa fa-angle-up"></i></div>
+                        <div class="icon-div"><i class="fa ifa fa-arrow-circle-down"></i></div>
+                        <div class="icon-div"><i class="fa ifa fa-arrow-circle-left"></i></div>
+                        <div class="icon-div"><i class="fa ifa fa-arrow-circle-o-down"></i></div>
+                        <div class="icon-div"><i class="fa ifa fa-arrow-circle-o-left"></i></div>
+                        <div class="icon-div"><i class="fa ifa fa-arrow-circle-o-right"></i></div>
+                        <div class="icon-div"><i class="fa ifa fa-arrow-circle-o-up"></i></div>
+                        <div class="icon-div"><i class="fa ifa fa-arrow-circle-right"></i></div>
+                        <div class="icon-div"><i class="fa ifa fa-arrow-circle-up"></i></div>
+                        <div class="icon-div"><i class="fa ifa fa-arrow-down"></i></div>
+                        <div class="icon-div"><i class="fa ifa fa-arrow-left"></i></div>
+                        <div class="icon-div"><i class="fa ifa fa-arrow-right"></i></div>
+                        <div class="icon-div"><i class="fa ifa fa-arrow-up"></i></div>
+                        <div class="icon-div"><i class="fa ifa fa-arrows"></i></div>
+                        <div class="icon-div"><i class="fa ifa fa-arrows-alt"></i></div>
+                        <div class="icon-div"><i class="fa ifa fa-arrows-h"></i></div>
+                        <div class="icon-div"><i class="fa ifa fa-arrows-v"></i></div>
+                        <div class="icon-div"><i class="fa ifa fa-caret-down"></i></div>
+                        <div class="icon-div"><i class="fa ifa fa-caret-left"></i></div>
+                        <div class="icon-div"><i class="fa ifa fa-caret-right"></i></div>
+                        <div class="icon-div"><i class="fa ifa fa-caret-square-o-down"></i></div>
+                        <div class="icon-div"><i class="fa ifa fa-caret-square-o-left"></i></div>
+                        <div class="icon-div"><i class="fa ifa fa-caret-square-o-right"></i></div>
+                        <div class="icon-div"><i class="fa ifa fa-caret-square-o-up"></i></div>
+                        <div class="icon-div"><i class="fa ifa fa-caret-up"></i></div>
+                        <div class="icon-div"><i class="fa ifa fa-chevron-circle-down"></i></div>
+                        <div class="icon-div"><i class="fa ifa fa-chevron-circle-left"></i></div>
+                        <div class="icon-div"><i class="fa ifa fa-chevron-circle-right"></i></div>
+                        <div class="icon-div"><i class="fa ifa fa-chevron-circle-up"></i></div>
+                        <div class="icon-div"><i class="fa ifa fa-chevron-down"></i></div>
+                        <div class="icon-div"><i class="fa ifa fa-chevron-left"></i></div>
+                        <div class="icon-div"><i class="fa ifa fa-chevron-right"></i></div>
+                        <div class="icon-div"><i class="fa ifa fa-chevron-up"></i></div>
+                        <div class="icon-div"><i class="fa ifa fa-hand-o-down"></i></div>
+                        <div class="icon-div"><i class="fa ifa fa-hand-o-left"></i></div>
+                        <div class="icon-div"><i class="fa ifa fa-hand-o-right"></i></div>
+                        <div class="icon-div"><i class="fa ifa fa-hand-o-up"></i></div>
+                        <div class="icon-div"><i class="fa ifa fa-long-arrow-down"></i></div>
+                        <div class="icon-div"><i class="fa ifa fa-long-arrow-left"></i></div>
+                        <div class="icon-div"><i class="fa ifa fa-long-arrow-right"></i></div>
+                        <div class="icon-div"><i class="fa ifa fa-long-arrow-up"></i></div>
+                        <div class="icon-div"><i class="fa ifa fa-toggle-down"></i></div>
+                        <div class="icon-div"><i class="fa ifa fa-toggle-left"></i></div>
+                        <div class="icon-div"><i class="fa ifa fa-toggle-right"></i></div>
+                        <div class="icon-div"><i class="fa ifa fa-toggle-up"></i></div>
+                        <!--Directional Icons-->
+                        <!--Medical Icons-->
+                        <div class="icon-div"><i class="fa ifa fa-ambulance"></i></div>
+                        <div class="icon-div"><i class="fa ifa fa-h-square"></i></div>
+                        <div class="icon-div"><i class="fa ifa fa-hospital-o"></i></div>
+                        <div class="icon-div"><i class="fa ifa fa-medkit"></i></div>
+                        <div class="icon-div"><i class="fa ifa fa-plus-square"></i></div>
+                        <div class="icon-div"><i class="fa ifa fa-stethoscope"></i></div>
+                        <div class="icon-div"><i class="fa ifa fa-user-md"></i></div>
+                        <div class="icon-div"><i class="fa ifa fa-wheelchair"></i></div>
+                        <!--Medical Icons-->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- start: JavaScript-->
+    <!-- Vendor JS-->
+
+    <script src="/assets/vendor/bootstrap/js/bootstrap.min.js"></script>
+    <script src="/assets/vendor/skycons/js/skycons.js"></script>
+    <script src="/assets/vendor/js/pace.min.js"></script>
+
+    <!-- Plugins JS-->
+    <script src="/assets/plugins/jquery-ui/js/jquery-ui-1.10.4.min.js"></script>
+    <script src="/assets/plugins/scrollbar/js/jquery.mCustomScrollbar.concat.min.js"></script>
+    <script src="/assets/plugins/bootkit/js/bootkit.js"></script>
+    <script src="/assets/plugins/magnific-popup/js/magnific-popup.js"></script>
+    <script src="/assets/plugins/moment/js/moment.min.js"></script>
+    <script src="/assets/plugins/fullcalendar/js/fullcalendar.js"></script>
+    <script src="/assets/plugins/flot/js/jquery.flot.min.js"></script>
+    <script src="/assets/plugins/flot/js/jquery.flot.pie.min.js"></script>
+    <script src="/assets/plugins/flot/js/jquery.flot.resize.min.js"></script>
+    <script src="/assets/plugins/flot/js/jquery.flot.stack.min.js"></script>
+    <script src="/assets/plugins/flot/js/jquery.flot.time.min.js"></script>
+    <script src="/assets/plugins/flot-tooltip/js/jquery.flot.tooltip.js"></script>
+    <script src="/assets/plugins/chart-master/js/Chart.js"></script>
+    <script src="/assets/plugins/jqvmap/jquery.vmap.js"></script>
+    <script src="/assets/plugins/jqvmap/data/jquery.vmap.sampledata.js"></script>
+    <script src="/assets/plugins/jqvmap/maps/jquery.vmap.world.js"></script>
+    <script src="/assets/plugins/sparkline/js/jquery.sparkline.min.js"></script>
+
+    <!-- Theme JS -->
+    <script src="/assets/js/jquery.mmenu.min.js"></script>
+    <script src="/assets/js/core.min.js"></script>
+
+    <!-- end: JavaScript-->
+    <!-- Pages JS -->
+    <script src="/assets/js/pages/ui-modals.js"></script>
+
+    <!-- jquery.validate -->
+    <script src="~/Scripts/jquery.validate.min.js" type="text/javascript"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js" type="text/javascript"></script>
+    <script src="~/Scripts/page.js" type="text/javascript"></script>
+</body>
+</html>

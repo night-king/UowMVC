@@ -1,0 +1,85 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{3C92F1E4-FDD4-4751-B26D-DFDCE5859480}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>UowMVC.Service.Interfaces</RootNamespace>
+    <AssemblyName>UowMVC.Service.Interfaces</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="IConfigurationService.cs" />
+    <Compile Include="IDepartmentService.cs" />
+    <Compile Include="IDictIndexService.cs" />
+    <Compile Include="IDictService.cs" />
+    <Compile Include="IFriendRelationshipService.cs" />
+    <Compile Include="IItemCountService.cs" />
+    <Compile Include="ILoginLogService.cs" />
+    <Compile Include="ILogService.cs" />
+    <Compile Include="IMediaService.cs" />
+    <Compile Include="IMenuService.cs" />
+    <Compile Include="IMessageService.cs" />
+    <Compile Include="INewsCategoryService.cs" />
+    <Compile Include="INewsService.cs" />
+    <Compile Include="INewsViewRecordService.cs" />
+    <Compile Include="IQrcodeService.cs" />
+    <Compile Include="IRoleService.cs" />
+    <Compile Include="IUserGroupService.cs" />
+    <Compile Include="IUserService.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\UowMVC.Domain\UowMVC.Domain.csproj">
+      <Project>{261c9020-a639-4649-b53d-8b62e68c9b1f}</Project>
+      <Name>UowMVC.Domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\UowMVC.Models\UowMVC.Models.csproj">
+      <Project>{8b3f7081-a13d-48af-89e9-d2b154f570ee}</Project>
+      <Name>UowMVC.Models</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\UowMVC.SDK\UowMVC.SDK.csproj">
+      <Project>{e88dbe0f-acaf-4011-b29f-e041e7e5476a}</Project>
+      <Name>UowMVC.SDK</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

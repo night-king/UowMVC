@@ -1,0 +1,40 @@
+﻿@using Webdiyer.WebControls.Mvc;
+@using UowMVC.Models;
+@model IEnumerable<UserViewModel>
+
+<div class="table-responsive">
+    <table id="group-left-table" class="mult-select-table table table-striped table-responsive table-hover">
+        <thead>
+            <tr>
+                <th><input type="checkbox" class="multi-check-all" onclick="checkall(this, 'group-left-table');" /></th>
+                <th>编号</th>
+                <th>称呼</th>
+                <th>账户名</th>
+            </tr>
+        </thead>
+        <tbody>
+            @{
+                foreach (var m in Model)
+                {
+                    <tr itemid="@m.Id" onclick="changeRowCheck(this, 'group-left-table')">
+                        <td>
+                            <input type="checkbox" class="checkbox" onclick="changeCheck(this, 'group-left-table')" />
+                        </td>
+                        <td>@m.Num</td>
+                        <td>
+                            @m.Name
+                        </td>
+                        <td>@m.UserName</td>
+                    </tr>
+                }
+            }
+        </tbody>
+        <tfoot>
+            <tr>
+                <td colspan="4" style="text-align:right;">
+                    共计 @Model.Count() 条记录
+                </td>
+            </tr>
+        </tfoot>
+    </table>
+</div>

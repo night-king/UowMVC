@@ -1,0 +1,51 @@
+﻿@using UowMVC.Web.Helpers;
+@{
+    var url = Request.Url.LocalPath.ToLower();
+    var menus = MenuConfig.Get(User);
+    var current = menus.FirstOrDefault(x => x.URL != null && x.URL.ToLower() == url);
+    if (current != null)
+    {
+        var children = menus.Where(x => x.ParentID == current.Id).ToList();
+        if (children != null)
+        {
+            var menuModel = MenuHelper.Convert(children);
+            foreach (var button in menuModel.Items)
+            {
+                if (!button.IsDisplayOnTable) { continue; }
+                bool disabled = button.IsMustSelected;
+                switch (button.OpenStyle)
+                {
+                    case 2://page
+                        if (disabled)
+                        {
+                            <a class="bk-margin-5 btn btn-xs btn-default" disabled role="button" requireid="true" onclick="openPage('@button.Action',true)">
+                                @Html.Raw(button.Text)
+                            </a>
+                        }
+                        else
+                        {
+                            <a class="bk-margin-5 btn btn-xs btn-default" role="button" requireid="false" onclick="openPage('@button.Action',true)">
+                                @Html.Raw(button.Text)
+                            </a>
+                        }
+                        break;
+                    case 1://Dialog
+                        if (disabled)
+                        {
+                            <a class="bk-margin-5 btn btn-xs btn-default" role="button" requireid="true" disabled onclick="openDialog(this, '@button.Text', '@button.Action?style=dialog', @button.Width, @button.Height,true)">
+                                @Html.Raw(button.Text) 
+                            </a>
+                        }
+                        else
+                        {
+                            <a class="bk-margin-5 btn btn-xs btn-default" role="button" requireid="false" onclick="openDialog(this, '@button.Text', '@button.Action?style=dialog', @button.Width, @button.Height,true)">
+                                @Html.Raw(button.Text) 
+                            </a>
+                        }
+                        break;
+
+                }
+            }
+        }
+    }
+}

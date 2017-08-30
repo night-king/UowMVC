@@ -1,0 +1,53 @@
+﻿@using UowMVC.Models;
+@model ConfigurationViewModel
+
+<form method="post" class="form-horizontal form-bordered">
+    <div class="form-group">
+        <div class="col-sm-12">
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    @Html.HiddenFor(x => x.Id)
+    @Html.HiddenFor(x => x.Key)
+    <div class="form-group">
+        @Html.LabelFor(x => x.No, new { @class = "col-sm-3 control-label" })
+        <div class="col-sm-5">
+            @Html.TextBoxFor(x => x.No, new { @class = "form-control" })
+        </div>
+        <div class="col-sm-4">
+            @Html.ValidationMessageFor(x => x.No, "", new { @class = "error" })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(x => x.Type, new { @class = "col-sm-3 control-label" })
+        <div class="col-sm-5">
+            @Html.DropDownListFor(x => x.Type, ViewData["Types"] as SelectList, new { @class = "form-control" })
+        </div>
+        <div class="col-sm-4">
+            @Html.ValidationMessageFor(x => x.Type, "", new { @class = "error" })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(x => x.Key, new { @class = "col-sm-3 control-label" })
+        <div class="col-sm-5">
+            <label class = "form-control text-muted" style="color:#999" >@Model.Key</label>
+        </div>
+        <div class="col-sm-4">
+            @Html.ValidationMessageFor(x => x.Key, "", new { @class = "error" })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(x => x.Value, new { @class = "col-sm-3 control-label" })
+        <div class="col-sm-5">
+            @Html.TextBoxFor(x => x.Value, new { @class = "form-control" })
+        </div>
+        <div class="col-sm-4">
+            @Html.ValidationMessageFor(x => x.Value, "", new { @class = "error" })
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-sm-9 col-sm-offset-3">
+            <button class="bk-margin-5 btn btn-info">提交</button>
+        </div>
+    </div>
+</form>

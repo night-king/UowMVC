@@ -1,0 +1,133 @@
+﻿@using Webdiyer.WebControls.Mvc;
+@using UowMVC.Models;
+@using UowMVC.Domain;
+
+@model PagedList<MessageViewModel>
+@{
+    ViewBag.Title = "我的消息";
+}
+
+<div class="row mailbox">
+    <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12" id="message-menu-body">
+        <script>
+            $(function () {
+                loadMenu();
+            })
+            function loadMenu() {
+                $('#message-menu-body').empty().append("<div style=\"margin:40% 0;text-align:center;\"><img src=\"/images/loading-small.gif\" style=\"vertical-align:middle;\"/><span>  加载中...</span></div>");
+                $.ajax({
+                    type: "POST",
+                    url: "/Message/_Mail_Menu_Partial",
+                    datatype: "html",
+                    success: function (html) {
+                        $('#message-menu-body').empty().append(html);
+                    },
+                    error: function () {
+                        $('#message-menu-body').empty().append('<span>加载失败</span>');
+                    }
+                });
+            }
+        </script>
+    </div>
+    <div class="col-lg-9 col-md-8 col-sm-8 col-xs-12">
+        <div class="panel bk-bg-white">
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <form class="form-inline form-bordered">
+                            <div class="form-group">
+                                <input type="text" name="key" class="form-control" placeholder="关键词" value="@ViewBag.key">
+                            </div>
+                            <div class="form-group">
+                                <button class="btn btn-sm btn-info">确定</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="panel-body">
+                @if (Model.TotalPageCount > 1)
+                {
+                    <div class="row datatables-footer">
+                        <div class="col-sm-12 col-md-6">
+                            <button type="button" class="bk-margin-5 btn btn-primary btn-xs">全部回复</button>
+                            <button type="button" class="bk-margin-5 btn btn-warning btn-xs">删除消息</button>
+                            <button type="button" class="bk-margin-5 btn btn-danger btn-xs">彻底删除</button>
+                            <button type="button" class="bk-margin-5 btn btn-default btn-xs">全部标为已读</button>
+                        </div>
+                        <div class="col-sm-12 col-md-6">
+                            <div class="dataTables_paginate paging_bs_normal" id="datatable-default_paginate">
+                                @Html.Pager(Model, new PagerOptions
+                       {
+                           CssClass = "pagination",
+                           ShowMorePagerItems = true,
+                           CurrentPagerItemTemplate = "<li class=\"active\"><a href=\"#\">{0}</a></li>",
+                           PagerItemTemplate = "<li>{0}</li>",
+                           DisabledPagerItemTemplate = "<li class=\"disabled\"><a href=\"#\">{0}</a></li>",
+                       })
+                            </div>
+                        </div>
+                    </div>
+                }
+                <ul class="messages-list">
+                    <li>
+                        <div class="header">
+                            <span class="checkbox-custom">
+                                <input type="checkbox" id="mailInbox">
+                                <label for="mailInbox"></label>
+                            </span>
+                            <span class="from">主题</span>
+                            <span class="date">时间</span>
+                        </div>
+                    </li>
+                    @foreach (var m in Model)
+                    {
+                        var unread = m.Status == (int)MessageStatusEnum.New ? "unread" : "";
+                        <li class="@unread">
+                            <a href="/Message/Detail/@m.Id">
+                                <div class="header">
+                                    <span class="checkbox-custom">
+                                        <input type="checkbox" id="mailInbox">
+                                        <label for="mailInbox"></label>
+                                    </span>
+                                    <span class="from">@m.Sender.Name</span>
+                                    <span class="date">@m.CreateAt.ToString("yyyy-MM-dd HH:mm:ss")</span>
+                                </div>
+                                @*<div class="title">
+                                        <span class="action"><i class="fa fa-star"></i></span>
+                                       @m.Content
+                                    </div>*@
+                                <div class="description">
+                                    @Html.Raw(m.Content)
+                                </div>
+                            </a>
+                        </li>
+                    }
+                </ul>
+                <div class="row datatables-footer">
+                    <div class="col-sm-12 col-md-6">
+                        <button type="button" class="bk-margin-5 btn btn-primary btn-xs">全部回复</button>
+                        <button type="button" class="bk-margin-5 btn btn-warning btn-xs">删除消息</button>
+                        <button type="button" class="bk-margin-5 btn btn-danger btn-xs">彻底删除</button>
+                        <button type="button" class="bk-margin-5 btn btn-default btn-xs">全部标为已读</button>
+                    </div>
+                    <div class="col-sm-12 col-md-6">
+                        <div class="dataTables_paginate paging_bs_normal" id="datatable-default_paginate">
+                            @Html.Pager(Model, new PagerOptions
+                       {
+                           CssClass = "pagination",
+                           ShowMorePagerItems = true,
+                           CurrentPagerItemTemplate = "<li class=\"active\"><a href=\"#\">{0}</a></li>",
+                           PagerItemTemplate = "<li>{0}</li>",
+                           DisabledPagerItemTemplate = "<li class=\"disabled\"><a href=\"#\">{0}</a></li>",
+                       })
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+
+    </div>
+</div>

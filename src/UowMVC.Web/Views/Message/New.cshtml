@@ -1,0 +1,139 @@
+﻿@using UowMVC.Web.Models;
+
+@model MessageRegisterModel
+@{
+    ViewBag.Title = "";
+}
+
+<script type="text/javascript" charset="utf-8" src="../../ueditor/ueditor.config.js"></script>
+<script type="text/javascript" charset="utf-8" src="../../ueditor/ueditor.all.min.js"> </script>
+<!--建议手动加在语言，避免在ie下有时因为加载语言失败导致编辑器加载失败-->
+<!--这里加载的语言文件会覆盖你在配置项目里添加的语言类型，比如你在配置项目里配置的是英文，这里加载的中文，那最后就是中文-->
+<script type="text/javascript" charset="utf-8" src="../../ueditor/lang/zh-cn/zh-cn.js"></script>
+
+<link href="/assets/plugins/bootstrap-tagsinput/css/bootstrap-tagsinput.css" rel="stylesheet" />
+<script src="/assets/plugins/bootstrap-tagsinput/js/bootstrap-tagsinput.js"></script>
+
+<div class="row mailbox">
+    <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12" id="message-menu-body">
+    </div>
+    <div class="col-lg-9 col-md-8 col-sm-8 col-xs-12">
+        <div class="panel bk-bg-white">
+            <div class="panel-body">
+                <form method="post" id="form1" class="form-horizontal form-bordered">
+                    <div class="form-group">
+                        <div class="col-sm-12">
+                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    @Html.HiddenFor(x => x.IsDraft)
+                    @Html.HiddenFor(x => x.Content)
+                    <div class="form-group">
+                        <div class="col-sm-12">
+                            <input name="Accepter" id="Accepter" data-role="tagsinput" placeholder="请输入收件人登录账号" data-tag-class="label label-primary" style="min-width:200px" class="form-control" value="" />
+                            <p>输入多个请按回车键</p>
+                        </div>
+                        <div class="col-sm-12">
+
+                            @Html.ValidationMessageFor(x => x.Accepter, "", new { @class = "error" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-12">
+                            @Html.TextBoxFor(x => x.Title, new { placeholder = "3 ~ 10个字", @class = "form-control" })
+                        </div>
+                        <div class="col-sm-12">
+                            @Html.ValidationMessageFor(x => x.Title, "", new { @class = "error" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-12">
+                            <div id="ContentDiv" name="ContentDiv" style="height:330px;"></div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-12">
+                            <button class="bk-margin-5 btn btn-info" type="button" id="btn-send">发送</button>
+                            <button class="bk-margin-5 btn btn-default" type="button" id="btn-savedraft">存草稿</button>
+                        </div>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+
+    $(function () {
+        loadMenu();
+        var ue = UE.getEditor('ContentDiv');
+        //$('#AccepterName').autocomplete("/Message/QueryAccepters", {
+        //    minChars: 0,
+        //    max: 10,
+        //    highlight: false,
+        //    scroll: true,
+        //    autoFill: false,
+        //    scrollHeight: 300,
+        //    dataType: "json",
+        //    delay: 10,
+        //    parse: function (data) {
+        //        return $.map(data, function (row) {
+        //            return {
+        //                data: row,
+        //                value: row.Id,
+        //                result: row.Name
+        //            }
+        //        });
+        //    },
+        //    formatItem: function (row, i, n, value) {
+        //        return '<span>' + row.Name + '<span>';
+        //    },
+        //    formatResult: function (row, value) {
+        //        return row.Name;
+        //    }
+        //}).result(function (event, row, formatted) {
+        //    $("#Accepter").val(row.Id);
+        //});
+
+        $("#btn-send").click(function () {
+            var accepter = $("#Accepter").val();
+            var content = ue.getContent();
+            if (!accepter) {
+                alert("收件人不能为空");
+                return;
+            }
+            if (!content) {
+                alert("内容不能为空");
+                return;
+            }
+            $("#Content").val(content);
+            $("#form1").submit();
+        });
+        $("#btn-savedraft").click(function () {
+            var accepter = $("#Accepter").val();
+            var content = ue.getContent();
+            if (!content) {
+                alert("内容不能为空");
+                return;
+            }
+            $("#Content").val(content);
+            $("#form1").submit();
+        });
+    })
+    function loadMenu() {
+        $('#message-menu-body').empty().append("<div style=\"margin:40% 0;text-align:center;\"><img src=\"/images/loading-small.gif\" style=\"vertical-align:middle;\"/><span>  加载中...</span></div>");
+        $.ajax({
+            type: "POST",
+            url: "/Message/_Mail_Menu_Partial",
+            datatype: "html",
+            success: function (html) {
+                $('#message-menu-body').empty().append(html);
+            },
+            error: function () {
+                $('#message-menu-body').empty().append('<span>加载失败</span>');
+            }
+        });
+    }
+</script>

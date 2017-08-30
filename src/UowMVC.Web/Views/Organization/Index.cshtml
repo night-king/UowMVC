@@ -1,0 +1,66 @@
+﻿@using UowMVC.Models;
+@using UowMVC.Domain;
+@using UowMVC.SDK;
+@using Autofac;
+@using Autofac.Integration.Owin;
+@using UowMVC.Service.Interfaces;
+
+@model IEnumerable<DepartmentViewModel>
+@{
+    ViewBag.Title = "组织架构";
+}
+<div class="row">
+    <div class="col-lg-12">
+        <div class="panel panel-default bk-bg-white">
+            <div class="panel-body">
+                <div class="table-responsive">
+                    <table class="single-select-table table table-hover">
+                        <thead>
+                            <tr  class="active">
+                                <th>名称</th>
+                                <th>编号</th>
+                                <th>成员</th>
+                                <th>描述</th>
+                                <th style="width:200px">操作</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @{
+                                int level = 0;
+                                var nodes = Model.Where(x => string.IsNullOrEmpty(x.ParentID));
+                                @Html.Raw(renderChindren(level, Model, nodes))
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@helper renderChindren(int level, IEnumerable<DepartmentViewModel> nodes, IEnumerable<DepartmentViewModel> parent)
+{
+
+level++;
+foreach (var node in parent.OrderBy(x => x.No))
+{
+    var left = (level<=1)?10:(level - 1) * 50;
+        <tr itemid="@node.Id">
+            <td style="padding-left:@(left)px">@node.Name</td>
+            <td>@node.No</td>
+            <td>@Html.Raw(getUserCount(node.Id))</td>
+            <td>
+                @node.Description
+            </td>
+            <td style="padding:4px">
+                @Html.Partial("_MenuPartial")
+            </td>
+            @renderChindren(level, nodes, nodes.Where(x => x.ParentID == node.Id))
+        </tr>
+}
+}
+
+@helper getUserCount(string id)
+{
+var userService = Request.GetOwinContext().GetAutofacLifetimeScope().Resolve<IUserService>();
+    <span> @userService.QueryDepartmentUserCount(id)</span>
+}

@@ -1,0 +1,58 @@
+﻿@using UowMVC.Models;
+@using UowMVC.Domain;
+
+@model IEnumerable<ConfigurationViewModel>
+@{
+    ViewBag.Title = "系统配置";
+}
+<div class="row">
+    <div class="col-sm-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">当前系统配置项目</div>
+            <div class="panel-body">
+                <table class="single-select-table table table-hover">
+                    <thead>
+                        <tr  class="active">
+                            <th>名称</th>
+                            <th>值</th>
+                            <th>操作</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if (Model != null)
+                        {
+                            foreach (var m in Model)
+                            {
+                                <tr itemid="@m.Id">
+                                    <td>
+                                        @m.Key
+                                    </td>
+                                    <td>
+                                        @switch ((ConfigurationTypeEnum)m.Type)
+                                        {
+                                            case ConfigurationTypeEnum.Bool:
+                                                <span>@(m.Value == "是" || m.Value == "1" || m.Value == "是" ? "是" : "否")</span>
+                                                break;
+                                            case ConfigurationTypeEnum.Image:
+                                                <a href="@m.Value" target="_blank"  ><span>@m.Value</span></a>
+                                                break;
+                                            case ConfigurationTypeEnum.Int:
+                                                <span>@m.Value</span>
+                                                break;
+                                            case ConfigurationTypeEnum.String:
+                                                <span>@m.Value</span>
+                                                break;
+                                        }
+                                    </td>
+                                    <td>
+                                        @Html.Partial("_MenuPartial")
+                                    </td>
+                                </tr>
+                            }
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

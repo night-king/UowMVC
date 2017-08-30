@@ -1,0 +1,117 @@
+﻿@using UowMVC.Models;
+@model UserGroupViewModel
+@{
+    ViewBag.Title = "分配用户";
+}
+
+<div class="row" style="height:500px">
+    <div class="col-lg-5 col-md-5 col-sm-6" style="height:500px">
+        <div class="panel panel-default" style="height:100%">
+            <div class="panel-heading">不属于<span>@Model.Name</span>的成员</div>
+            <div class="panel-body" style="height:100%">
+                <form class="form-inline form-bordered">
+                    <div class="form-group">
+                        <span>关键词</span>
+                        <input type="text" id="key" name="key" class="form-control" placeholder="关键词" value="@ViewBag.key">
+                    </div>
+                    <div class="form-group">
+                        <button id="btn-search" class="btn btn-sm btn-info " type="button">确定</button>
+                    </div>
+                </form>
+                <div id="user-body" style="height:100%;overflow-y:auto;overflow-x:hidden">
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-1 col-md-1 col-sm-1" style="height:500px;display:table-cell;
+            vertical-align:middle;
+            text-align: center;padding-top:220px">
+        <form id="transfer-form" method="post"></form>
+        <button id="btn-add-to-group" type="button" class="btn btn-primary" style="display:block">
+            <i class="fa fa-long-arrow-right"></i>
+        </button>
+        <button id="btn-remove-from-group" type="button" class="btn btn-default" style="display:block;margin-top:20px;">
+            <i class="fa fa-long-arrow-left"></i>
+        </button>
+
+
+    </div>
+    <div class="col-lg-5 col-md-6 col-sm-5" style="height:500px">
+        <div class="panel panel-default" style="height:100%">
+            <div class="panel-heading"><span>@Model.Name</span>所属成员</div>
+            <div class="panel-body" style="height:100%">
+                <div id="groupin-body" style="height:100%;overflow-y:auto;overflow-x:hidden">
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(function () {
+        searchUsers();
+        loadGroupUsers();
+        $('#btn-search').click(function () {
+            searchUsers();
+        });
+        $('#btn-add-to-group').click(function () {
+            var checkedUsers = $("#group-left-table > tbody >tr[state=1]");
+            if (checkedUsers.length == 0) {
+                return;
+            }
+            $("#transfer-form").empty().append('<input type="hidden" name="id" value="@Model.Id"/>')
+                .append('<input type="hidden" name="type" value="1"/>');
+            $.each(checkedUsers, function (i, item) {
+                var itemid = $(item).attr("itemid");
+                $("#transfer-form").append('<input type="hidden" name="user" value="' + itemid + '"/>');
+            });
+            $("#transfer-form").submit();
+        });
+        $('#btn-remove-from-group').click(function () {
+            var checkedUsers = $("#group-right-table > tbody >tr[state=1]");
+            if (checkedUsers.length == 0) {
+                return;
+            }
+            $("#transfer-form").empty().append('<input type="hidden" name="id" value="@Model.Id"/>')
+                .append('<input type="hidden" name="type" value="2"/>');
+            $.each(checkedUsers, function (i, item) {
+                var itemid = $(item).attr("itemid");
+                $("#transfer-form").append('<input type="hidden" name="user" value="' + itemid + '"/>');
+            });
+            $("#transfer-form").submit();
+        });
+    });
+    var pageIndex = 1;
+    function searchUsers() {
+        $('#user-body').empty().append("<div style=\"margin:40% 0;text-align:center;\"><img src=\"/images/loading-small.gif\" style=\"vertical-align:middle;\"/><span>  加载中...</span></div>");
+        var key = $("#key").val();
+        $.ajax({
+            type: "POST",
+            url: "/UserGroup/_Group_Left_Partial?key=" + key + "&pageIndex=" + pageIndex + "&groupid=@Request["Id"]",
+            datatype: "html",
+            success: function (html) {
+                $('#user-body').empty().append(html);
+            },
+            error: function () {
+                $('#user-body').empty().append('<span>搜索失败</span>');
+            }
+        });
+    }
+    function loadGroupUsers() {
+        $('#groupin-body').empty().append("<div style=\"margin:40% 0;text-align:center;\"><img src=\"/images/loading-small.gif\" style=\"vertical-align:middle;\"/><span>  加载中...</span></div>");
+        var key = $("#key").val();
+        $.ajax({
+            type: "POST",
+            url: "/UserGroup/_Group_Right_Partial?pageIndex=" + pageIndex + "&groupid=@Request["Id"]",
+            datatype: "html",
+            success: function (html) {
+                $('#groupin-body').empty().append(html);
+            },
+            error: function () {
+                $('#groupin-body').empty().append('<span>搜索失败</span>');
+            }
+        });
+    }
+</script>

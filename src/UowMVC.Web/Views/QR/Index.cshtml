@@ -1,0 +1,34 @@
+﻿@using UowMVC.Models;
+@model QrcodeViewModel
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title></title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0" />
+    <style>
+        .container {
+            margin: 30% auto;
+            width: 60%;
+            max-width: 500px;
+        }
+        .qr-img {
+            width: 100%;
+            max-width: 500px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <img src="@Model.Path" class="qr-img" />
+        <div style="text-align:center">
+            <strong>请将此二维码出示给用户或者分享给微信好友</strong>
+            <p>微信扫一扫或者长按识别图中二维码</p>
+        </div>
+    </div>
+</body>
+</html>

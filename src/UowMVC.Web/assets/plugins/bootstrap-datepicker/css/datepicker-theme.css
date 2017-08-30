@@ -1,0 +1,171 @@
+/* Datepicker - Base */
+.datepicker {
+	padding: 10px;
+	margin: 0 auto;
+	line-height: 1.1em;
+}
+
+.datepicker.datepicker-inline {
+	line-height: 1.7em;
+	width: 100%;
+}
+
+.datepicker table {
+	width: 100%;
+}
+
+.datepicker table tr td {
+	border-radius: 0;
+}
+
+.datepicker table thead tr th {
+	cursor: pointer;
+	font-size: 13px;
+	font-size: 1.3rem;
+	text-align: center;
+	font-weight: normal;
+}
+
+.datepicker table thead tr th.prev {
+	content: '\f0d9';
+	font-family: FontAwesome;
+}
+
+.datepicker table thead tr th.next {
+	content: '\f0da';
+	font-family: FontAwesome;
+}
+
+.datepicker table td {
+	text-align: center;
+	font-size: 12px;
+	font-size: 1.2rem;
+}
+
+.datepicker table td.day {
+	-webkit-transition: background-color 0.1s ease-in 0.1s, color 0.1s ease-in 0.1s;
+	-moz-transition: background-color 0.1s ease-in 0.1s, color 0.1s ease-in 0.1s;
+	transition: background-color 0.1s ease-in 0.1s, color 0.1s ease-in 0.1s;
+	cursor: pointer;
+}
+
+/* Datepicker - Skin Default */
+.datepicker thead tr:first-child th:hover,
+.datepicker tfoot tr th:hover,
+.datepicker table tr td span:hover {
+	background: #368ee0;
+	color: white;
+}
+
+.datepicker table tbody tr td span.old,
+.datepicker table tbody tr td span.new {
+	color: #CCC;
+}
+
+.datepicker table tbody tr td span.old:hover,
+.datepicker table tbody tr td span.new:hover {
+	color: white;
+}
+
+.datepicker table tbody tr td.day:hover {
+	background: #368ee0;
+	color: white;
+}
+
+.datepicker table tbody tr td.day.active {
+	background: #368ee0;
+	color: white;
+}
+
+.datepicker table tbody tr td.day.new {
+	color: #777777;
+}
+
+.datepicker table tbody tr td.day.new:hover {
+	color: white;
+}
+
+/* Datepicker - Skin Dark */
+.datepicker.datepicker-dark {
+	background: #33363F;
+}
+
+.datepicker.datepicker-dark table thead tr th.datepicker-switch {
+	color: white;
+}
+
+.datepicker.datepicker-dark table thead tr th.dow {
+	color: #777777;
+}
+
+.datepicker.datepicker-dark table tbody tr td span.old,
+.datepicker.datepicker-dark table tbody tr td span.new {
+	color: #444;
+}
+
+.datepicker.datepicker-dark table tbody tr td span.old:hover,
+.datepicker.datepicker-dark table tbody tr td span.new:hover {
+	color: white;
+}
+
+.datepicker.datepicker-dark table tbody tr td.day {
+	color: white;
+}
+
+.datepicker.datepicker-dark table tbody tr td.day:hover {
+	background: #cccccc;
+	color: white;
+}
+
+.datepicker.datepicker-dark table tbody tr td.day.active {
+	background: #b3b3b3;
+	color: white;
+}
+
+.datepicker.datepicker-dark table tbody tr td.day.new {
+	color: #777777;
+}
+
+.datepicker.datepicker-dark table tbody tr td.day.new:hover {
+	color: white;
+}
+
+/* Datepicker - Skin Primary */
+.datepicker.datepicker-primary {
+	min-width: 490px;
+}
+
+.datepicker.datepicker-primary.datepicker-inline {
+	background: #fff;
+	border: 1px solid #eee;
+}
+
+.datepicker.datepicker-primary table thead tr:first-child {
+	background-color: #368ee0;
+	color: white;
+}
+
+.datepicker.datepicker-primary table thead tr:first-child th:hover {
+	background-color: #006699;
+}
+
+.datepicker.datepicker-primary table thead tr:first-child th:first-child {
+	border-radius: 0;
+}
+
+.datepicker.datepicker-primary table thead tr:first-child th:last-child {
+	border-radius: 0;
+}
+
+.datepicker.datepicker-primary table thead tr:last-child {
+	background-color: #74b0e8;
+	color: white;
+}
+
+.datepicker.datepicker-primary table thead tr:last-child th:hover {
+	background-color: #5b9cd8;
+}
+
+.datepicker.datepicker-primary table thead tr th {
+	border-radius: 0;
+}

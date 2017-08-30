@@ -1,0 +1,46 @@
+﻿@using UowMVC.Models;
+@model UserGroupViewModel
+@{
+    ViewBag.Title = "";
+}
+
+<form method="post" class="form-horizontal form-bordered">
+    <div class="form-group">
+        <div class="col-sm-12">
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    @Html.HiddenFor(x => x.Id)
+    <div class="form-group">
+        @Html.LabelFor(x => x.No, new { @class = "col-sm-3 control-label" })
+        <div class="col-sm-5">
+            @Html.TextBoxFor(x => x.No, new { @class = "form-control" })
+        </div>
+        <div class="col-sm-4">
+            @Html.ValidationMessageFor(x => x.No, "", new { @class = "error" })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(x => x.Name, new { @class = "col-sm-3 control-label" })
+        <div class="col-sm-5">
+            @Html.TextBoxFor(x => x.Name, new { @class = "form-control" })
+        </div>
+        <div class="col-sm-4">
+            @Html.ValidationMessageFor(x => x.Name, "", new { @class = "error" })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(x => x.Description, new { @class = "col-sm-3 control-label" })
+        <div class="col-sm-5">
+            @Html.TextAreaFor(x => x.Description, new { @class = "form-control" })
+        </div>
+        <div class="col-sm-4">
+            @Html.ValidationMessageFor(x => x.Description, "", new { @class = "error" })
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-sm-9 col-sm-offset-3">
+            <button class="bk-margin-5 btn btn-info">提交</button>
+        </div>
+    </div>
+</form>

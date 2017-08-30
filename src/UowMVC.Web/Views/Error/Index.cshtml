@@ -1,0 +1,166 @@
+﻿@using UowMVC.Web.Models;
+@model ErrorModel
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Error</title>
+    <meta charset="utf-8" />
+    <!-- start: CSS file-->
+    <!-- Vendor CSS-->
+    <link href="/assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="/assets/vendor/skycons/css/skycons.css" rel="stylesheet" />
+    <link href="/assets/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
+
+    <!-- Plugins CSS-->
+    <!-- Theme CSS -->
+    <link href="/assets/css/jquery.mmenu.css" rel="stylesheet" />
+
+    <!-- Page CSS -->
+    <link href="/assets/css/style.css" rel="stylesheet" />
+    <link href="/assets/css/add-ons.min.css" rel="stylesheet" />
+
+    <style>
+        footer {
+            display: none;
+        }
+    </style>
+
+    <!-- end: CSS file-->
+    <!-- Head Libs -->
+    <script src="/assets/plugins/modernizr/js/modernizr.js"></script>
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+        <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+<body>
+    <!-- Start: Content -->
+    <div class="container-fluid content">
+        <div class="row">
+            <!-- Main Page -->
+            <div id="content" class="col-sm-12 full">
+                <div class="row box-error" style="margin-top:60px;">
+                    <div class="col-lg-12 col-md-12 col-xs-12">
+                        <form method="post" action="/Error/Report">
+                            @Html.HiddenFor(x=>x.Id)
+                            <div class="text-center">
+                                @if (Model == null)
+                                {
+                                    <h1>Error</h1>
+                                }
+                                else
+                                {
+                                    <h1>@Model.StatusCode </h1>
+                                    <p style="color:#c7254e">@Model.Id</p>
+                                    if (Model.Exception != null)
+                                    {
+                                        <p style="color:#c7254e">@Model.Exception.Message</p>
+                                    }
+                                }
+                                <a href="javascript: history.go(-1)" class="btn btn-default">
+                                    <i class="fa fa-chevron-left"></i> 返回上一页
+                                </a>
+                                <button type="button" class="btn btn-primary" onclick="javascript: relogin();"><i class="fa fa-lock"></i> 重新登录</button>
+                                <button type="submit" class="btn btn-warning"><i class="fa fa-lock"></i> 报告此错误</button>
+                            </div>
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+            <!-- End Main Page -->
+        </div>
+        @if (Model != null)
+        {
+            <div class="row" style="margin-top:15px;">
+                <div class="col-lg-12">
+                    <div class="well">
+                        <div class="text-left">
+                            <h3>基本信息</h3>
+                        </div>
+                        <div><code class="html"><b>[Code]:</b>@Model.StatusCode</code></div>
+                        <div><code class="html"><b>[IP]:</b>@Model.IP</code></div>
+                        <div><code class="html"><b>[URL]:</b>@Model.Url</code></div>
+                        <div>
+                            <code class="html">
+                                <b>[Summary]:</b> @if (Model.Exception != null)
+                                {
+                                    <span style="color:#c7254e">@Model.Exception.Message</span>
+                                }
+                            </code>
+                        </div>
+                        <div class="text-left">
+                            <h3>客户端信息</h3>
+                        </div>
+                        @if (Model.Browser != null)
+                        {
+                            <div><code class="html"><b>[Type]:</b>@Model.Browser.Browser</code></div>
+                            <div><code class="html"><b>[Platform]:</b>@Model.Browser.Platform</code></div>
+                            <div><code class="html"><b>[Version]:</b>@Model.Browser.MajorVersion</code></div>
+                        }
+
+
+                        <div class="text-left">
+                            <h3>错误详细描述</h3>
+                        </div>
+                        @if (Model.Exception != null)
+                        {
+                            <div><code class="html"><b>[Message]:</b>@Model.Exception.Message</code></div>
+                            <div><code class="html"><b>[Source]:</b>@Model.Exception.Source</code></div>
+                            <div><code class="html"><b>[TargetSite]:</b>@Model.Exception.TargetSite</code></div>
+                            <div><code class="html"><b>[StackTrace]:</b>@Model.Exception.StackTrace</code></div>
+                        }
+                    </div>
+                </div>
+            </div>
+        }
+        <!--/container-->
+        <!-- start: JavaScript-->
+        <!-- Vendor JS-->
+        <script src="/assets/vendor/js/jquery.min.js"></script>
+        <script src="/assets/vendor/js/jquery-2.1.1.min.js"></script>
+        <script src="/assets/vendor/js/jquery-migrate-1.2.1.min.js"></script>
+        <script src="/assets/vendor/bootstrap/js/bootstrap.min.js"></script>
+        <script src="/assets/vendor/skycons/js/skycons.js"></script>
+
+        <!-- Plugins JS-->
+        <!-- Theme JS -->
+        <script src="/assets/js/jquery.mmenu.min.js"></script>
+        <script src="/assets/js/core.min.js"></script>
+
+        <!-- Pages JS -->
+        <script src="/assets/js/pages/page-404.js"></script>
+
+        <!-- end: JavaScript-->
+        <script>
+            function relogin() {
+                if (window.parent != null) {
+                    window.parent.window.location.href = "/account/login";
+                } else {
+                    window.location.href = "/account/login";
+                }
+            }
+            function gohome() {
+                if (window.parent != null) {
+                    window.parent.window.location.href = "/";
+                } else {
+                    window.location.href = "/";
+                }
+            }
+            $(function () {
+                if (window.parent) {
+                    $(window.parent.document).find("#mod-window .modal-dialog").css("height", "600px").css("width", "680px");
+                    $(window.parent.document).find("#mod-window .modal-body").css("height", "550px");
+                }
+            })
+        </script>
+</body>
+</html>

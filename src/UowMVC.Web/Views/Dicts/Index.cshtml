@@ -1,0 +1,203 @@
+﻿@using UowMVC.Models;
+@using Webdiyer.WebControls.Mvc;
+
+@model PagedList<DictViewModel>
+@{
+    ViewBag.Title = "字典管理";
+}
+<link rel="stylesheet" href="~/vender/ztree/style.css" type="text/css">
+<script src="~/vender/ztree/jquery.ztree.core.js"></script>
+
+<div class="row" style="min-height:500px">
+    <div class="col-lg-12 col-md-12 col-sm-12" style="min-height:500px">
+        <div class="panel panel-default" style="height:100%">
+            <div class="panel-body" style="height:100%">
+                <div class="row">
+                    <div class="col-lg-3 col-md-3 col-sm-5" style="padding:0">
+                        <div class="panel panel-default" style="height:100%">
+                            <div class="panel-heading">
+                                <div class="row">
+                                    <div class="col-xs-8 text-left bk-vcenter">
+                                        <h6 class="bk-margin-off"><b>字典索引</b></h6>
+                                    </div>
+                                    <div class="col-xs-4 bk-vcenter text-right">
+                                      <i class="fa ifa fa-plus" title="添加根节点" onclick="craeteNode();" style="cursor:pointer"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="panel-body">
+                                <ul id="treeDiv" class="ztree"></ul>
+                                <div id="rMenu" style="position: fixed;visibility:hidden;z-index:999">
+                                    <ul class="dropdown-menu" role="menu" style="background-color:#ECEDEF">
+                                        <li role="presentation" onclick="craeteNode();" style="cursor:pointer"><a role="menuitem">创建</a></li>
+                                        <li role="presentation" onclick="editNode();" style="cursor:pointer"><a role="menuitem">编辑</a></li>
+                                        <li role="presentation" onclick="deleteNode();" style="cursor:pointer"><a role="menuitem">删除</a></li>
+                                        <li role="presentation" onclick="addDict();" style="cursor:pointer"><a role="menuitem">添加项目</a></li>
+                                        <li role="presentation" onclick="importContent();" style="cursor:pointer"><a role="menuitem">导入</a></li>
+                                        <li role="presentation" onclick="exportContent();" style="cursor:pointer"><a role="menuitem">导出</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-9 col-md-9 col-sm-7">
+                        <div class="table-responsive">
+                            <table class="single-select-table table table-striped table-responsive table-hover" style="margin-bottom:5px;">
+                                <thead>
+                                    <tr class="active">
+                                        <th>序号</th>
+                                        <th>字典键</th>
+                                        <th>字典值</th>
+                                        <th class="center">时间</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var m in Model)
+                                    {
+                                        <tr itemid="@m.Id">
+                                            <td class="center">@m.No</td>
+                                            <td class="center">@m.Key</td>
+                                            <td class="left">@m.Value</td>
+                                            <td class="center">@m.CreateAt</td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                            <div class="row datatables-footer">
+                                <div class="col-sm-12 col-md-6">
+                                    <div class="dataTables_info" id="datatable-default_info" role="status" aria-live="polite">
+                                        @if (Model.Count > 0)
+                                        {
+                                            <span>第 @Model.CurrentPageIndex / @Model.TotalPageCount 页 共计 @Model.TotalItemCount 条</span>
+                                        }
+                                        else
+                                        {
+                                            <span>暂无数据</span>
+                                        }
+                                    </div>
+                                </div>
+                                <div class="col-sm-12 col-md-6">
+                                    <div class="dataTables_paginate paging_bs_normal" id="datatable-default_paginate">
+                                        @Html.Pager(Model, new PagerOptions
+                                   {
+                                       CssClass = "pagination",
+                                       ShowMorePagerItems = true,
+                                       CurrentPagerItemTemplate = "<li class=\"active\"><a href=\"#\">{0}</a></li>",
+                                       PagerItemTemplate = "<li>{0}</li>",
+                                       DisabledPagerItemTemplate = "<li class=\"disabled\"><a href=\"#\">{0}</a></li>",
+                                   })
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    var zTree, rMenu;
+    var selectedId = "@ViewBag.fid";
+    function importContent(root) {
+        hideRMenu();
+        if (root) {
+            openDialog(this, '导入', '/DictIndex/Import/?style=dialog&id=', 600, 300, false);
+        } else {
+            openDialog(this, '导入', '/DictIndex/Import/?style=dialog&id=' + selectedId, 600, 300, false);
+        }
+    }
+    function exportContent(root) {
+        hideRMenu();
+        if (root) {
+            window.open(this, '/DictIndex/export/?style=dialog&id=');
+        } else {
+            window.open(this, '/DictIndex/export/?style=dialog&id=' + selectedId);
+        }
+    }
+    function craeteNode(root) {
+        hideRMenu();
+        if (selectedId && !root) {
+            openDialog(this, '创建节点', '/DictIndex/New?style=dialog&id=' + selectedId, 600, 300, false);
+        }
+        else {
+            openDialog(this, '创建节点', '/DictIndex/New?style=dialog&id=', 600, 300, false);
+
+        }
+    }
+    function editNode() {
+        hideRMenu();
+        if (selectedId) {
+            openDialog(this, '编辑节点', '/DictIndex/Edit?style=dialog&id=' + selectedId, 600, 300, false);
+        }
+    }
+    function deleteNode() {
+        hideRMenu();
+        if (selectedId) {
+            openDialog(this, '删除节点', '/DictIndex/Delete?style=dialog&id=' + selectedId, 600, 300, false);
+        }
+    }
+    function addDict() {
+        hideRMenu();
+        if (selectedId) {
+            openDialog(this, '添加项目', '/Dicts/New?style=dialog&id=' + selectedId, 600, 300, false);
+        }
+    }
+    function hideRMenu() {
+        if (rMenu) rMenu.css({ "visibility": "hidden" });
+        $("body").unbind("mousedown", onBodyMouseDown);
+    }
+    var setting = {
+        view: {
+            selectedMulti: false
+        },
+        callback: {
+            onClick: function (event, treeId, treeNode, clickFlag) {
+                selectedId = treeNode.id;
+                console.log("id:" + treeNode.id + ",name:" + treeNode.name);
+            },
+            onRightClick: function (event, treeId, treeNode) {
+                selectedId = treeNode.id;
+                if (!treeNode && event.target.tagName.toLowerCase() != "button" && $(event.target).parents("a").length == 0) {
+                    zTree.cancelSelectedNode();
+                    showRMenu("root", event.clientX, event.clientY);
+                } else if (treeNode && !treeNode.noR) {
+                    zTree.selectNode(treeNode);
+                    showRMenu("node", event.clientX, event.clientY);
+                }
+            }
+        }
+    };
+
+    function showRMenu(type, x, y) {
+        $("#rMenu ul").show();
+        if (type == "root") {
+            $("#m_del").hide();
+            $("#m_check").hide();
+            $("#m_unCheck").hide();
+        } else {
+            $("#m_del").show();
+            $("#m_check").show();
+            $("#m_unCheck").show();
+        }
+        rMenu.css({ "top": y + "px", "left": x + "px", "visibility": "visible" });
+
+        $("body").bind("mousedown", onBodyMouseDown);
+    }
+    function onBodyMouseDown(event) {
+        if (!(event.target.id == "rMenu" || $(event.target).parents("#rMenu").length > 0)) {
+            rMenu.css({ "visibility": "hidden" });
+        }
+    }
+
+    $(function () {
+        $.ajax({
+            type: 'POST',
+            url: '/DictIndex/getTree?checkedId=@ViewBag.fid',
+            success: function (zNodes) {
+                zTree = $.fn.zTree.init($("#treeDiv"), setting, zNodes);
+                rMenu = $("#rMenu");
+            }
+        });
+    })
+</script>

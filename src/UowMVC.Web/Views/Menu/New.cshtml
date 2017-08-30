@@ -1,0 +1,146 @@
+﻿@using UowMVC.Models;
+@model MenuViewModel
+@{
+    ViewBag.Title = "菜单";
+}
+
+<form method="post" class="form-horizontal form-bordered">
+    <div class="form-group">
+        <div class="col-sm-12">
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    @Html.HiddenFor(x => x.ParentID)
+    <div class="form-group">
+        @Html.LabelFor(x => x.No, new { @class = "col-sm-3 control-label" })
+        <div class="col-sm-5">
+            @Html.TextBoxFor(x => x.No, new { @class = "form-control" })
+        </div>
+        <div class="col-sm-4">
+            @Html.ValidationMessageFor(x => x.No, "", new { @class = "error" })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(x => x.Name, new { @class = "col-sm-3 control-label" })
+        <div class="col-sm-5">
+            @Html.TextBoxFor(x => x.Name, new { @class = "form-control" })
+        </div>
+        <div class="col-sm-4">
+            @Html.ValidationMessageFor(x => x.Name, "", new { @class = "error" })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(x => x.Icon, new { @class = "col-sm-3 control-label" })
+        <div class="col-sm-5" style="vertical-align:middle;">
+            @Html.HiddenFor(x => x.Icon, new { @class = "icon-display-div" })
+            <div class="icon-div icon-display-div" onclick="openIconWindow()"></div>
+        </div>
+        <div class="col-sm-4">
+            @Html.ValidationMessageFor(x => x.Icon, "", new { @class = "error" })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(x => x.OpenStyle, new { @class = "col-sm-3 control-label" })
+        <div class="col-sm-5">
+            <div class="radio-custom radio-inline">
+                <input type="radio" name="OpenStyle" value="2" checked>
+                <label for="inline-radio1"> Page</label>
+            </div>
+            <div class="radio-custom radio-inline">
+                <input type="radio" name="OpenStyle" value="1">
+                <label for="inline-radio1"> Dialog</label>
+            </div>
+        </div>
+        <div class="col-sm-4">
+            @Html.ValidationMessageFor(x => x.OpenStyle, "", new { @class = "error" })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(x => x.Width, new { @class = "col-sm-3 control-label" })
+        <div class="col-sm-5">
+            @Html.TextBoxFor(x => x.Width, new { @class = "form-control" })
+        </div>
+        <div class="col-sm-4">
+            @Html.ValidationMessageFor(x => x.Width, "", new { @class = "error" })
+        </div>
+    </div><div class="form-group">
+        @Html.LabelFor(x => x.Height, new { @class = "col-sm-3 control-label" })
+        <div class="col-sm-5">
+            @Html.TextBoxFor(x => x.Height, new { @class = "form-control" })
+        </div>
+        <div class="col-sm-4">
+            @Html.ValidationMessageFor(x => x.Height, "", new { @class = "error" })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(x => x.URL, new { @class = "col-sm-3 control-label" })
+        <div class="col-sm-5">
+            @Html.TextBoxFor(x => x.URL, new { @class = "form-control" })
+        </div>
+        <div class="col-sm-4">
+            @Html.ValidationMessageFor(x => x.URL, "", new { @class = "error" })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(x => x.RelevantURL, new { @class = "col-sm-3 control-label" })
+        <div class="col-sm-5">
+            @Html.TextAreaFor(x => x.RelevantURL, new { @class = "form-control" })
+        </div>
+        <div class="col-sm-4">
+            @Html.ValidationMessageFor(x => x.RelevantURL, "", new { @class = "error" })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(x => x.IsMustSelected, new { @class = "col-sm-3 control-label" })
+        <div class="col-sm-5">
+            <div class="radio-custom radio-inline">
+                <input type="radio" name="IsMustSelected" value="true" checked>
+                <label for="inline-radio1"> 是</label>
+            </div>
+            <div class="radio-custom radio-inline">
+                <input type="radio" name="IsMustSelected" value="false">
+                <label for="inline-radio1"> 否</label>
+            </div>
+        </div>
+        <div class="col-sm-4">
+            @Html.ValidationMessageFor(x => x.IsMustSelected, "", new { @class = "error" })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(x => x.IsControlPanel, new { @class = "col-sm-3 control-label" })
+        <div class="col-sm-5">
+            <div class="radio-custom radio-inline">
+                <input type="radio" name="IsControlPanel" value="true" checked>
+                <label for="inline-radio1"> 是</label>
+            </div>
+            <div class="radio-custom radio-inline">
+                <input type="radio" name="IsControlPanel" value="false">
+                <label for="inline-radio1"> 否</label>
+            </div>
+        </div>
+        <div class="col-sm-4">
+            @Html.ValidationMessageFor(x => x.IsControlPanel, "", new { @class = "error" })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(x => x.IsDisplayOnTable, new { @class = "col-sm-3 control-label" })
+        <div class="col-sm-5">
+            <div class="radio-custom radio-inline">
+                <input type="radio" name="IsDisplayOnTable" value="true" checked>
+                <label for="inline-radio1"> 是</label>
+            </div>
+            <div class="radio-custom radio-inline">
+                <input type="radio" name="IsDisplayOnTable" value="false">
+                <label for="inline-radio1"> 否</label>
+            </div>
+        </div>
+        <div class="col-sm-4">
+            @Html.ValidationMessageFor(x => x.IsDisplayOnTable, "", new { @class = "error" })
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-sm-9 col-sm-offset-3">
+            <button class="bk-margin-5 btn btn-info">提交</button>
+        </div>
+    </div>
+</form>

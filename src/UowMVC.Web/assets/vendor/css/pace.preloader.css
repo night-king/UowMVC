@@ -1,0 +1,61 @@
+.pace-running .mast-wrap, .pace-running > .static-side-navigation-wrap, .pace-running > .slide, .pace-running > .standard-header{
+  opacity: 0;
+/*  height: 0;*/
+}
+.pace-done .mast-wrap, .pace-done > .static-side-navigation-wrap, .pace-done > .slide, .pace-done > .standard-header{
+  opacity: 1;
+/*  height: auto;*/
+}
+.pace {
+  -webkit-pointer-events: none;
+  pointer-events: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  user-select: none;
+  z-index: 2000;
+  position: fixed;
+  margin: auto;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height:  100%;
+  width: 100%;
+  background:none !important;
+}
+
+.pace .pace-progress {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -ms-box-sizing: border-box;
+  -o-box-sizing: border-box;
+  box-sizing: border-box;
+
+  -webkit-transition: width 1s ease-in-out 1s linear;
+  -moz-transition: width 1s ease-in-out 1s linear;
+  -ms-transition: width 1s ease-in-out 1s linear;
+  -o-transition: width 1s ease-in-out 1s linear;
+  transition: width 1s ease-in-out 1s linear;
+
+  -webkit-transform: translate3d(0, 0, 0);
+  -moz-transform: translate3d(0, 0, 0);
+  -ms-transform: translate3d(0, 0, 0);
+  -o-transform: translate3d(0, 0, 0);
+  transform: translate3d(0, 0, 0);
+
+  max-width: 100%;
+  width: 100%;
+  margin-left: 0;
+  position: fixed;
+  z-index: 2000;
+  display: block;
+  left: 0;
+  top: 1%;
+  margin-top: -5px;
+ height: 3px;
+ background:#73B9FF;
+}
+
+.pace.pace-inactive {
+  display: none;
+}

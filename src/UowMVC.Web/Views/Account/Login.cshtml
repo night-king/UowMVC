@@ -1,0 +1,77 @@
+﻿@using UowMVC.Web.Models
+@model LoginModel
+@{
+    ViewBag.Title = "登录";
+    Layout = "~/Views/Shared/_Layout2.cshtml";
+
+}
+<div class="container-fluid content">
+    <div class="row">
+        <!-- Main Page -->
+        <div id="content" class="col-sm-12 full">
+            <div class="row">
+                <div class="login-box">
+                    <div class="panel">
+                        <div class="panel-body">
+                            <div class="header bk-margin-bottom-20 text-center" style="background:#fff;margin-bottom: 40px !important;min-height:150px">
+                                <img src="/images/banner.png" alt="" style="margin: 20px 0;width:100%" >
+                                <h4>登录</h4>
+                            </div>
+                            @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal login", role = "form" }))
+                            {
+                                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                <div class="bk-padding-left-20 bk-padding-right-20">
+                                    <div class="form-group">
+                                        @Html.LabelFor(m => m.UserName, new { })
+                                        <div class="input-group input-group-icon">
+                                            @Html.TextBoxFor(m => m.UserName, new { @class = "form-control  bk-radius" })
+                                            <span class="input-group-addon">
+                                                <span class="icon">
+                                                    <i class="fa fa-user"></i>
+                                                </span>
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <span class="error">
+                                            @Html.ValidationMessageFor(x => x.UserName)
+                                        </span>
+                                    </div>
+                                    <div class="form-group">
+                                        @Html.LabelFor(m => m.Password, new { })
+                                        <div class="input-group input-group-icon">
+                                            @Html.PasswordFor(m => m.Password, new { @class = "form-control  bk-radius" })
+                                            <span class="input-group-addon">
+                                                <span class="icon">
+                                                    <i class="fa fa-key"></i>
+                                                </span>
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <span class="error">
+                                            @Html.ValidationMessageFor(x => x.Password)
+                                        </span>
+                                    </div>
+                                    <div class="row bk-margin-top-20 bk-margin-bottom-10">
+                                        <div class="col-sm-8">
+                                            <div class="checkbox-custom checkbox-default">
+                                                <input id="RememberMe" name="rememberme" type="checkbox">
+                                                @Html.LabelFor(m => m.RememberMe)
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-4 text-right">
+                                            <button type="submit" class="btn btn-primary">登录</button>
+                                        </div>
+                                    </div>
+                                    <p class="text-center" >技术支持 <a href="http://deepleo.com">deepleo.com</a></p>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- End Main Page -->
+    </div>
+</div>

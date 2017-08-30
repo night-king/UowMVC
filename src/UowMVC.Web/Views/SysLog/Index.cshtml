@@ -1,0 +1,108 @@
+﻿@using Webdiyer.WebControls.Mvc;
+@using UowMVC.Models;
+@using UowMVC.SDK;
+
+@model PagedList<LogViewModel>
+@{
+    ViewBag.Title = "系统日志";
+}
+
+<div class="row">
+    <div class="col-xs-12 text-left ">
+        <div class="panel panel-default">
+            <div class="panel-heading">搜索</div>
+            <div class="panel-body">
+                <form class="form-inline form-bordered">
+                    <div class="form-group">
+                        <span>级别</span>
+                        <select id="level" name="level" class="form-control" size="1">
+                            <option value="">全部</option>
+                            <option value="INFO">信息</option>
+                            <option value="WARN">警告</option>
+                            <option value="ERROR">错误</option>
+                            <option value="FATAL">致命错误</option>
+                        </select>
+                        <script>
+                            $(function () {
+                                $("#level").val('@ViewBag.level');
+                            })
+                        </script>
+                    </div>
+                    <div class="form-group">
+                        <span>关键词</span>
+                        <input type="text" name="key" class="form-control" placeholder="关键词" value="@ViewBag.key">
+                    </div>
+                    <div class="form-group">
+                        <button class="btn btn-sm btn-info">确定</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-12 col-md-12 col-sm-12">
+        <div class="panel bk-bg-white">
+            <div class="panel-body">
+                <div class="table-responsive">
+                    <table class="single-select-table table table-striped table-responsive table-hover" style="margin-bottom:5px;">
+                        <thead>
+                            <tr  class="active">
+                                <th class="center">#</th>
+                                <th>代码</th>
+                                <th>级别</th>
+                                <th style="width:200px">概要</th>
+                                <th>用户</th>
+                                <th>状态</th>
+                                <th class="center">时间</th>
+                                <th class="center">操作</th>
+
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var m in Model)
+                            {
+                                <tr itemid="@m.Id">
+                                    <td class="center">@m.Id</td>
+                                    <td class="left">@m.StatusCode</td>
+                                    <td class="left">@m.Level</td>
+                                    <td class="left"><div style="width:250px;word-break:break-all;white-space:normal;line-break:normal">@m.Message</div> </td>
+                                    <td class="left">@m.UserName</td>
+                                    <td class="left">@m.Status.ToDescription()</td>
+                                    <td class="center">@m.CreateAt</td>
+                                    <td>@Html.Partial("_MenuPartial")</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                    <div class="row datatables-footer">
+                        <div class="col-sm-12 col-md-6">
+                            <div class="dataTables_info" id="datatable-default_info" role="status" aria-live="polite">
+                                @if (Model.Count > 0)
+                                {
+                                    <span>第 @Model.CurrentPageIndex / @Model.TotalPageCount 页 共计 @Model.TotalItemCount 条</span>
+                                }
+                                else
+                                {
+                                    <span>暂无数据</span>
+                                }
+                            </div>
+                        </div>
+                        <div class="col-sm-12 col-md-6">
+                            <div class="dataTables_paginate paging_bs_normal" id="datatable-default_paginate">
+                                @Html.Pager(Model, new PagerOptions
+                           {
+                               CssClass = "pagination",
+                               ShowMorePagerItems = true,
+                               CurrentPagerItemTemplate = "<li class=\"active\"><a href=\"#\">{0}</a></li>",
+                               PagerItemTemplate = "<li>{0}</li>",
+                               DisabledPagerItemTemplate = "<li class=\"disabled\"><a href=\"#\">{0}</a></li>",
+                           })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

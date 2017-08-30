@@ -1,0 +1,80 @@
+﻿@using UowMVC.Models;
+@using UowMVC.Domain;
+@using UowMVC.SDK;
+
+@model UserViewModel
+@{
+    ViewBag.Title = "用户";
+}
+<div class="panel">
+    <div class="panel-body">
+        <div class="text-left bk-bg-white bk-padding-top-40 bk-padding-bottom-10">
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 bk-vcenter text-center">
+                    <div class="bk-avatar">
+                        <img src="@Model.Avatar" alt="" class="img-circle bk-img-120 bk-border-light-gray bk-border-3x">
+                    </div>
+                    <h4 class="bk-margin-top-10 bk-docs-font-weight-300">@Model.Name</h4>
+                </div>
+                <hr class="bk-margin-off">
+            </div>
+        </div>
+        <hr class="bk-margin-off">
+        <div class="bk-ltr bk-bg-white">
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                    <table class="table">
+
+                        <tr>
+                            <td style="width:100px;text-align:right">编号:</td>
+                            <td>@Model.Num</td>
+                        </tr>
+                        <tr>
+                            <td style="width:100px;text-align:right">性别:</td>
+                            <td>@(((GenderEnum)Model.Gender).ToDescription())</td>
+                        </tr>
+                        <tr>
+                            <td style="width:100px;text-align:right">手机号:</td>
+                            <td>@Model.PhoneNumber</td>
+                        </tr>
+                        <tr>
+                            <td style="width:100px;text-align:right">邮箱:</td>
+                            <td>@Model.Email</td>
+                        </tr>
+                        <tr>
+                            <td style="width:100px;text-align:right">所属用户组:</td>
+                            <td>
+                                @if (Model.UserGroups != null)
+                                {
+                                    foreach (var m in Model.UserGroups)
+                                    {
+                                        <div>@m.Name</div>
+                                    }
+                                }
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="width:100px;text-align:right">所属部门:</td>
+                            <td>
+                                @if (Model.Departments != null)
+                                {
+                                    foreach (var m in Model.Departments)
+                                    {
+                                        <div>@m.Name</div>
+                                    }
+                                }
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="text-align:center" colspan="2">
+                                @*<a class="btn btn-success"><i class="fa  fa-pinterest-square"></i> 联系他</a>*@
+                            </td>
+                        </tr>
+
+                    </table>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,1163 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props" Condition="Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" />
+  <Import Project="..\packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props" Condition="Exists('..\packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{7E982978-3DB0-42B7-8D23-AEB2A0D52BD4}</ProjectGuid>
+    <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>UowMVC.Web</RootNamespace>
+    <AssemblyName>UowMVC.Web</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <MvcBuildViews>false</MvcBuildViews>
+    <UseIISExpress>true</UseIISExpress>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Autofac, Version=4.6.0.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
+      <HintPath>..\packages\Autofac.4.6.0\lib\net45\Autofac.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Autofac.Integration.Mvc, Version=4.0.0.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
+      <HintPath>..\packages\Autofac.Mvc5.4.0.2\lib\net45\Autofac.Integration.Mvc.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Autofac.Integration.Owin, Version=4.0.0.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
+      <HintPath>..\packages\Autofac.Owin.4.0.0\lib\net45\Autofac.Integration.Owin.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="ICSharpCode.SharpZipLib, Version=0.86.0.518, Culture=neutral, PublicKeyToken=1b03e6acf1164f73, processorArchitecture=MSIL">
+      <HintPath>..\packages\SharpZipLib.0.86.0\lib\20\ICSharpCode.SharpZipLib.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="log4net, Version=2.0.8.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
+      <HintPath>..\packages\log4net.2.0.8\lib\net45-full\log4net.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.SignalR.Core, Version=2.2.2.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.SignalR.Core.2.2.2\lib\net45\Microsoft.AspNet.SignalR.Core.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.SignalR.SystemWeb, Version=2.2.2.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.SignalR.SystemWeb.2.2.2\lib\net45\Microsoft.AspNet.SignalR.SystemWeb.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="NPOI, Version=2.3.0.0, Culture=neutral, PublicKeyToken=0df73ec7942b34e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\NPOI.2.3.0\lib\net40\NPOI.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="NPOI.OOXML, Version=2.3.0.0, Culture=neutral, PublicKeyToken=0df73ec7942b34e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\NPOI.2.3.0\lib\net40\NPOI.OOXML.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="NPOI.OpenXml4Net, Version=2.3.0.0, Culture=neutral, PublicKeyToken=0df73ec7942b34e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\NPOI.2.3.0\lib\net40\NPOI.OpenXml4Net.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="NPOI.OpenXmlFormats, Version=2.3.0.0, Culture=neutral, PublicKeyToken=0df73ec7942b34e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\NPOI.2.3.0\lib\net40\NPOI.OpenXmlFormats.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Simple.ImageResizer, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Simple.ImageResizer.2.0.0\lib\Simple.ImageResizer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Simple.ImageResizer.MvcExtensions, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Simple.ImageResizer.MvcExtensions.1.0.0\lib\net45\Simple.ImageResizer.MvcExtensions.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Data.Common, Version=4.1.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Data.Common.4.3.0\lib\net451\System.Data.Common.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Data.SqlClient, Version=4.1.1.1, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Data.SqlClient.4.3.1\lib\net46\System.Data.SqlClient.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Caching" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Abstractions" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Routing" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http">
+    </Reference>
+    <Reference Include="System.Net.Http.WebRequest">
+    </Reference>
+    <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.5.2.3\lib\net45\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Optimization">
+      <HintPath>..\packages\Microsoft.AspNet.Web.Optimization.1.1.3\lib\net40\System.Web.Optimization.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Razor.3.2.3\lib\net45\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.3\lib\net45\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="Webdiyer.MvcPager, Version=3.0.2015.802, Culture=neutral, PublicKeyToken=f6872c5a09aed72c, processorArchitecture=MSIL">
+      <HintPath>..\packages\Webdiyer.MvcPager.3.0.1.1\lib\Webdiyer.MvcPager.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="WebGrease">
+      <Private>True</Private>
+      <HintPath>..\packages\WebGrease.1.5.2\lib\WebGrease.dll</HintPath>
+    </Reference>
+    <Reference Include="Antlr3.Runtime">
+      <Private>True</Private>
+      <HintPath>..\packages\Antlr.3.4.1.9004\lib\Antlr3.Runtime.dll</HintPath>
+    </Reference>
+    <Reference Include="zxing, Version=1.0.4727.18517, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\ZXing.2.1.1\lib\net20\zxing.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\packages\Newtonsoft.Json.6.0.4\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Net.Http.Formatting">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.3\lib\net45\System.Net.Http.Formatting.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Core.5.2.3\lib\net45\System.Web.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Http.WebHost">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.WebHost.5.2.3\lib\net45\System.Web.Http.WebHost.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.Core">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.Core.2.2.1\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.Owin">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.Owin.2.2.1\lib\net45\Microsoft.AspNet.Identity.Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.EntityFramework">
+      <HintPath>..\packages\Microsoft.AspNet.Identity.EntityFramework.2.2.1\lib\net45\Microsoft.AspNet.Identity.EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="Owin">
+      <HintPath>..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin">
+      <HintPath>..\packages\Microsoft.Owin.3.0.1\lib\net45\Microsoft.Owin.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Host.SystemWeb">
+      <HintPath>..\packages\Microsoft.Owin.Host.SystemWeb.3.0.1\lib\net45\Microsoft.Owin.Host.SystemWeb.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security">
+      <HintPath>..\packages\Microsoft.Owin.Security.3.0.1\lib\net45\Microsoft.Owin.Security.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.Facebook">
+      <HintPath>..\packages\Microsoft.Owin.Security.Facebook.3.0.1\lib\net45\Microsoft.Owin.Security.Facebook.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.Cookies">
+      <HintPath>..\packages\Microsoft.Owin.Security.Cookies.3.0.1\lib\net45\Microsoft.Owin.Security.Cookies.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.OAuth">
+      <HintPath>..\packages\Microsoft.Owin.Security.OAuth.3.0.1\lib\net45\Microsoft.Owin.Security.OAuth.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.Google">
+      <HintPath>..\packages\Microsoft.Owin.Security.Google.3.0.1\lib\net45\Microsoft.Owin.Security.Google.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.Twitter">
+      <HintPath>..\packages\Microsoft.Owin.Security.Twitter.3.0.1\lib\net45\Microsoft.Owin.Security.Twitter.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Owin.Security.MicrosoftAccount">
+      <HintPath>..\packages\Microsoft.Owin.Security.MicrosoftAccount.3.0.1\lib\net45\Microsoft.Owin.Security.MicrosoftAccount.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App_Start\AutofacConfig.cs" />
+    <Compile Include="App_Start\BundleConfig.cs" />
+    <Compile Include="App_Start\FilterConfig.cs" />
+    <Compile Include="App_Start\IdentityConfig.cs" />
+    <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="App_Start\MenuConfig.cs" />
+    <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="App_Start\WebConfig.cs" />
+    <Compile Include="Aspx\Main.Master.cs">
+      <DependentUpon>Main.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Aspx\Main.Master.designer.cs">
+      <DependentUpon>Main.Master</DependentUpon>
+    </Compile>
+    <Compile Include="Attrs\RoleAuthorizeAttribute.cs" />
+    <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\BaseController.cs" />
+    <Compile Include="Controllers\InstallController.cs" />
+    <Compile Include="Controllers\NewCategoryController.cs" />
+    <Compile Include="Controllers\NewsController.cs" />
+    <Compile Include="Controllers\ConfigrutionController.cs" />
+    <Compile Include="Controllers\DepartmentController.cs" />
+    <Compile Include="Controllers\DictIndexController.cs" />
+    <Compile Include="Controllers\DictsController.cs" />
+    <Compile Include="Controllers\ErrorController.cs" />
+    <Compile Include="Controllers\FriendController.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\ImageController.cs" />
+    <Compile Include="Controllers\LoginLogController.cs" />
+    <Compile Include="Controllers\MessageController.cs" />
+    <Compile Include="Controllers\QRController.cs" />
+    <Compile Include="Controllers\RegionController.cs" />
+    <Compile Include="Controllers\UserController.cs" />
+    <Compile Include="Controllers\UserGroupController.cs" />
+    <Compile Include="Controllers\OrganizationController.cs" />
+    <Compile Include="Controllers\SysLogController.cs" />
+    <Compile Include="Controllers\MenuController.cs" />
+    <Compile Include="Controllers\ResultController.cs" />
+    <Compile Include="Controllers\RoleController.cs" />
+    <Compile Include="Filters\CustomActionFilterAttribute.cs" />
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Helpers\IPParser.cs" />
+    <Compile Include="Helpers\MenuHelper.cs" />
+    <Compile Include="Helpers\NPOIHelper.cs" />
+    <Compile Include="Helpers\ZTreeHelper.cs" />
+    <Compile Include="Models\ImportModels.cs" />
+    <Compile Include="Models\MultiDeleteModel.cs" />
+    <Compile Include="Models\UserModels.cs" />
+    <Compile Include="Models\AccountModels.cs" />
+    <Compile Include="Models\ErrorModels.cs" />
+    <Compile Include="Models\MenuModels.cs" />
+    <Compile Include="Models\MessageModel.cs" />
+    <Compile Include="Models\ResultModels.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SignalR\ErrorHandlingPipelineModule.cs" />
+    <Compile Include="SignalR\LoggingPipelineModule.cs" />
+    <Compile Include="SignalR\MessageHub.cs" />
+    <Compile Include="SignalR\PushHelper.cs" />
+    <Compile Include="Startup.cs" />
+    <Compile Include="ueditor\net\App_Code\Config.cs" />
+    <Compile Include="ueditor\net\App_Code\ConfigHandler.cs" />
+    <Compile Include="ueditor\net\App_Code\CrawlerHandler.cs" />
+    <Compile Include="ueditor\net\App_Code\Handler.cs" />
+    <Compile Include="ueditor\net\App_Code\ListFileHandler.cs" />
+    <Compile Include="ueditor\net\App_Code\NotSupportedHandler.cs" />
+    <Compile Include="ueditor\net\App_Code\PathFormater.cs" />
+    <Compile Include="ueditor\net\App_Code\UploadHandler.cs" />
+    <Compile Include="UploadFileHandler.ashx.cs">
+      <DependentUpon>UploadFileHandler.ashx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="0.html" />
+    <Content Include="404.html" />
+    <Content Include="500.html" />
+    <Content Include="assets\css\add-ons.min.css" />
+    <Content Include="assets\css\jquery.mmenu.css" />
+    <Content Include="assets\css\style.css" />
+    <Content Include="assets\fonts\climacons-webfont.svg" />
+    <Content Include="assets\fonts\fontawesome-webfont.svg" />
+    <Content Include="assets\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="assets\fonts\weathericons-regular-webfont.svg" />
+    <Content Include="assets\ico\apple-touch-icon-114x114.png" />
+    <Content Include="assets\ico\apple-touch-icon-120x120.png" />
+    <Content Include="assets\ico\apple-touch-icon-144x144.png" />
+    <Content Include="assets\ico\apple-touch-icon-152x152.png" />
+    <Content Include="assets\ico\apple-touch-icon-57x57.png" />
+    <Content Include="assets\ico\apple-touch-icon-72x72.png" />
+    <Content Include="assets\ico\apple-touch-icon-76x76.png" />
+    <Content Include="assets\ico\apple-touch-icon.png" />
+    <Content Include="assets\ico\favicon.ico" />
+    <Content Include="assets\img\avatar.jpg" />
+    <Content Include="assets\img\avatar1.jpg" />
+    <Content Include="assets\img\avatar2.jpg" />
+    <Content Include="assets\img\avatar3.jpg" />
+    <Content Include="assets\img\avatar4.jpg" />
+    <Content Include="assets\img\avatar5.jpg" />
+    <Content Include="assets\img\avatar6.jpg" />
+    <Content Include="assets\img\avatar7.jpg" />
+    <Content Include="assets\img\bg1.jpg" />
+    <Content Include="assets\img\browser-chrome-big.png" />
+    <Content Include="assets\img\browser-firefox-big.png" />
+    <Content Include="assets\img\browser-ie.png" />
+    <Content Include="assets\img\browser-opera.png" />
+    <Content Include="assets\img\browser-safari.png" />
+    <Content Include="assets\img\flags\USA.png" />
+    <Content Include="assets\img\flat-landscape.jpg" />
+    <Content Include="assets\img\flat-sun.jpg" />
+    <Content Include="assets\img\gallery\photo1.jpg" />
+    <Content Include="assets\img\gallery\photo10.jpg" />
+    <Content Include="assets\img\gallery\photo11.jpg" />
+    <Content Include="assets\img\gallery\photo12.jpg" />
+    <Content Include="assets\img\gallery\photo13.jpg" />
+    <Content Include="assets\img\gallery\photo14.jpg" />
+    <Content Include="assets\img\gallery\photo15.jpg" />
+    <Content Include="assets\img\gallery\photo2.jpg" />
+    <Content Include="assets\img\gallery\photo3.jpg" />
+    <Content Include="assets\img\gallery\photo4.jpg" />
+    <Content Include="assets\img\gallery\photo5.jpg" />
+    <Content Include="assets\img\gallery\photo6.jpg" />
+    <Content Include="assets\img\gallery\photo7.jpg" />
+    <Content Include="assets\img\gallery\photo8.jpg" />
+    <Content Include="assets\img\gallery\photo9.jpg" />
+    <Content Include="assets\img\general\general-img-1.jpg" />
+    <Content Include="assets\img\general\general-img-2.jpg" />
+    <Content Include="assets\img\general\general-img-3.jpg" />
+    <Content Include="assets\img\logo.png" />
+    <Content Include="assets\img\sunny-large.jpg" />
+    <Content Include="assets\js\core.min.js" />
+    <Content Include="assets\js\jquery.mmenu.min.js" />
+    <Content Include="assets\js\pages\activity.js" />
+    <Content Include="assets\js\pages\buttons.js" />
+    <Content Include="assets\js\pages\calendar.js" />
+    <Content Include="assets\js\pages\charts-flot.js" />
+    <Content Include="assets\js\pages\charts-other.js" />
+    <Content Include="assets\js\pages\charts-xcharts.js" />
+    <Content Include="assets\js\pages\font-awesome.js" />
+    <Content Include="assets\js\pages\form-dropzone.js" />
+    <Content Include="assets\js\pages\form-editors.js" />
+    <Content Include="assets\js\pages\form-elements.js" />
+    <Content Include="assets\js\pages\form-validation.js" />
+    <Content Include="assets\js\pages\form-wizard.js" />
+    <Content Include="assets\js\pages\form-x-editable-demo.js" />
+    <Content Include="assets\js\pages\form-x-editable.js" />
+    <Content Include="assets\js\pages\gallery.js" />
+    <Content Include="assets\js\pages\glyphicon.js" />
+    <Content Include="assets\js\pages\index.js" />
+    <Content Include="assets\js\pages\invoice.js" />
+    <Content Include="assets\js\pages\mailbox.js" />
+    <Content Include="assets\js\pages\map-basic.js" />
+    <Content Include="assets\js\pages\map-vector.js" />
+    <Content Include="assets\js\pages\nestable.js" />
+    <Content Include="assets\js\pages\page-404.js" />
+    <Content Include="assets\js\pages\page-lockscreen.js" />
+    <Content Include="assets\js\pages\page-login.js" />
+    <Content Include="assets\js\pages\page-register.js" />
+    <Content Include="assets\js\pages\page-timeline.js" />
+    <Content Include="assets\js\pages\pricing-tables.js" />
+    <Content Include="assets\js\pages\profile.js" />
+    <Content Include="assets\js\pages\table-advanced.js" />
+    <Content Include="assets\js\pages\table-editable.js" />
+    <Content Include="assets\js\pages\table-responsive.js" />
+    <Content Include="assets\js\pages\typography.js" />
+    <Content Include="assets\js\pages\ui-carousels.js" />
+    <Content Include="assets\js\pages\ui-elements.js" />
+    <Content Include="assets\js\pages\ui-lightbox.js" />
+    <Content Include="assets\js\pages\ui-modals.js" />
+    <Content Include="assets\js\pages\ui-notifications.js" />
+    <Content Include="assets\js\pages\ui-panels.js" />
+    <Content Include="assets\js\pages\ui-portlets.js" />
+    <Content Include="assets\js\pages\ui-progress-bar.js" />
+    <Content Include="assets\js\pages\ui-slider.js" />
+    <Content Include="assets\js\pages\weathericons.js" />
+    <Content Include="assets\js\pages\widgets.js" />
+    <Content Include="assets\plugins\autosize\jquery.autosize.min.js" />
+    <Content Include="assets\plugins\bootkit\css\bootkit.css" />
+    <Content Include="assets\plugins\bootkit\js\bootkit.js" />
+    <Content Include="assets\plugins\bootstrap-colorpicker\css\bootstrap-colorpicker.css" />
+    <Content Include="assets\plugins\bootstrap-colorpicker\img\bootstrap-colorpicker\alpha.png" />
+    <Content Include="assets\plugins\bootstrap-colorpicker\img\bootstrap-colorpicker\hue.png" />
+    <Content Include="assets\plugins\bootstrap-colorpicker\img\bootstrap-colorpicker\saturation.png" />
+    <Content Include="assets\plugins\bootstrap-colorpicker\js\bootstrap-colorpicker.js" />
+    <Content Include="assets\plugins\bootstrap-datepicker\css\datepicker-theme.css" />
+    <Content Include="assets\plugins\bootstrap-datepicker\css\datepicker3.css" />
+    <Content Include="assets\plugins\bootstrap-datepicker\js\bootstrap-datepicker.js" />
+    <Content Include="assets\plugins\bootstrap-datepicker\locales\bootstrap-datepicker-en-CA.js" />
+    <Content Include="assets\plugins\bootstrap-datepicker\locales\bootstrap-datepicker.ar-tn.js" />
+    <Content Include="assets\plugins\bootstrap-datepicker\locales\bootstrap-datepicker.ar.js" />
+    <Content Include="assets\plugins\bootstrap-datepicker\locales\bootstrap-datepicker.az.js" />
+    <Content Include="assets\plugins\bootstrap-datepicker\locales\bootstrap-datepicker.bg.js" />
+    <Content Include="assets\plugins\bootstrap-datepicker\locales\bootstrap-datepicker.bn.js" />
+    <Content Include="assets\plugins\bootstrap-datepicker\locales\bootstrap-datepicker.br.js" />
+    <Content Include="assets\plugins\bootstrap-datepicker\locales\bootstrap-datepicker.bs.js" />
+    <Content Include="assets\plugins\bootstrap-datepicker\locales\bootstrap-datepicker.ca.js" />
+    <Content Include="assets\plugins\bootstrap-datepicker\locales\bootstrap-datepicker.cs.js" />
+    <Content Include="assets\plugins\bootstrap-datepicker\locales\bootstrap-datepicker.cy.js" />
+    <Content Include="assets\plugins\bootstrap-datepicker\locales\bootstrap-datepicker.da.js" />
+    <Content Include="assets\plugins\bootstrap-datepicker\locales\bootstrap-datepicker.de.js" />
+    <Content Include="assets\plugins\bootstrap-datepicker\locales\bootstrap-datepicker.el.js" />
+    <Content Include="assets\plugins\bootstrap-datepicker\locales\bootstrap-datepicker.en-AU.js" />
+    <Content Include="assets\plugins\bootstrap-datepicker\locales\bootstrap-datepicker.en-CA.js" />
+    <Content Include="assets\plugins\bootstrap-datepicker\locales\bootstrap-datepicker.en-GB.js" />
+    <Content Include="assets\plugins\bootstrap-datepicker\locales\bootstrap-datepicker.en-IE.js" />
+    <Content Include="assets\plugins\bootstrap-datepicker\locales\bootstrap-datepicker.en-NZ.js" />
+    <Content Include="assets\plugins\bootstrap-datepicker\locales\bootstrap-datepicker.en-ZA.js" />
+    <Content Include="assets\plugins\bootstrap-datepicker\locales\bootstrap-datepicker.eo.js" />
+    <Content Include="assets\plugins\bootstrap-datepicker\locales\bootstrap-datepicker.es.js" />
+    <Content Include="assets\plugins\bootstrap-datepicker\locales\bootstrap-datepicker.et.js" />
+    <Content Include="assets\plugins\bootstrap-datepicker\locales\bootstrap-datepicker.eu.js" />
+    <Content Include="assets\plugins\bootstrap-datepicker\locales\bootstrap-datepicker.fa.js" />
+    <Content Include="assets\plugins\bootstrap-datepicker\locales\bootstrap-datepicker.fi.js" />
+    <Content Include="assets\plugins\bootstrap-datepicker\locales\bootstrap-datepicker.fo.js" />
+    <Content Include="assets\plugins\bootstrap-datepicker\locales\bootstrap-datepicker.fr-CH.js" />
+    <Content Include="assets\plugins\bootstrap-datepicker\locales\bootstrap-datepicker.fr.js" />
+    <Content Include="assets\plugins\bootstrap-datepicker\locales\bootstrap-datepicker.gl.js" />
+    <Content Include="assets\plugins\bootstrap-datepicker\locales\bootstrap-datepicker.he.js" />
+    <Content Include="assets\plugins\bootstrap-datepicker\locales\bootstrap-datepicker.hi.js" />
+    <Content Include="assets\plugins\bootstrap-datepicker\locales\bootstrap-datepicker.hr.js" />
+    <Content Include="assets\plugins\bootstrap-datepicker\locales\bootstrap-datepicker.hu.js" />
+    <Content Include="assets\plugins\bootstrap-datepicker\locales\bootstrap-datepicker.hy.js" />
+    <Content Include="assets\plugins\bootstrap-datepicker\locales\bootstrap-datepicker.id.js" />
+    <Content Include="assets\plugins\bootstrap-datepicker\locales\bootstrap-datepicker.is.js" />
+    <Content Include="assets\plugins\bootstrap-datepicker\locales\bootstrap-datepicker.it-CH.js" />
+    <Content Include="assets\plugins\bootstrap-datepicker\locales\bootstrap-datepicker.it.js" />
+    <Content Include="assets\plugins\bootstrap-datepicker\locales\bootstrap-datepicker.ja.js" />
+    <Content Include="assets\plugins\bootstrap-datepicker\locales\bootstrap-datepicker.ka.js" />
+    <Content Include="assets\plugins\bootstrap-datepicker\locales\bootstrap-datepicker.kh.js" />
+    <Content Include="assets\plugins\bootstrap-datepicker\locales\bootstrap-datepicker.kk.js" />
+    <Content Include="assets\plugins\bootstrap-datepicker\locales\bootstrap-datepicker.km.js" />
+    <Content Include="assets\plugins\bootstrap-datepicker\locales\bootstrap-datepicker.ko.js" />
+    <Content Include="assets\plugins\bootstrap-datepicker\locales\bootstrap-datepicker.kr.js" />
+    <Content Include="assets\plugins\bootstrap-datepicker\locales\bootstrap-datepicker.lt.js" />
+    <Content Include="assets\plugins\bootstrap-datepicker\locales\bootstrap-datepicker.lv.js" />
+    <Content Include="assets\plugins\bootstrap-datepicker\locales\bootstrap-datepicker.me.js" />
+    <Content Include="assets\plugins\bootstrap-datepicker\locales\bootstrap-datepicker.mk.js" />
+    <Content Include="assets\plugins\bootstrap-datepicker\locales\bootstrap-datepicker.mn.js" />
+    <Content Include="assets\plugins\bootstrap-datepicker\locales\bootstrap-datepicker.ms.js" />
+    <Content Include="assets\plugins\bootstrap-datepicker\locales\bootstrap-datepicker.nb.js" />
+    <Content Include="assets\plugins\bootstrap-datepicker\locales\bootstrap-datepicker.nl-BE.js" />
+    <Content Include="assets\plugins\bootstrap-datepicker\locales\bootstrap-datepicker.nl.js" />
+    <Content Include="assets\plugins\bootstrap-datepicker\locales\bootstrap-datepicker.no.js" />
+    <Content Include="assets\plugins\bootstrap-datepicker\locales\bootstrap-datepicker.oc.js" />
+    <Content Include="assets\plugins\bootstrap-datepicker\locales\bootstrap-datepicker.pl.js" />
+    <Content Include="assets\plugins\bootstrap-datepicker\locales\bootstrap-datepicker.pt-BR.js" />
+    <Content Include="assets\plugins\bootstrap-datepicker\locales\bootstrap-datepicker.pt.js" />
+    <Content Include="assets\plugins\bootstrap-datepicker\locales\bootstrap-datepicker.ro.js" />
+    <Content Include="assets\plugins\bootstrap-datepicker\locales\bootstrap-datepicker.rs-latin.js" />
+    <Content Include="assets\plugins\bootstrap-datepicker\locales\bootstrap-datepicker.rs.js" />
+    <Content Include="assets\plugins\bootstrap-datepicker\locales\bootstrap-datepicker.ru.js" />
+    <Content Include="assets\plugins\bootstrap-datepicker\locales\bootstrap-datepicker.si.js" />
+    <Content Include="assets\plugins\bootstrap-datepicker\locales\bootstrap-datepicker.sk.js" />
+    <Content Include="assets\plugins\bootstrap-datepicker\locales\bootstrap-datepicker.sl.js" />
+    <Content Include="assets\plugins\bootstrap-datepicker\locales\bootstrap-datepicker.sq.js" />
+    <Content Include="assets\plugins\bootstrap-datepicker\locales\bootstrap-datepicker.sr-latin.js" />
+    <Content Include="assets\plugins\bootstrap-datepicker\locales\bootstrap-datepicker.sr.js" />
+    <Content Include="assets\plugins\bootstrap-datepicker\locales\bootstrap-datepicker.sv.js" />
+    <Content Include="assets\plugins\bootstrap-datepicker\locales\bootstrap-datepicker.sw.js" />
+    <Content Include="assets\plugins\bootstrap-datepicker\locales\bootstrap-datepicker.ta.js" />
+    <Content Include="assets\plugins\bootstrap-datepicker\locales\bootstrap-datepicker.tg.js" />
+    <Content Include="assets\plugins\bootstrap-datepicker\locales\bootstrap-datepicker.th.js" />
+    <Content Include="assets\plugins\bootstrap-datepicker\locales\bootstrap-datepicker.tr.js" />
+    <Content Include="assets\plugins\bootstrap-datepicker\locales\bootstrap-datepicker.uk.js" />
+    <Content Include="assets\plugins\bootstrap-datepicker\locales\bootstrap-datepicker.uz-cyrl.js" />
+    <Content Include="assets\plugins\bootstrap-datepicker\locales\bootstrap-datepicker.uz-latn.js" />
+    <Content Include="assets\plugins\bootstrap-datepicker\locales\bootstrap-datepicker.vi.js" />
+    <Content Include="assets\plugins\bootstrap-datepicker\locales\bootstrap-datepicker.zh-CN.js" />
+    <Content Include="assets\plugins\bootstrap-datepicker\locales\bootstrap-datepicker.zh-TW.js" />
+    <Content Include="assets\plugins\bootstrap-datetimepicker\css\bootstrap-datetimepicker.css" />
+    <Content Include="assets\plugins\bootstrap-datetimepicker\css\bootstrap-datetimepicker.min.css" />
+    <Content Include="assets\plugins\bootstrap-datetimepicker\js\bootstrap-datetimepicker.js" />
+    <Content Include="assets\plugins\bootstrap-datetimepicker\js\bootstrap-datetimepicker.min.js" />
+    <Content Include="assets\plugins\bootstrap-markdown\css\bootstrap-markdown.min.css" />
+    <Content Include="assets\plugins\bootstrap-markdown\js\bootstrap-markdown.js" />
+    <Content Include="assets\plugins\bootstrap-markdown\js\markdown.js" />
+    <Content Include="assets\plugins\bootstrap-markdown\js\to-markdown.js" />
+    <Content Include="assets\plugins\bootstrap-tagsinput\css\bootstrap-tagsinput.css" />
+    <Content Include="assets\plugins\bootstrap-tagsinput\js\bootstrap-tagsinput.js" />
+    <Content Include="assets\plugins\bootstrap-timepicker\css\bootstrap-timepicker.css" />
+    <Content Include="assets\plugins\bootstrap-timepicker\js\bootstrap-timepicker.js" />
+    <Content Include="assets\plugins\chart-master\js\Chart.js" />
+    <Content Include="assets\plugins\chosen\js\chosen.jquery.min.js" />
+    <Content Include="assets\plugins\d3\js\d3.min.js" />
+    <Content Include="assets\plugins\dropzone\css\dropzone.css" />
+    <Content Include="assets\plugins\dropzone\images\spritemap.png" />
+    <Content Include="assets\plugins\dropzone\js\dropzone.min.js" />
+    <Content Include="assets\plugins\easypiechart\js\jquery.easypiechart.min.js" />
+    <Content Include="assets\plugins\editable\css\bootstrap-editable.css" />
+    <Content Include="assets\plugins\editable\inputs-ext\address\address.min.js" />
+    <Content Include="assets\plugins\editable\inputs-ext\typeaheadjs\typeaheadjs.min.js" />
+    <Content Include="assets\plugins\editable\js\bootstrap-editable.min.js" />
+    <Content Include="assets\plugins\flot-tooltip\js\jquery.flot.tooltip.js" />
+    <Content Include="assets\plugins\flot\js\jquery.flot.min.js" />
+    <Content Include="assets\plugins\flot\js\jquery.flot.pie.min.js" />
+    <Content Include="assets\plugins\flot\js\jquery.flot.resize.min.js" />
+    <Content Include="assets\plugins\flot\js\jquery.flot.spline.min.js" />
+    <Content Include="assets\plugins\flot\js\jquery.flot.stack.min.js" />
+    <Content Include="assets\plugins\flot\js\jquery.flot.time.min.js" />
+    <Content Include="assets\plugins\fullcalendar\css\fullcalendar.css" />
+    <Content Include="assets\plugins\fullcalendar\js\fullcalendar.js" />
+    <Content Include="assets\plugins\gauge\js\gauge.min.js" />
+    <Content Include="assets\plugins\gmaps\gmaps.js" />
+    <Content Include="assets\plugins\isotope\css\jquery.isotope.css" />
+    <Content Include="assets\plugins\isotope\js\jquery.isotope.js" />
+    <Content Include="assets\plugins\jquery-datatables-bs3\css\datatables.css" />
+    <Content Include="assets\plugins\jquery-datatables-bs3\js\datatables.js" />
+    <Content Include="assets\plugins\jquery-datatables\extras\TableTools\js\dataTables.tableTools.min.js" />
+    <Content Include="assets\plugins\jquery-datatables\media\js\jquery.dataTables.js" />
+    <Content Include="assets\plugins\jquery-ui-touch-punch\js\jquery.ui.touch-punch.js" />
+    <Content Include="assets\plugins\jquery-ui\css\jquery-ui-1.10.4.custom.css" />
+    <Content Include="assets\plugins\jquery-ui\css\jquery-ui-1.10.4.min.css" />
+    <Content Include="assets\plugins\jquery-ui\js\jquery-ui-1.10.4.custom.js" />
+    <Content Include="assets\plugins\jquery-ui\js\jquery-ui-1.10.4.min.js" />
+    <Content Include="assets\plugins\jquery-validation\js\jquery.validate.js" />
+    <Content Include="assets\plugins\jquery\js\jquery.js" />
+    <Content Include="assets\plugins\jqvmap\data\jquery.vmap.sampledata.js" />
+    <Content Include="assets\plugins\jqvmap\jquery.vmap.js" />
+    <Content Include="assets\plugins\jqvmap\jqvmap.css" />
+    <Content Include="assets\plugins\jqvmap\maps\continents\jquery.vmap.africa.js" />
+    <Content Include="assets\plugins\jqvmap\maps\continents\jquery.vmap.asia.js" />
+    <Content Include="assets\plugins\jqvmap\maps\continents\jquery.vmap.australia.js" />
+    <Content Include="assets\plugins\jqvmap\maps\continents\jquery.vmap.europe.js" />
+    <Content Include="assets\plugins\jqvmap\maps\continents\jquery.vmap.north-america.js" />
+    <Content Include="assets\plugins\jqvmap\maps\continents\jquery.vmap.south-america.js" />
+    <Content Include="assets\plugins\jqvmap\maps\jquery.vmap.world.js" />
+    <Content Include="assets\plugins\justgage\js\justgage.1.0.1.min.js" />
+    <Content Include="assets\plugins\magnific-popup\css\magnific-popup.css" />
+    <Content Include="assets\plugins\magnific-popup\js\magnific-popup.js" />
+    <Content Include="assets\plugins\maskedinput\js\jquery.maskedinput.js" />
+    <Content Include="assets\plugins\maskedinput\js\jquery.maskedinput.min.js" />
+    <Content Include="assets\plugins\mockjax\js\jquery.mockjax.min.js" />
+    <Content Include="assets\plugins\modernizr\js\modernizr.js" />
+    <Content Include="assets\plugins\moment\js\moment.js" />
+    <Content Include="assets\plugins\moment\js\moment.min.js" />
+    <Content Include="assets\plugins\morris\css\morris.css" />
+    <Content Include="assets\plugins\morris\js\morris.min.js" />
+    <Content Include="assets\plugins\nanoscroller\js\nanoscroller.js" />
+    <Content Include="assets\plugins\owl-carousel\css\owl.carousel.css" />
+    <Content Include="assets\plugins\owl-carousel\css\owl.theme.css" />
+    <Content Include="assets\plugins\owl-carousel\js\owl.carousel.js" />
+    <Content Include="assets\plugins\placeholder\js\jquery.placeholder.min.js" />
+    <Content Include="assets\plugins\pnotify\css\pnotify.custom.css" />
+    <Content Include="assets\plugins\pnotify\js\pnotify.custom.js" />
+    <Content Include="assets\plugins\raphael\js\raphael.min.js" />
+    <Content Include="assets\plugins\scrollbar\css\mCustomScrollbar.css" />
+    <Content Include="assets\plugins\scrollbar\js\jquery.mCustomScrollbar.concat.min.js" />
+    <Content Include="assets\plugins\select2\select2.css" />
+    <Content Include="assets\plugins\select2\select2.js" />
+    <Content Include="assets\plugins\select2\select2.png" />
+    <Content Include="assets\plugins\sparkline\js\jquery.sparkline.min.js" />
+    <Content Include="assets\plugins\store-js\js\store.js" />
+    <Content Include="assets\plugins\summernote\css\summernote-bs3.css" />
+    <Content Include="assets\plugins\summernote\css\summernote.css" />
+    <Content Include="assets\plugins\summernote\js\summernote.js" />
+    <Content Include="assets\plugins\touchpunch\js\jquery.ui.touch-punch.min.js" />
+    <Content Include="assets\plugins\wizard\js\jquery.bootstrap.wizard.min.js" />
+    <Content Include="assets\plugins\xcharts\css\xcharts.min.css" />
+    <Content Include="assets\plugins\xcharts\js\xcharts.min.js" />
+    <Content Include="assets\vendor\bootstrap\css\bootstrap.min.css" />
+    <Content Include="assets\vendor\bootstrap\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="assets\vendor\bootstrap\js\bootstrap.min.js" />
+    <Content Include="assets\vendor\css\animate.min.css" />
+    <Content Include="assets\vendor\css\pace.preloader.css" />
+    <Content Include="assets\vendor\font-awesome\css\font-awesome.min.css" />
+    <Content Include="assets\vendor\font-awesome\fonts\fontawesome-webfont.svg" />
+    <Content Include="assets\vendor\js\jquery-2.1.1.min.js" />
+    <Content Include="assets\vendor\js\jquery-migrate-1.2.1.min.js" />
+    <Content Include="assets\vendor\js\jquery.min.js" />
+    <Content Include="assets\vendor\js\pace.min.js" />
+    <Content Include="assets\vendor\skycons\css\skycons.css" />
+    <Content Include="assets\vendor\skycons\fonts\weathericons-regular-webfont.svg" />
+    <Content Include="assets\vendor\skycons\js\skycons.js" />
+    <Content Include="401.html" />
+    <Content Include="favicon.ico" />
+    <Content Include="Global.asax" />
+    <Content Include="Images\admin-avatar.png" />
+    <Content Include="Images\banner.png" />
+    <Content Include="Images\default-avatar.png" />
+    <Content Include="Images\error.png" />
+    <Content Include="Images\home.png" />
+    <Content Include="Images\loading-small.gif" />
+    <Content Include="Images\logo.png" />
+    <Content Include="Images\user.png" />
+    <Content Include="Images\WePayLogo.png" />
+    <Content Include="Scripts\bootstrap.js" />
+    <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="assets\fonts\climacons-webfont.eot" />
+    <Content Include="assets\fonts\climacons-webfont.ttf" />
+    <Content Include="assets\fonts\climacons-webfont.woff" />
+    <Content Include="assets\fonts\fontawesome-webfont.eot" />
+    <Content Include="assets\fonts\fontawesome-webfont.ttf" />
+    <Content Include="assets\fonts\fontawesome-webfont.woff" />
+    <Content Include="assets\fonts\FontAwesome.otf" />
+    <Content Include="assets\fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="assets\fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="assets\fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="assets\fonts\weathericons-regular-webfont.eot" />
+    <Content Include="assets\fonts\weathericons-regular-webfont.ttf" />
+    <Content Include="assets\fonts\weathericons-regular-webfont.woff" />
+    <Content Include="assets\fonts\WeatherIcons-Regular.otf" />
+    <Content Include="assets\vendor\bootstrap\fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="assets\vendor\bootstrap\fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="assets\vendor\bootstrap\fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="assets\vendor\font-awesome\fonts\fontawesome-webfont.eot" />
+    <Content Include="assets\vendor\font-awesome\fonts\fontawesome-webfont.ttf" />
+    <Content Include="assets\vendor\font-awesome\fonts\fontawesome-webfont.woff" />
+    <Content Include="assets\vendor\font-awesome\fonts\FontAwesome.otf" />
+    <Content Include="assets\vendor\skycons\fonts\weathericons-regular-webfont.eot" />
+    <Content Include="assets\vendor\skycons\fonts\weathericons-regular-webfont.ttf" />
+    <Content Include="assets\vendor\skycons\fonts\weathericons-regular-webfont.woff" />
+    <Content Include="assets\vendor\skycons\fonts\WeatherIcons-Regular.otf" />
+    <Content Include="log4netconfig.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Aspx\Main.Master" />
+    <Content Include="控制面板菜单.xml" />
+    <None Include="Properties\PublishProfiles\default.pubxml" />
+    <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="Scripts\jquery-1.10.2.js" />
+    <Content Include="Scripts\jquery-1.10.2.min.js" />
+    <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery.signalR-2.2.2.js" />
+    <Content Include="Scripts\jquery.signalR-2.2.2.min.js" />
+    <Content Include="Scripts\jquery.validate.js" />
+    <Content Include="Scripts\jquery.validate.min.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Scripts\modernizr-2.6.2.js" />
+    <Content Include="Scripts\page.js" />
+    <Content Include="Scripts\respond.js" />
+    <Content Include="Scripts\respond.min.js" />
+    <Content Include="Scripts\_references.js" />
+    <Content Include="ueditor\dialogs\anchor\anchor.html" />
+    <Content Include="ueditor\dialogs\attachment\attachment.css" />
+    <Content Include="ueditor\dialogs\attachment\attachment.html" />
+    <Content Include="ueditor\dialogs\attachment\attachment.js" />
+    <Content Include="ueditor\dialogs\attachment\fileTypeImages\icon_chm.gif" />
+    <Content Include="ueditor\dialogs\attachment\fileTypeImages\icon_default.png" />
+    <Content Include="ueditor\dialogs\attachment\fileTypeImages\icon_doc.gif" />
+    <Content Include="ueditor\dialogs\attachment\fileTypeImages\icon_exe.gif" />
+    <Content Include="ueditor\dialogs\attachment\fileTypeImages\icon_jpg.gif" />
+    <Content Include="ueditor\dialogs\attachment\fileTypeImages\icon_mp3.gif" />
+    <Content Include="ueditor\dialogs\attachment\fileTypeImages\icon_mv.gif" />
+    <Content Include="ueditor\dialogs\attachment\fileTypeImages\icon_pdf.gif" />
+    <Content Include="ueditor\dialogs\attachment\fileTypeImages\icon_ppt.gif" />
+    <Content Include="ueditor\dialogs\attachment\fileTypeImages\icon_psd.gif" />
+    <Content Include="ueditor\dialogs\attachment\fileTypeImages\icon_rar.gif" />
+    <Content Include="ueditor\dialogs\attachment\fileTypeImages\icon_txt.gif" />
+    <Content Include="ueditor\dialogs\attachment\fileTypeImages\icon_xls.gif" />
+    <Content Include="ueditor\dialogs\attachment\images\alignicon.gif" />
+    <Content Include="ueditor\dialogs\attachment\images\alignicon.png" />
+    <Content Include="ueditor\dialogs\attachment\images\bg.png" />
+    <Content Include="ueditor\dialogs\attachment\images\file-icons.gif" />
+    <Content Include="ueditor\dialogs\attachment\images\file-icons.png" />
+    <Content Include="ueditor\dialogs\attachment\images\icons.gif" />
+    <Content Include="ueditor\dialogs\attachment\images\icons.png" />
+    <Content Include="ueditor\dialogs\attachment\images\image.png" />
+    <Content Include="ueditor\dialogs\attachment\images\progress.png" />
+    <Content Include="ueditor\dialogs\attachment\images\success.gif" />
+    <Content Include="ueditor\dialogs\attachment\images\success.png" />
+    <Content Include="ueditor\dialogs\background\background.css" />
+    <Content Include="ueditor\dialogs\background\background.html" />
+    <Content Include="ueditor\dialogs\background\background.js" />
+    <Content Include="ueditor\dialogs\background\images\bg.png" />
+    <Content Include="ueditor\dialogs\background\images\success.png" />
+    <Content Include="ueditor\dialogs\charts\chart.config.js" />
+    <Content Include="ueditor\dialogs\charts\charts.css" />
+    <Content Include="ueditor\dialogs\charts\charts.html" />
+    <Content Include="ueditor\dialogs\charts\charts.js" />
+    <Content Include="ueditor\dialogs\charts\images\charts0.png" />
+    <Content Include="ueditor\dialogs\charts\images\charts1.png" />
+    <Content Include="ueditor\dialogs\charts\images\charts2.png" />
+    <Content Include="ueditor\dialogs\charts\images\charts3.png" />
+    <Content Include="ueditor\dialogs\charts\images\charts4.png" />
+    <Content Include="ueditor\dialogs\charts\images\charts5.png" />
+    <Content Include="ueditor\dialogs\emotion\emotion.css" />
+    <Content Include="ueditor\dialogs\emotion\emotion.html" />
+    <Content Include="ueditor\dialogs\emotion\emotion.js" />
+    <Content Include="ueditor\dialogs\emotion\images\0.gif" />
+    <Content Include="ueditor\dialogs\emotion\images\bface.gif" />
+    <Content Include="ueditor\dialogs\emotion\images\cface.gif" />
+    <Content Include="ueditor\dialogs\emotion\images\fface.gif" />
+    <Content Include="ueditor\dialogs\emotion\images\jxface2.gif" />
+    <Content Include="ueditor\dialogs\emotion\images\neweditor-tab-bg.png" />
+    <Content Include="ueditor\dialogs\emotion\images\tface.gif" />
+    <Content Include="ueditor\dialogs\emotion\images\wface.gif" />
+    <Content Include="ueditor\dialogs\emotion\images\yface.gif" />
+    <Content Include="ueditor\dialogs\gmap\gmap.html" />
+    <Content Include="ueditor\dialogs\help\help.css" />
+    <Content Include="ueditor\dialogs\help\help.html" />
+    <Content Include="ueditor\dialogs\help\help.js" />
+    <Content Include="ueditor\dialogs\image\image.css" />
+    <Content Include="ueditor\dialogs\image\image.html" />
+    <Content Include="ueditor\dialogs\image\image.js" />
+    <Content Include="ueditor\dialogs\image\images\alignicon.jpg" />
+    <Content Include="ueditor\dialogs\image\images\bg.png" />
+    <Content Include="ueditor\dialogs\image\images\icons.gif" />
+    <Content Include="ueditor\dialogs\image\images\icons.png" />
+    <Content Include="ueditor\dialogs\image\images\image.png" />
+    <Content Include="ueditor\dialogs\image\images\progress.png" />
+    <Content Include="ueditor\dialogs\image\images\success.gif" />
+    <Content Include="ueditor\dialogs\image\images\success.png" />
+    <Content Include="ueditor\dialogs\insertframe\insertframe.html" />
+    <Content Include="ueditor\dialogs\internal.js" />
+    <Content Include="ueditor\dialogs\link\link.html" />
+    <Content Include="ueditor\dialogs\map\map.html" />
+    <Content Include="ueditor\dialogs\map\show.html" />
+    <Content Include="ueditor\dialogs\music\music.css" />
+    <Content Include="ueditor\dialogs\music\music.html" />
+    <Content Include="ueditor\dialogs\music\music.js" />
+    <Content Include="ueditor\dialogs\preview\preview.html" />
+    <Content Include="ueditor\dialogs\scrawl\images\addimg.png" />
+    <Content Include="ueditor\dialogs\scrawl\images\brush.png" />
+    <Content Include="ueditor\dialogs\scrawl\images\delimg.png" />
+    <Content Include="ueditor\dialogs\scrawl\images\delimgH.png" />
+    <Content Include="ueditor\dialogs\scrawl\images\empty.png" />
+    <Content Include="ueditor\dialogs\scrawl\images\emptyH.png" />
+    <Content Include="ueditor\dialogs\scrawl\images\eraser.png" />
+    <Content Include="ueditor\dialogs\scrawl\images\redo.png" />
+    <Content Include="ueditor\dialogs\scrawl\images\redoH.png" />
+    <Content Include="ueditor\dialogs\scrawl\images\scale.png" />
+    <Content Include="ueditor\dialogs\scrawl\images\scaleH.png" />
+    <Content Include="ueditor\dialogs\scrawl\images\size.png" />
+    <Content Include="ueditor\dialogs\scrawl\images\undo.png" />
+    <Content Include="ueditor\dialogs\scrawl\images\undoH.png" />
+    <Content Include="ueditor\dialogs\scrawl\scrawl.css" />
+    <Content Include="ueditor\dialogs\scrawl\scrawl.html" />
+    <Content Include="ueditor\dialogs\scrawl\scrawl.js" />
+    <Content Include="ueditor\dialogs\searchreplace\searchreplace.html" />
+    <Content Include="ueditor\dialogs\searchreplace\searchreplace.js" />
+    <Content Include="ueditor\dialogs\snapscreen\snapscreen.html" />
+    <Content Include="ueditor\dialogs\spechars\spechars.html" />
+    <Content Include="ueditor\dialogs\spechars\spechars.js" />
+    <Content Include="ueditor\dialogs\table\dragicon.png" />
+    <Content Include="ueditor\dialogs\table\edittable.css" />
+    <Content Include="ueditor\dialogs\table\edittable.html" />
+    <Content Include="ueditor\dialogs\table\edittable.js" />
+    <Content Include="ueditor\dialogs\table\edittd.html" />
+    <Content Include="ueditor\dialogs\table\edittip.html" />
+    <Content Include="ueditor\dialogs\template\config.js" />
+    <Content Include="ueditor\dialogs\template\images\bg.gif" />
+    <Content Include="ueditor\dialogs\template\images\pre0.png" />
+    <Content Include="ueditor\dialogs\template\images\pre1.png" />
+    <Content Include="ueditor\dialogs\template\images\pre2.png" />
+    <Content Include="ueditor\dialogs\template\images\pre3.png" />
+    <Content Include="ueditor\dialogs\template\images\pre4.png" />
+    <Content Include="ueditor\dialogs\template\template.css" />
+    <Content Include="ueditor\dialogs\template\template.html" />
+    <Content Include="ueditor\dialogs\template\template.js" />
+    <Content Include="ueditor\dialogs\video\images\bg.png" />
+    <Content Include="ueditor\dialogs\video\images\center_focus.jpg" />
+    <Content Include="ueditor\dialogs\video\images\file-icons.gif" />
+    <Content Include="ueditor\dialogs\video\images\file-icons.png" />
+    <Content Include="ueditor\dialogs\video\images\icons.gif" />
+    <Content Include="ueditor\dialogs\video\images\icons.png" />
+    <Content Include="ueditor\dialogs\video\images\image.png" />
+    <Content Include="ueditor\dialogs\video\images\left_focus.jpg" />
+    <Content Include="ueditor\dialogs\video\images\none_focus.jpg" />
+    <Content Include="ueditor\dialogs\video\images\progress.png" />
+    <Content Include="ueditor\dialogs\video\images\right_focus.jpg" />
+    <Content Include="ueditor\dialogs\video\images\success.gif" />
+    <Content Include="ueditor\dialogs\video\images\success.png" />
+    <Content Include="ueditor\dialogs\video\video.css" />
+    <Content Include="ueditor\dialogs\video\video.html" />
+    <Content Include="ueditor\dialogs\video\video.js" />
+    <Content Include="ueditor\dialogs\webapp\webapp.html" />
+    <Content Include="ueditor\dialogs\wordimage\fClipboard_ueditor.swf" />
+    <Content Include="ueditor\dialogs\wordimage\imageUploader.swf" />
+    <Content Include="ueditor\dialogs\wordimage\tangram.js" />
+    <Content Include="ueditor\dialogs\wordimage\wordimage.html" />
+    <Content Include="ueditor\dialogs\wordimage\wordimage.js" />
+    <Content Include="ueditor\lang\en\en.js" />
+    <Content Include="ueditor\lang\en\images\addimage.png" />
+    <Content Include="ueditor\lang\en\images\alldeletebtnhoverskin.png" />
+    <Content Include="ueditor\lang\en\images\alldeletebtnupskin.png" />
+    <Content Include="ueditor\lang\en\images\background.png" />
+    <Content Include="ueditor\lang\en\images\button.png" />
+    <Content Include="ueditor\lang\en\images\copy.png" />
+    <Content Include="ueditor\lang\en\images\deletedisable.png" />
+    <Content Include="ueditor\lang\en\images\deleteenable.png" />
+    <Content Include="ueditor\lang\en\images\listbackground.png" />
+    <Content Include="ueditor\lang\en\images\localimage.png" />
+    <Content Include="ueditor\lang\en\images\music.png" />
+    <Content Include="ueditor\lang\en\images\rotateleftdisable.png" />
+    <Content Include="ueditor\lang\en\images\rotateleftenable.png" />
+    <Content Include="ueditor\lang\en\images\rotaterightdisable.png" />
+    <Content Include="ueditor\lang\en\images\rotaterightenable.png" />
+    <Content Include="ueditor\lang\en\images\upload.png" />
+    <Content Include="ueditor\lang\zh-cn\images\copy.png" />
+    <Content Include="ueditor\lang\zh-cn\images\localimage.png" />
+    <Content Include="ueditor\lang\zh-cn\images\music.png" />
+    <Content Include="ueditor\lang\zh-cn\images\upload.png" />
+    <Content Include="ueditor\lang\zh-cn\zh-cn.js" />
+    <Content Include="ueditor\net\config.json" />
+    <Content Include="ueditor\net\controller.ashx" />
+    <Content Include="ueditor\net\net.sln" />
+    <Content Include="ueditor\net\README.md" />
+    <Content Include="ueditor\net\Web.config" />
+    <Content Include="ueditor\themes\default\css\ueditor.css" />
+    <Content Include="ueditor\themes\default\css\ueditor.min.css" />
+    <Content Include="ueditor\themes\default\dialogbase.css" />
+    <Content Include="ueditor\themes\default\images\anchor.gif" />
+    <Content Include="ueditor\themes\default\images\arrow.png" />
+    <Content Include="ueditor\themes\default\images\arrow_down.png" />
+    <Content Include="ueditor\themes\default\images\arrow_up.png" />
+    <Content Include="ueditor\themes\default\images\button-bg.gif" />
+    <Content Include="ueditor\themes\default\images\cancelbutton.gif" />
+    <Content Include="ueditor\themes\default\images\charts.png" />
+    <Content Include="ueditor\themes\default\images\cursor_h.gif" />
+    <Content Include="ueditor\themes\default\images\cursor_h.png" />
+    <Content Include="ueditor\themes\default\images\cursor_v.gif" />
+    <Content Include="ueditor\themes\default\images\cursor_v.png" />
+    <Content Include="ueditor\themes\default\images\dialog-title-bg.png" />
+    <Content Include="ueditor\themes\default\images\filescan.png" />
+    <Content Include="ueditor\themes\default\images\highlighted.gif" />
+    <Content Include="ueditor\themes\default\images\icons-all.gif" />
+    <Content Include="ueditor\themes\default\images\icons.gif" />
+    <Content Include="ueditor\themes\default\images\icons.png" />
+    <Content Include="ueditor\themes\default\images\loaderror.png" />
+    <Content Include="ueditor\themes\default\images\loading.gif" />
+    <Content Include="ueditor\themes\default\images\lock.gif" />
+    <Content Include="ueditor\themes\default\images\neweditor-tab-bg.png" />
+    <Content Include="ueditor\themes\default\images\pagebreak.gif" />
+    <Content Include="ueditor\themes\default\images\scale.png" />
+    <Content Include="ueditor\themes\default\images\sortable.png" />
+    <Content Include="ueditor\themes\default\images\spacer.gif" />
+    <Content Include="ueditor\themes\default\images\sparator_v.png" />
+    <Content Include="ueditor\themes\default\images\table-cell-align.png" />
+    <Content Include="ueditor\themes\default\images\tangram-colorpicker.png" />
+    <Content Include="ueditor\themes\default\images\toolbar_bg.png" />
+    <Content Include="ueditor\themes\default\images\unhighlighted.gif" />
+    <Content Include="ueditor\themes\default\images\upload.png" />
+    <Content Include="ueditor\themes\default\images\videologo.gif" />
+    <Content Include="ueditor\themes\default\images\word.gif" />
+    <Content Include="ueditor\themes\default\images\wordpaste.png" />
+    <Content Include="ueditor\themes\iframe.css" />
+    <Content Include="ueditor\third-party\codemirror\codemirror.css" />
+    <Content Include="ueditor\third-party\codemirror\codemirror.js" />
+    <Content Include="ueditor\third-party\highcharts\adapters\mootools-adapter.js" />
+    <Content Include="ueditor\third-party\highcharts\adapters\mootools-adapter.src.js" />
+    <Content Include="ueditor\third-party\highcharts\adapters\prototype-adapter.js" />
+    <Content Include="ueditor\third-party\highcharts\adapters\prototype-adapter.src.js" />
+    <Content Include="ueditor\third-party\highcharts\adapters\standalone-framework.js" />
+    <Content Include="ueditor\third-party\highcharts\adapters\standalone-framework.src.js" />
+    <Content Include="ueditor\third-party\highcharts\highcharts-more.js" />
+    <Content Include="ueditor\third-party\highcharts\highcharts-more.src.js" />
+    <Content Include="ueditor\third-party\highcharts\highcharts.js" />
+    <Content Include="ueditor\third-party\highcharts\highcharts.src.js" />
+    <Content Include="ueditor\third-party\highcharts\modules\annotations.js" />
+    <Content Include="ueditor\third-party\highcharts\modules\annotations.src.js" />
+    <Content Include="ueditor\third-party\highcharts\modules\canvas-tools.js" />
+    <Content Include="ueditor\third-party\highcharts\modules\canvas-tools.src.js" />
+    <Content Include="ueditor\third-party\highcharts\modules\data.js" />
+    <Content Include="ueditor\third-party\highcharts\modules\data.src.js" />
+    <Content Include="ueditor\third-party\highcharts\modules\drilldown.js" />
+    <Content Include="ueditor\third-party\highcharts\modules\drilldown.src.js" />
+    <Content Include="ueditor\third-party\highcharts\modules\exporting.js" />
+    <Content Include="ueditor\third-party\highcharts\modules\exporting.src.js" />
+    <Content Include="ueditor\third-party\highcharts\modules\funnel.js" />
+    <Content Include="ueditor\third-party\highcharts\modules\funnel.src.js" />
+    <Content Include="ueditor\third-party\highcharts\modules\heatmap.js" />
+    <Content Include="ueditor\third-party\highcharts\modules\heatmap.src.js" />
+    <Content Include="ueditor\third-party\highcharts\modules\map.js" />
+    <Content Include="ueditor\third-party\highcharts\modules\map.src.js" />
+    <Content Include="ueditor\third-party\highcharts\modules\no-data-to-display.js" />
+    <Content Include="ueditor\third-party\highcharts\modules\no-data-to-display.src.js" />
+    <Content Include="ueditor\third-party\highcharts\themes\dark-blue.js" />
+    <Content Include="ueditor\third-party\highcharts\themes\dark-green.js" />
+    <Content Include="ueditor\third-party\highcharts\themes\gray.js" />
+    <Content Include="ueditor\third-party\highcharts\themes\grid.js" />
+    <Content Include="ueditor\third-party\highcharts\themes\skies.js" />
+    <Content Include="ueditor\third-party\jquery-1.10.2.js" />
+    <Content Include="ueditor\third-party\jquery-1.10.2.min.js" />
+    <Content Include="ueditor\third-party\jquery-1.10.2.min.map" />
+    <Content Include="ueditor\third-party\snapscreen\UEditorSnapscreen.exe" />
+    <Content Include="ueditor\third-party\SyntaxHighlighter\shCore.js" />
+    <Content Include="ueditor\third-party\SyntaxHighlighter\shCoreDefault.css" />
+    <Content Include="ueditor\third-party\video-js\font\vjs.eot" />
+    <Content Include="ueditor\third-party\video-js\font\vjs.svg" />
+    <Content Include="ueditor\third-party\video-js\font\vjs.ttf" />
+    <Content Include="ueditor\third-party\video-js\font\vjs.woff" />
+    <Content Include="ueditor\third-party\video-js\video-js.css" />
+    <Content Include="ueditor\third-party\video-js\video-js.min.css" />
+    <Content Include="ueditor\third-party\video-js\video-js.swf" />
+    <Content Include="ueditor\third-party\video-js\video.dev.js" />
+    <Content Include="ueditor\third-party\video-js\video.js" />
+    <Content Include="ueditor\third-party\webuploader\Uploader.swf" />
+    <Content Include="ueditor\third-party\webuploader\webuploader.css" />
+    <Content Include="ueditor\third-party\webuploader\webuploader.custom.js" />
+    <Content Include="ueditor\third-party\webuploader\webuploader.custom.min.js" />
+    <Content Include="ueditor\third-party\webuploader\webuploader.flashonly.js" />
+    <Content Include="ueditor\third-party\webuploader\webuploader.flashonly.min.js" />
+    <Content Include="ueditor\third-party\webuploader\webuploader.html5only.js" />
+    <Content Include="ueditor\third-party\webuploader\webuploader.html5only.min.js" />
+    <Content Include="ueditor\third-party\webuploader\webuploader.js" />
+    <Content Include="ueditor\third-party\webuploader\webuploader.min.js" />
+    <Content Include="ueditor\third-party\webuploader\webuploader.withoutimage.js" />
+    <Content Include="ueditor\third-party\webuploader\webuploader.withoutimage.min.js" />
+    <Content Include="ueditor\third-party\zeroclipboard\ZeroClipboard.js" />
+    <Content Include="ueditor\third-party\zeroclipboard\ZeroClipboard.min.js" />
+    <Content Include="ueditor\third-party\zeroclipboard\ZeroClipboard.swf" />
+    <Content Include="ueditor\ueditor.all.js" />
+    <Content Include="ueditor\ueditor.all.min.js" />
+    <Content Include="ueditor\ueditor.config.js" />
+    <Content Include="ueditor\ueditor.parse.js" />
+    <Content Include="ueditor\ueditor.parse.min.js" />
+    <Content Include="vender\Jcrop-0.9.12\css\Jcrop.gif" />
+    <Content Include="vender\Jcrop-0.9.12\css\jquery.Jcrop.css" />
+    <Content Include="vender\Jcrop-0.9.12\css\jquery.Jcrop.min.css" />
+    <Content Include="vender\Jcrop-0.9.12\demos\demo_files\demos.css" />
+    <Content Include="vender\Jcrop-0.9.12\demos\demo_files\main.css" />
+    <Content Include="vender\Jcrop-0.9.12\demos\demo_files\pool.jpg" />
+    <Content Include="vender\Jcrop-0.9.12\demos\demo_files\sago.jpg" />
+    <Content Include="vender\Jcrop-0.9.12\demos\demo_files\sagomod.jpg" />
+    <Content Include="vender\Jcrop-0.9.12\demos\demo_files\sagomod.png" />
+    <Content Include="vender\Jcrop-0.9.12\demos\non-image.html" />
+    <Content Include="vender\Jcrop-0.9.12\demos\styling.html" />
+    <Content Include="vender\Jcrop-0.9.12\demos\tutorial1.html" />
+    <Content Include="vender\Jcrop-0.9.12\demos\tutorial2.html" />
+    <Content Include="vender\Jcrop-0.9.12\demos\tutorial3.html" />
+    <Content Include="vender\Jcrop-0.9.12\demos\tutorial4.html" />
+    <Content Include="vender\Jcrop-0.9.12\demos\tutorial5.html" />
+    <Content Include="vender\Jcrop-0.9.12\index.html" />
+    <Content Include="vender\Jcrop-0.9.12\js\jquery.color.js" />
+    <Content Include="vender\Jcrop-0.9.12\js\jquery.Jcrop.js" />
+    <Content Include="vender\Jcrop-0.9.12\js\jquery.Jcrop.min.js" />
+    <Content Include="vender\Jcrop-0.9.12\js\jquery.min.js" />
+    <Content Include="vender\Jcrop-0.9.12\MIT-LICENSE.txt" />
+    <Content Include="vender\jquery.autocomplete\jquery.autocomplete.css" />
+    <Content Include="vender\jquery.autocomplete\jquery.autocomplete.min.js" />
+    <Content Include="vender\ztree\img\loading.gif" />
+    <Content Include="vender\ztree\img\zTreeStandard.gif" />
+    <Content Include="vender\ztree\jquery.ztree.core.js" />
+    <Content Include="vender\ztree\style.css" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Views\Web.config" />
+    <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\Shared\Error.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Account\Login.cshtml" />
+    <Content Include="Views\Shared\Lockout.cshtml" />
+    <Content Include="Views\Shared\_LoginPartial.cshtml" />
+    <Content Include="Views\Shared\_Layout2.cshtml" />
+    <Content Include="Views\Account\MyProfile.cshtml" />
+    <Content Include="Views\Account\ChangePassword.cshtml" />
+    <Content Include="Views\Account\LoginLog.cshtml" />
+    <Content Include="Views\Menu\New.cshtml" />
+    <Content Include="Views\Menu\Index.cshtml" />
+    <Content Include="Views\Error\Index.cshtml" />
+    <Content Include="Views\Result\Index.cshtml" />
+    <Content Include="Views\Menu\Edit.cshtml" />
+    <Content Include="Views\Menu\Delete.cshtml" />
+    <Content Include="Views\Role\Delete.cshtml" />
+    <Content Include="Views\Role\Edit.cshtml" />
+    <Content Include="Views\Role\Index.cshtml" />
+    <Content Include="Views\Role\New.cshtml" />
+    <Content Include="Views\Shared\_MenuPartial.cshtml" />
+    <Content Include="Views\Role\Permission.cshtml" />
+    <Content Include="Views\SysLog\Index.cshtml" />
+    <Content Include="Views\LoginLog\Index.cshtml" />
+    <Content Include="Views\Organization\New.cshtml" />
+    <Content Include="Views\Organization\Delete.cshtml" />
+    <Content Include="Views\Organization\Edit.cshtml" />
+    <Content Include="Views\Organization\Index.cshtml" />
+    <Content Include="Views\UserGroup\Delete.cshtml" />
+    <Content Include="Views\UserGroup\Edit.cshtml" />
+    <Content Include="Views\UserGroup\Index.cshtml" />
+    <Content Include="Views\UserGroup\New.cshtml" />
+    <Content Include="Views\UserGroup\Assign.cshtml" />
+    <Content Include="Views\UserGroup\_Group_Left_Partial.cshtml" />
+    <Content Include="Views\UserGroup\_Group_Right_Partial.cshtml" />
+    <Content Include="Views\Organization\Assign.cshtml" />
+    <Content Include="Views\Organization\_Department_Left_Partial.cshtml" />
+    <Content Include="Views\Organization\_Department_Right_Partial.cshtml" />
+    <Content Include="Views\Role\_Role_Left_Partial.cshtml" />
+    <Content Include="Views\Role\_Role_Right_Partial.cshtml" />
+    <Content Include="Views\Role\Assign.cshtml" />
+    <Content Include="Views\DictIndex\New.cshtml" />
+    <Content Include="Views\Dicts\Index.cshtml" />
+    <Content Include="Views\Dicts\New.cshtml" />
+    <Content Include="Views\Dicts\Edit.cshtml" />
+    <Content Include="Views\Dicts\Delete.cshtml" />
+    <Content Include="Views\DictIndex\Edit.cshtml" />
+    <Content Include="Views\DictIndex\Delete.cshtml" />
+    <Content Include="Views\User\Index.cshtml" />
+    <Content Include="Views\Error\Success.cshtml" />
+    <Content Include="Views\SysLog\Detail.cshtml" />
+    <Content Include="Views\Configrution\Index.cshtml" />
+    <Content Include="Views\Configrution\Edit.cshtml" />
+    <Content Include="Views\User\New.cshtml" />
+    <Content Include="Views\User\Edit.cshtml" />
+    <Content Include="Views\User\Delete.cshtml" />
+    <Content Include="Views\User\Detail.cshtml" />
+    <Content Include="Views\Account\Edit.cshtml" />
+    <Content Include="Views\Shared\_getNav.cshtml" />
+    <Content Include="Views\Shared\_getUserMenu.cshtml" />
+    <Content Include="vender\Jcrop-0.9.12\demos\crop.php" />
+    <Content Include="vender\Jcrop-0.9.12\README.md" />
+    <Content Include="Views\Account\ChangeAvatar.cshtml" />
+    <Content Include="UploadFileHandler.ashx" />
+    <Content Include="Views\Friend\Index.cshtml" />
+    <Content Include="Views\Message\Index.cshtml" />
+    <Content Include="Views\Message\_Mail_Menu_Partial.cshtml" />
+    <Content Include="Views\Message\New.cshtml" />
+    <Content Include="Views\Message\Detail.cshtml" />
+    <Content Include="Views\Dicts\Detail.cshtml" />
+    <Content Include="Views\QR\Index.cshtml" />
+    <Content Include="Views\QR\Error.cshtml" />
+    <Content Include="Views\Region\Index.cshtml" />
+    <Content Include="Views\Region\Import.cshtml" />
+    <Content Include="Views\Department\New.cshtml" />
+    <Content Include="Views\Department\Index.cshtml" />
+    <Content Include="Views\Department\Edit.cshtml" />
+    <Content Include="Views\Department\Delete.cshtml" />
+    <Content Include="Views\Department\Import.cshtml" />
+    <Content Include="Views\NewCategory\Delete.cshtml" />
+    <Content Include="Views\NewCategory\Edit.cshtml" />
+    <Content Include="Views\NewCategory\Index.cshtml" />
+    <Content Include="Views\NewCategory\New.cshtml" />
+    <Content Include="Views\News\New.cshtml" />
+    <Content Include="Views\News\Delete.cshtml" />
+    <Content Include="Views\News\Edit.cshtml" />
+    <Content Include="Views\News\Index.cshtml" />
+    <Content Include="Views\Menu\Import.cshtml" />
+    <Content Include="行政区域表.xls" />
+    <Content Include="Views\Install\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+    <Folder Include="Templates\" />
+    <Folder Include="ueditor\net\Bin\" />
+    <Folder Include="ueditor\net\upload\file\" />
+    <Folder Include="ueditor\net\upload\image\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="packages.config" />
+    <None Include="Project_Readme.html" />
+    <Content Include="Scripts\jquery-1.10.2.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\UowMVC.Domain\UowMVC.Domain.csproj">
+      <Project>{261c9020-a639-4649-b53d-8b62e68c9b1f}</Project>
+      <Name>UowMVC.Domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\UowMVC.Models\UowMVC.Models.csproj">
+      <Project>{8b3f7081-a13d-48af-89e9-d2b154f570ee}</Project>
+      <Name>UowMVC.Models</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\UowMVC.Repository\UowMVC.Repository.csproj">
+      <Project>{dae5d281-7673-4914-8331-22355575403f}</Project>
+      <Name>UowMVC.Repository</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\UowMVC.SDK\UowMVC.SDK.csproj">
+      <Project>{e88dbe0f-acaf-4011-b29f-e041e7e5476a}</Project>
+      <Name>UowMVC.SDK</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\UowMVC.Service.Imps\UowMVC.Service.Imps.csproj">
+      <Project>{6f6dfaf4-8f5e-4412-ab99-1f6e9c73bdd4}</Project>
+      <Name>UowMVC.Service.Imps</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\UowMVC.Service.Interfaces\UowMVC.Service.Interfaces.csproj">
+      <Project>{3c92f1e4-fdd4-4751-b26d-dfdce5859480}</Project>
+      <Name>UowMVC.Service.Interfaces</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <Target Name="MvcBuildViews" AfterTargets="AfterBuild" Condition="'$(MvcBuildViews)'=='true'">
+    <AspNetCompiler VirtualPath="temp" PhysicalPath="$(WebProjectOutputDir)" />
+  </Target>
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>60143</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:2345/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>这台计算机上缺少此项目引用的 NuGet 程序包。使用“NuGet 程序包还原”可下载这些程序包。有关更多信息，请参见 http://go.microsoft.com/fwlink/?LinkID=322105。缺少的文件是 {0}。</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.Net.Compilers.1.0.0\build\Microsoft.Net.Compilers.props'))" />
+    <Error Condition="!Exists('..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\build\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.props'))" />
+  </Target>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target> -->
+</Project>

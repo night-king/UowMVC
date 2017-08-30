@@ -1,0 +1,157 @@
+﻿@using Microsoft.AspNet.Identity
+
+<!-- Notifications -->
+<ul class="notifications hidden-xs">
+    <li>
+        <a href="#" id="newMessageCount" class="dropdown-toggle notification-icon" data-toggle="dropdown">
+            <i class="fa fa-envelope"></i>
+        </a>
+        <ul class="dropdown-menu" id="newMessageUL" style="padding:10px">
+            <li>
+                <strong>我的消息</strong>
+            </li>
+            <li class="text-center" style="margin-top:20px">
+                <span class="text-muted">暂无未读消息</span>
+            </li>
+            <li class="dropdown-menu-footer text-center" style="margin-top:20px">
+                <a href="/Message" >查看我的消息</a>
+            </li>
+        </ul>
+    </li>
+</ul>
+<!-- End Notifications -->
+<!-- Userbox -->
+<div class="userbox">
+    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+        <figure class="profile-picture hidden-xs">
+            <img src="@(Request.Cookies["Avatar"]!=null?Request.Cookies["Avatar"].Value.ToString():"/Images/admin-avatar.png")" class="img-circle" style="border-radius:50%" alt="">
+        </figure>
+        <div class="profile-info">
+            <span class="name">@User.Identity.Name</span>
+            <span class="role"> @(Request.Cookies["Name"] != null ? Request.Cookies["Name"].Value.ToString() : "")</span>
+            </div>
+        <i class="fa custom-caret"></i>
+    </a>
+    <div class="dropdown-menu">
+        <ul class="list-unstyled" style="margin-top:20px">
+            <li class="dropdown-menu-header bk-bg-white bk-margin-top-15">
+            </li>
+            <li>
+                <a href="/Account/MyProfile"><i class="fa fa-info"></i> 我的资料</a>
+            </li>
+            <li>
+                <a href="/Account/LoginLog"><i class="fa fa-sign-out"></i> 登录日志</a>
+            </li>
+            @*<li>
+                <a href="/Message"><i class="fa fa-envelope"></i> 我的消息</a>
+            </li>*@
+            <li>
+                <a href="/Account/ChangePassword"><i class="fa fa-key"></i> 修改密码</a>
+            </li>
+            <li>
+                @using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", }))
+                {
+                    @Html.AntiForgeryToken()
+                    <a href="javascript:document.getElementById('logoutForm').submit()">
+                        <i class="fa fa-power-off"></i> 注销
+                    </a>
+                }
+            </li>
+        </ul>
+    </div>
+</div>
+<!-- End Userbox -->
+
+<script type="text/javascript">
+    var userIdentity = '@User.Identity.Name';
+    var stateConversion = { 0: 'connecting', 1: 'connected', 2: 'reconnecting', 4: 'disconnected' };
+    // Declare a proxy to reference the hub.
+    var messageHub = $.connection.MessageHub;
+    messageHub.client.showMessageCount = function () {
+        loadNewMessage();
+    };
+    $(function () {
+        loadNewMessage();
+        registerClientMethods(messageHub);
+        connect();
+    });
+    function loadNewMessage() {
+        $.ajax({
+            url: '/Message/GetMyNewMessage',
+            type: 'POST',
+            success: function (res) {
+                var $content = $('#newMessageUL');
+                $content.empty();
+                $content.append('<li><strong>我的消息</strong></li>');
+                if (res.count > 0) {
+                    $('#newMessageCount').remove("span").append('<span class="badge">' + res.count + '</span>');
+                    $.each(res.items, function (i, item) {
+                        $content.append('<li class="avatar">' +
+                        '<a href="/Message/Detail/' + item.id + '">' +
+                           ' <img class="avatar" src="' + item.avatar + '" alt="">' +
+                          '  <div>' + item.title + '</div>' +
+                          '  <span><small>' + item.time + '</small></span>' +
+                       ' </a>' +
+                   ' </li>');
+                    });
+                }
+                else {
+                    $('#newMessageCount').remove("span");
+                    $content.append('<li class="text-center" style="margin-top:20px">' +
+                                    '  <span class="text-muted">暂无未读消息</span>' +
+                                    '</li>');
+                }
+         
+                $content.append(' <li class="dropdown-menu-footer text-center">' +
+                     ' <a href="/Message">查看我的消息</a>' +
+                  '</li>');
+            }
+        });
+    }
+    function connect() {
+        $.connection.hub.start().done(function () {
+            connectedCallback();
+        });
+    }
+    function connectedCallback() {
+        console.log("connected callback:连接成功后执行回调");
+        messageHub.connection.stateChanged(connectionStateChanged);
+        var conId = messageHub.connection.id;
+        messageHub.server.notifyConnected(userIdentity, conId);
+    }
+    function connectionStateChanged(state) {
+        console.log('SignalR state changed from: ' + stateConversion[state.oldState]
+         + ' to: ' + stateConversion[state.newState]);
+        if (state.newState == 4) { //disconnected
+            connect();
+        }
+        if (state.newState == 1) {
+            online();
+        } else {
+            offline();
+        }
+    }
+    //注册客户端方法
+    function registerClientMethods(messageHub) {
+        messageHub.client.connected = function () {
+            console.log("connected:与服务器成功建立了连接");
+            online();
+        }
+        messageHub.client.disconnected = function () {
+            console.log("disconnected:与服务器连接断开");
+            offline();
+        }
+        messageHub.client.recevied = function (message) {
+            var json = $.parseJSON(message);
+            alert(json);
+            console.log("recevied：收到服务器推送消息" + message);
+        };
+    }
+    function online() {
+        connectedCallback();
+        $("#network-status").css("color", "#1ca939");
+    }
+    function offline() {
+        $("#network-status").css("color", "#000");
+    }
+</script>

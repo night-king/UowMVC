@@ -1,0 +1,57 @@
+﻿@using UowMVC.Models;
+@using UowMVC.Domain;
+@using UowMVC.SDK;
+@using Autofac;
+@using Autofac.Integration.Owin;
+@using UowMVC.Service.Interfaces;
+
+@model IEnumerable<UserGroupViewModel>
+@{
+    ViewBag.Title = "用户组管理";
+}
+<div class="row">
+    <div class="col-lg-12">
+        <div class="panel panel-default bk-bg-white">
+            <div class="panel-body">
+                <div class="table-responsive">
+                    <table class="single-select-table table table-hover">
+                        <thead>
+                            <tr  class="active">
+                                <th>编号</th>
+                                <th>名称</th>
+                                <th>成员</th>
+                                <th>描述</th>
+                                <th style="width:200px">操作</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @{
+
+                                foreach (var node in Model.OrderBy(x => x.No))
+                                {
+                                    <tr itemid="@node.Id">
+                                        <td>@node.No</td>
+                                        <td>@node.Name</td>
+                                        <td>@Html.Raw(getUserCount(node.Id))</td>
+                                        <td>
+                                            @node.Description
+                                        </td>
+                                        <td style="padding:4px">
+                                            @Html.Partial("_MenuPartial")
+                                        </td>
+                                    </tr>
+                                }
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@helper getUserCount(string id)
+{
+var userService = Request.GetOwinContext().GetAutofacLifetimeScope().Resolve<IUserService>();
+    <span> @userService.QueryGroupUserCount(id)</span>
+}

@@ -1,0 +1,104 @@
+﻿@using UowMVC.Repository;
+@using UowMVC.Domain;
+@using UowMVC.Models;
+@using UowMVC.Web.Helpers;
+@using UowMVC.Web.Models;
+
+@{
+    var menus = MenuConfig.Get(User);
+    var url = Request.Url.LocalPath.ToLower();
+   
+    var menuModel = MenuHelper.Convert(menus, url);
+    <div class="page-header" style="box-shadow:none;">
+        <div class="pull-left">
+            <ol class="breadcrumb visible-sm visible-md visible-lg">
+                <li><a href="/">首页</a></li>
+                @{
+                    MenuItem active = menuModel.Items.FirstOrDefault(x => x.IsActive);
+                    while (active != null)
+                    {
+                        <li><a href="@active.Action">@Html.Raw(active.Icon) @active.Text</a></li>
+                        if (active.Items == null || active.Items.Count == 0)
+                        {
+                            break;
+                        }
+                        active = active.Items.FirstOrDefault(x => x.IsActive);
+                    }
+                }
+            </ol>
+        </div>
+        <div class="pull-right" style="min-width:100px;min-height:100%">
+
+        </div>
+    </div>
+                    if (url == "/" || url == "/home/index" || url == "/result" || url == "/result/index")
+                    {
+                        return;
+                    }
+                    var current = menus.FirstOrDefault(x => x.URL != null && (x.URL.ToLower() == url || (x.RelevantURL != null && x.RelevantURL.ToLower().Contains(url))));
+                    if (current != null)
+                    {
+                        <div class="row">
+                            <div class="col-lg-12">
+
+                                <div class="col-sm-4 col-xs-12" style="padding-left:10px;padding-top:10px">
+                                    <h5>
+                                        <b>  @current.Name </b>
+                                    </h5>
+                                </div>
+                                <div class="col-sm-8 col-xs-12">
+                                    <div class="bk-padding-5">
+                                        <div class="input-group input-search page-toolbars" style="text-align:right">
+                                            <div class="bk-margin-5">
+                                                @{
+                                                    var children = menus.Where(x => x.ParentID == current.Id).ToList();
+                                                    if (children != null)
+                                                    {
+                                                        var childrenMenu = MenuHelper.Convert(children, url);
+                                                        foreach (MenuItem button in childrenMenu.Items)
+                                                        {
+                                                            bool disabled = button.IsMustSelected;
+                                                            switch (button.OpenStyle)
+                                                            {
+                                                                case 2://page
+                                                                    if (disabled)
+                                                                    {
+                                                                        <a class="btn btn-default  btn-sm" disabled role="button" requireid="true" onclick="openPage('@button.Action',true)">
+                                                                            @Html.Raw(button.Icon) @button.Text
+                                                                        </a>
+                                                                    }
+                                                                    else
+                                                                    {
+                                                                        <a class="btn btn-default  btn-sm" role="button" requireid="false" onclick="openPage('@button.Action',false)">
+                                                                            @Html.Raw(button.Icon) @button.Text
+                                                                        </a>
+                                                                    }
+                                                                    break;
+                                                                case 1://Dialog
+                                                                    if (disabled)
+                                                                    {
+                                                                        <a class="btn btn-default  btn-sm" role="button" requireid="true" disabled onclick="openDialog(this, '@button.Text', '@button.Action?style=dialog', @button.Width, @button.Height,true)">
+                                                                            @Html.Raw(button.Icon) @button.Text
+                                                                        </a>
+                                                                    }
+                                                                    else
+                                                                    {
+                                                                        <a class="btn btn-default  btn-sm" role="button" requireid="false" onclick="openDialog(this, '@button.Text', '@button.Action?style=dialog', @button.Width, @button.Height,false)">
+                                                                            @Html.Raw(button.Icon) @button.Text
+                                                                        </a>
+                                                                    }
+                                                                    break;
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                                                    }
+}

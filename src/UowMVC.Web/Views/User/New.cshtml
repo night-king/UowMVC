@@ -1,0 +1,104 @@
+﻿@using UowMVC.Models;
+@model UserViewModel
+@{
+    ViewBag.Title = "用户";
+}
+
+<form method="post" class="form-horizontal form-bordered">
+    <div class="form-group">
+        <div class="col-sm-12">
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(x => x.Name, new { @class = "col-sm-3 control-label" })
+        <div class="col-sm-5">
+            @Html.TextBoxFor(x => x.Name, new { @class = "form-control" })
+        </div>
+        <div class="col-sm-4">
+            @Html.ValidationMessageFor(x => x.Name, "", new { @class = "error" })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(x => x.UserName, new { @class = "col-sm-3 control-label" })
+        <div class="col-sm-5">
+            @Html.TextBoxFor(x => x.UserName, new { @class = "form-control" })
+        </div>
+        <div class="col-sm-4">
+            @Html.ValidationMessageFor(x => x.UserName, "", new { @class = "error" })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(x => x.Password, new { @class = "col-sm-3 control-label" })
+        <div class="col-sm-5">
+            @Html.PasswordFor(x => x.Password, new { @class = "form-control" })
+        </div>
+        <div class="col-sm-4">
+            @Html.ValidationMessageFor(x => x.Password, "", new { @class = "error" })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(x => x.Gender, new { @class = "col-sm-3 control-label" })
+        <div class="col-sm-5">
+            @if (Model.Gender == 1)
+            {
+                <div class="radio-custom radio-inline">
+                    <input type="radio" name="Gender" value="1" checked>
+                    <label for="inline-radio2">男</label>
+                </div>
+                <div class="radio-custom radio-inline">
+                    <input type="radio" name="Gender" value="2">
+                    <label for="inline-radio2">女</label>
+                </div>
+            }
+            else if (Model.Gender == 2)
+            {
+                <div class="radio-custom radio-inline">
+                    <input type="radio" name="Gender" value="1">
+                    <label for="inline-radio2">男</label>
+                </div>
+                <div class="radio-custom radio-inline">
+                    <input type="radio" name="Gender" value="2" checked>
+                    <label for="inline-radio2">女</label>
+                </div>
+            }
+            else
+            {
+                <div class="radio-custom radio-inline">
+                    <input type="radio" name="Gender" value="1">
+                    <label for="inline-radio2">男</label>
+                </div>
+                <div class="radio-custom radio-inline">
+                    <input type="radio" name="Gender" value="2">
+                    <label for="inline-radio2">女</label>
+                </div>
+            }
+        </div>
+        <div class="col-sm-4">
+            @Html.ValidationMessageFor(x => x.Gender, "", new { @class = "error" })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(x => x.PhoneNumber, new { @class = "col-sm-3 control-label" })
+        <div class="col-sm-5">
+            @Html.TextBoxFor(x => x.PhoneNumber, new { @class = "form-control" })
+        </div>
+        <div class="col-sm-4">
+            @Html.ValidationMessageFor(x => x.PhoneNumber, "", new { @class = "error" })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(x => x.Email, new { @class = "col-sm-3 control-label" })
+        <div class="col-sm-5">
+            @Html.TextBoxFor(x => x.Email, new { @class = "form-control" })
+        </div>
+        <div class="col-sm-4">
+            @Html.ValidationMessageFor(x => x.Email, "", new { @class = "error" })
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-sm-9 col-sm-offset-3">
+            <button class="bk-margin-5 btn btn-info">提交</button>
+        </div>
+    </div>
+</form>

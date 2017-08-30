@@ -1,0 +1,41 @@
+﻿@using UowMVC.Models;
+
+@model IEnumerable<ItemCountViewModel>
+<div class="panel panel-default bk-bg-white">
+    <div class="panel-body">
+        <h2>欢迎使用本系统</h2>
+        <p>版权所有：<a href="http://www.deepleo.com">袁圈</a></p>
+        <p>项目代码：<a href="https://github.com/night-king/UowMVC">https://github.com/night-king/UowMVC</a></p>
+        <p>友情提示：</p>
+        <p>1.为了账号的安全，如果上面的登录情况不正常，建议第一次登录成功后修改原始密码！ </p>
+        <p>2.没有看到左侧菜单，请点击下方“初始化菜单”按钮。 </p>
+        <p>3.项目发布后请删除下方“初始化菜单”按钮。 </p>
+        <p>@Html.ActionLink("初始化菜单", "Index", "Install", new { }, new { style = "color:#428bca;font-weight:900" }) </p>
+    </div>
+</div>
+@if (Model.Count() > 0)
+{
+    <div class="panel panel-default bk-bg-white">
+        <div class="panel-body">
+            @foreach (var m in Model)
+            {
+                <div class="col-lg-4 col-md-4 col-sm-6 col-xs-6">
+                    <div class="panel bk-widget bk-border-off">
+                        <div class="panel-body bk-bg-very-light-gray">
+                            <div class="row bk-fg-gray">
+                                <div class="col-lg-12 col-md-6 col-sm-6 col-xs-6">
+                                    <h3 class="bk-margin-off bk-docs-font-weight-300 bk-fg-primary">@m.Count</h3>
+                                    @m.Name  @m.Description
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+            <div class="col-md-12">
+                <p>以上数据仅供参考，实际情况请参见具体数据</p>
+            </div>
+        </div>
+    </div>
+}
+

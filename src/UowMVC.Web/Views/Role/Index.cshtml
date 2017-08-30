@@ -1,0 +1,58 @@
+﻿@using UowMVC.Models;
+@using UowMVC.Domain;
+@using UowMVC.SDK;
+@using Autofac;
+@using Autofac.Integration.Owin;
+@using UowMVC.Service.Interfaces;
+
+@model IEnumerable<RoleViewModel>
+@{
+    ViewBag.Title = "角色";
+}
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="panel panel-default bk-bg-white">
+            <div class="panel-body">
+                <div class="table-responsive">
+                    <table class="single-select-table table table-hover">
+                        <thead>
+                            <tr  class="active">
+                                <th>名称</th>
+                                <th>成员</th>
+                                <th>描述</th>
+                                <th >操作</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+
+                            @foreach (var m in Model)
+                            {
+                                <tr itemid="@m.Id">
+                                    <td>@m.Name</td>
+                                    <td>@Html.Raw(getUserCount(m.Id))</td>
+                                    <td>@m.Description</td>
+                                    <td style="padding:4px">
+                                        @Html.Partial("_MenuPartial")
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <td colspan="4" style="text-align:right;">
+                                    共计 @Model.Count() 条记录
+                                </td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@helper getUserCount(string id)
+{
+var userService = Request.GetOwinContext().GetAutofacLifetimeScope().Resolve<IUserService>();
+    <span> @userService.QueryRoleUserCount(id)</span>
+}

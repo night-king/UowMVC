@@ -1,0 +1,72 @@
+﻿@using UowMVC.Models;
+@using UowMVC.Domain;
+@using UowMVC.SDK;
+
+@model IEnumerable<MenuViewModel>
+@{
+    ViewBag.Title = "菜单导航";
+}
+<div class="row">
+    <div class="col-lg-12">
+        <div class="panel panel-default bk-bg-white">
+            <div class="panel-body">
+                <div class="table-responsive">
+                    <table class="single-select-table table table-hover">
+                        <thead>
+                            <tr  class="active">
+                                <th>名称</th>
+                                <th>序号</th>
+                                <th>连接目标</th>
+                                <th>链接</th>
+                                <th>选中</th>
+                                <th style="width:200px">操作</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @{
+                                int level = 0;
+                                var nodes = Model.Where(x => string.IsNullOrEmpty(x.ParentID));
+                                @Html.Raw(renderChindren(level, Model, nodes))
+                            }
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <td colspan="6" style="text-align:right;">
+                                </td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@helper renderChindren(int level, IEnumerable<MenuViewModel> nodes, IEnumerable<MenuViewModel> parent)
+{
+
+level++;
+var no = 1;
+foreach (var node in parent.OrderBy(x => x.No))
+{
+    var left = (level <= 1) ? 10 : (level - 1) * 50;
+        <tr itemid="@node.Id">
+            <td style="padding-left:@(left)px"> @Html.Raw(node.Icon) @node.Name</td>
+            <td>@no</td>
+            <td>
+                @(((MenuOpenStyleEnum)(node.OpenStyle)).ToDescription())
+                @if (node.OpenStyle == (int)MenuOpenStyleEnum.Dialog)
+                {
+                    <span>(@node.Width</span><span> X </span><span>@node.Height)</span>
+                }
+            </td>
+            <td>@node.URL</td>
+            <td>@(node.IsMustSelected ? "是" : "否")</td>
+            <td style="padding:4px">
+                @Html.Partial("_MenuPartial")
+            </td>
+        </tr>
+    var ps = nodes.Where(x => x.ParentID == node.Id).ToList();
+    @renderChindren(level, nodes, ps);
+    no++;
+}
+}

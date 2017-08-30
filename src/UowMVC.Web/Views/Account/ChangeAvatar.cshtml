@@ -1,0 +1,97 @@
+﻿@using UowMVC.Web.Models;
+@model ChangeAvatarModel
+@{
+    ViewBag.Title = "修改头像";
+}
+<link rel="stylesheet" href="~/vender/Jcrop-0.9.12/css/jquery.Jcrop.min.css">
+<script src="~/vender/Jcrop-0.9.12/js/jquery.Jcrop.min.js"></script>
+
+<div class="panel bk-bg-white">
+    <div class="panel-heading">
+        <div class="row">
+            <div class="col-xs-8 text-left bk-vcenter">
+                <h6 class="bk-margin-off">修改头像</h6>
+            </div>
+            <div class="col-xs-4 bk-vcenter text-right">
+            </div>
+        </div>
+    </div>
+    <div class="panel-body">
+        <div class="row profile" style="padding:10px 10px ">
+            <div class="col-xs-6">
+                <form method="post" class="form-horizontal form-bordered">
+                    <div class="form-group">
+                        <img id="element_id" src="@Model.Image?w=@Model.ImageWidth&h=@Model.ImageHeight" />
+                    </div>
+                    <div class="form-group">
+                        @Html.HiddenFor(x => x.ImageId)
+                        @Html.HiddenFor(x => x.X1)
+                        @Html.HiddenFor(x => x.X2)
+                        @Html.HiddenFor(x => x.Y1)
+                        @Html.HiddenFor(x => x.Y1)
+                        @Html.HiddenFor(x => x.Width)
+                        @Html.HiddenFor(x => x.Height)
+                        @Html.HiddenFor(x => x.ImageWidth)
+                        @Html.HiddenFor(x => x.ImageHeight)
+                        <button type="submit" class="bk-margin-5 btn btn-info">保存头像</button>
+                    </div>
+                </form>
+            </div>
+            <div class="col-xs-6">
+                <div id="preview-pane">
+                    <div class="preview-container">
+                        @*<img src="@Model.Image?w=100" class="jcrop-preview" alt="Preview" style="width: 100px; height: 100px;">*@
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    $(function () {
+        var $preview = $('#preview-pane'),
+             $pcnt = $('#preview-pane .preview-container'),
+             $pimg = $('#preview-pane .preview-container img'),
+           xsize = $pcnt.width(),
+        ysize = $pcnt.height();
+
+        $("#element_id").Jcrop({
+            onChange: showCoords,
+            onSelect: showCoords,
+            aspectRatio: 1 / 1
+        }, function () {
+            // Use the API to get the real image size
+            var bounds = this.getBounds();
+            boundx = bounds[0];
+            boundy = bounds[1];
+            // Store the API in the jcrop_api variable
+            jcrop_api = this;
+
+            // Move the preview into the jcrop container for css positioning
+            $preview.appendTo(jcrop_api.ui.holder);
+        });
+
+        function showCoords(c) {
+            console.log(c);
+            // updatePreview(c);
+            $('#X1').val(c.x);
+            $('#X2').val(c.x2);
+            $('#Y1').val(c.y);
+            $('#Y2').val(c.y2);
+            $('#Width').val(c.w);
+            $('#Height').val(c.h);
+        }
+        function updatePreview(c) {
+            if (parseInt(c.w) > 0) {
+                var rx = xsize / c.w;
+                var ry = ysize / c.h;
+                $pimg.css({
+                    width: Math.round(rx * boundx) + 'px',
+                    height: Math.round(ry * boundy) + 'px',
+                    marginLeft: '-' + Math.round(rx * c.x) + 'px',
+                    marginTop: '-' + Math.round(ry * c.y) + 'px'
+                });
+            }
+        }
+    })
+</script>

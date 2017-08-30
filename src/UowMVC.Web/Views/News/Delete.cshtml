@@ -1,0 +1,25 @@
+﻿@using UowMVC.Web.Models;
+@model MultiDeleteModel
+
+<form method="post" class="form-horizontal form-bordered">
+    <div class="form-group">
+        <div class="col-sm-12">
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    @Html.HiddenFor(x => x.Id)
+    <div class="modal-wrapper">
+        <div class="modal-icon">
+            <i class="fa fa-trash-o"></i>
+        </div>
+        <div class="modal-text">
+            <h4 class="alert-heading">删除</h4>
+            <p>确认批量删除选中的<b>@Model.Count</b>条数据?</p>
+            <p>
+                <button type="submit" class="bk-margin-5 btn btn-danger">确认</button>
+                <button type="button" class="bk-margin-5 btn btn-info" onclick="closeDialog();">取消</button>
+            </p>
+        </div>
+    </div>
+
+</form>

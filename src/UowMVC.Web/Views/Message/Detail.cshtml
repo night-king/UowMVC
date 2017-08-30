@@ -1,0 +1,71 @@
+﻿@using Webdiyer.WebControls.Mvc;
+@using UowMVC.Models;
+@using UowMVC.Domain;
+
+@model MessageViewModel
+@{
+    ViewBag.Title = "我的消息";
+}
+
+<div class="row mailbox">
+    <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12" id="message-menu-body">
+
+    </div>
+    <div class="col-lg-9 col-md-8 col-sm-8 col-xs-12">
+        <div class="panel bk-bg-white">
+            <div class="panel-heading">
+                <div class="row">
+                    <div class="col-md-8 col-lg-10">
+                        <h6><i class="fa fa-star"></i><b>@Model.Title</b></h6>
+                        <p><span>发件人：</span>
+                            @if (Model.Sender != null)
+                            {
+                                <span>@Model.Sender.Name</span>
+                            }
+                        </p>
+                        <p><span>时   间：</span>@Model.CreateAt.ToString("yyyy-MM-dd HH:mm:ss")</p>
+                        <p>
+                            <span>收件人：</span>
+                            @if (Model.Accepter != null)
+                            {
+                                <span>@Model.Accepter.Name</span>
+                            }
+                        </p>
+                    </div>
+                    <div class="col-md-4 col-lg-2" style="text-align:right;padding:20px 10px;">
+                        @if (Model.Sender != null)
+                        {
+                            <img src="@Model.Sender.Avatar" class="img-circle" style="width:40px;height:40px;" />
+                            <div>
+                                <span>@Model.Sender.Name</span>
+                            </div>
+
+                        }
+                    </div>
+                </div>
+            </div>
+            <div class="panel-body">
+                @Html.Raw(Model.Content)
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    $(function () {
+        loadMenu();
+    })
+    function loadMenu() {
+        $('#message-menu-body').empty().append("<div style=\"margin:40% 0;text-align:center;\"><img src=\"/images/loading-small.gif\" style=\"vertical-align:middle;\"/><span>  加载中...</span></div>");
+        $.ajax({
+            type: "POST",
+            url: "/Message/_Mail_Menu_Partial",
+            datatype: "html",
+            success: function (html) {
+                $('#message-menu-body').empty().append(html);
+            },
+            error: function () {
+                $('#message-menu-body').empty().append('<span>加载失败</span>');
+            }
+        });
+    }
+</script>

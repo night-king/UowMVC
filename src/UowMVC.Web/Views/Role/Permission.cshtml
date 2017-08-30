@@ -1,0 +1,178 @@
+﻿@using UowMVC.Models;
+@model List<RolePermissionViewModel>
+@{
+    ViewBag.Title = "分配权限";
+}
+<div class="row">
+    <div class="col-lg-12">
+        <div class="panel bk-bg-white" style="margin-bottom:2px;">
+            <div class="panel-body mailbox-btn-action" style="padding:0">
+                <div class="col-sm-4 col-xs-12" style="padding-left:10px;padding-top:10px">
+                    <h5><b> @ViewBag.roleName</b></h5>
+                </div>
+                <div class="col-sm-8 col-xs-12">
+                    <div class="bk-padding-5">
+                        <div class="input-group input-search page-toolbars" style="text-align:right">
+                            <div class="bk-margin-5">
+                                <form id="form1" method="post">
+                                    <input type="hidden" id="Id" name="Id" value="@ViewBag.Id" />
+                                    <div id="inputcols"></div>
+                                    <button type="button" id="btn-submit" class="btn btn-primary btn-sm pull-right" role="button">保存</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-12">
+        <div class="panel panel-default bk-bg-white">
+            <div class="panel-body">
+                <div class="table-responsive">
+                    <table class="table table-condensed table-hover">
+                        <thead>
+                            <tr>
+                                <th>名称</th>
+                                <th>序号</th>
+                                <th>链接</th>
+                                <th>图标</th>
+                                <th style="width:100px;padding:4px">
+                                    <div class="checkbox-custom checkbox-inline">
+                                        <input type="checkbox" id="checkbox-all" />
+                                        <label for="inline-checkbox3">全选</label>
+                                    </div>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @{
+                                int sum = 0;
+                                int no = 1;
+                                foreach (var menu in Model.Where(x => string.IsNullOrEmpty(x.ParentID)).OrderBy(x => x.No))
+                                {
+                                    <tr itemid="@menu.MenuID">
+                                        <td>@menu.Name</td>
+                                        <td>@no</td>
+                                        <td>@menu.URL</td>
+                                        <td> @Html.Raw(menu.Icon)</td>
+                                        <td style="padding:4px">
+                                            <div class="checkbox-custom checkbox-inline">
+                                                @if (menu.IsChecked)
+                                                {
+                                                    <input type="checkbox" class="checkbox" itemid="@menu.MenuID" name="inline-checkbox3" isckecked="true" checked />
+                                                }
+                                                else
+                                                {
+                                                    <input type="checkbox" class="checkbox" itemid="@menu.MenuID" name="inline-checkbox3" isckecked="false" />
+                                                }
+                                                <label for="inline-checkbox3"></label>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    var pages = Model.Where(x => x.ParentID == menu.MenuID).OrderBy(x => x.No);
+                                    if (pages != null && pages.Count() > 0)
+                                    {
+                                        int no2 = 1;
+                                        foreach (var page in pages)
+                                        {
+                                            <tr itemid="@page.MenuID">
+                                                <td style="padding-left:50px">@page.Name</td>
+                                                <td><span>@no</span>-<span>@no2</span></td>
+                                                <td>@page.URL</td>
+                                                <td> @Html.Raw(page.Icon)</td>
+                                                <td style="padding:4px">
+                                                    <div class="checkbox-custom checkbox-inline">
+                                                        @if (page.IsChecked)
+                                                        {
+                                                            <input type="checkbox" class="checkbox" itemid="@page.MenuID" fatherid="@menu.MenuID" isckecked="true" checked />
+                                                        }
+                                                        else
+                                                        {
+                                                            <input type="checkbox" class="checkbox" itemid="@page.MenuID" fatherid="@menu.MenuID" isckecked="false" />
+                                                        }
+                                                        <label for="inline-checkbox3"></label>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            var buttons = Model.Where(x => x.ParentID == page.MenuID).OrderBy(x => x.No);
+                                            if (buttons != null && buttons.Count() > 0)
+                                            {
+                                                int no3 = 1;
+                                                foreach (var button in buttons)
+                                                {
+                                                    <tr itemid="@button.MenuID">
+                                                        <td style="padding-left:90px"> @button.Name</td>
+                                                        <td><span>@no</span>-<span>@no2</span>-<span>@no3</span></td>
+                                                        <td>@button.URL</td>
+                                                        <td> @Html.Raw(button.Icon)</td>
+                                                        <td style="padding:4px">
+                                                            <div class="checkbox-custom checkbox-inline">
+                                                                @if (button.IsChecked)
+                                                                {
+                                                                    <input type="checkbox" class="checkbox" itemid="@button.MenuID" fatherid="@menu.MenuID @page.MenuID" isckecked="true" checked />
+                                                                }
+                                                                else
+                                                                {
+                                                                    <input type="checkbox" class="checkbox" itemid="@button.MenuID" fatherid="@menu.MenuID @page.MenuID" isckecked="false" />
+                                                                }
+                                                                <label for="inline-checkbox3"></label>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                    no3++; sum++;
+                                                }
+                                            }
+                                            no2++; sum++;
+                                        }
+                                    }
+                                    no++; sum++;
+                                }
+                            }
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <td colspan="5" style="text-align:right;">
+                                    共计 @sum 条记录
+                                </td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(function () {
+        $("#btn-submit").click(function () {
+            $('#inputcols').empty();
+            $(".checkbox[isckecked=true]").each(function (i, item) {
+                $('#inputcols').append('<input type="hidden" name="Menu" value="' + $(item).attr("itemid") + '">');
+            });
+            $('#form1').submit();
+        });
+        $("#checkbox-all").click(function () {
+            $(".checkbox").prop("checked", this.checked).attr("isckecked", this.checked);
+        });
+        $(".checkbox").click(function () {
+            var itemid = $(this).attr("itemid");
+            $(this).attr("isckecked", this.checked);
+            $(".checkbox[fatherid*=" + itemid + "]").prop("checked", this.checked).attr("isckecked", this.checked);
+            if (this.checked) {
+                var fatherid = $(this).attr("fatherid");
+                if (fatherid) {
+                    $("input[itemid=" + fatherid + "]:eq(0)").prop("checked", this.checked)
+                }
+            }
+        });
+    });
+
+</script>
+
+
+
+
