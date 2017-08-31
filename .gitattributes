@@ -13,7 +13,7 @@
 *.png 	binary
 *.gif 	binary
 
-*.cs text=csharp diff=csharp 
+*.cs text=c# diff=csharp 
 *.vb text=auto
 *.resx text=auto
 *.c text=auto
@@ -24,10 +24,10 @@
 *.py text=auto
 *.rb text=auto
 *.java text=auto
-*.html text=csharp
-*.htm text=csharp
-*.cshtm text=csharp
-*.css text=csharp
+*.html text=c#
+*.htm text=c#
+*.cshtm text=c#
+*.css text=c#
 *.scss text=auto
 *.sass text=auto
 *.less text=auto
@@ -44,10 +44,10 @@
 *.fsx text=auto
 *.hs text=auto
 
-*.csproj text=csharp
+*.csproj text=c#
 *.vbproj text=auto
 *.fsproj text=auto
 *.dbproj text=auto
-*.sln text=csharp eol=crlf
+*.sln text=c# eol=crlf
 
 *.sh eol=lf
