@@ -24,8 +24,9 @@
 *.py text=auto
 *.rb text=auto
 *.java text=auto
-*.html text=auto
-*.htm text=auto
+*.html text=C#
+*.htm text=C#
+*.cshtm text=C#
 *.css text=auto
 *.scss text=auto
 *.sass text=auto
