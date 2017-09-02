@@ -27,4 +27,4 @@ Wiki: https://github.com/night-king/UowMVC/wiki
 
 5.基于UowMVC + WeixinSDK (https://github.com/night-king/weixinSDK) 
   
-  计划开发微信公众号管理系统：UowMVC-Weixin（https://github.com/night-king/UowMVC-Weixin） ，Star过 1000，正式启动，O(∩_∩)O。
+  计划开发微信公众号管理系统：UowMVC-Weixin ( https://github.com/night-king/UowMVC-Weixin ) ，Star过 1000，正式启动，O(∩_∩)O。
