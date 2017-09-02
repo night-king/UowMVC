@@ -23,4 +23,4 @@ Wiki: https://github.com/night-king/UowMVC/wiki
 
 3.欢迎加入讨论组：279717371（敲门砖：UowMVC）
 
-4.基于此项目开发了灵活轻量级的CMS系统：CMSUowMVC-CMS，欢迎订阅：https://github.com/night-king/UowMVC-CMS
+4.基于此项目开发了灵活轻量级的CMS系统：UowMVC-CMS，欢迎订阅：https://github.com/night-king/UowMVC-CMS
