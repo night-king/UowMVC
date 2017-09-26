@@ -6,6 +6,8 @@ A simple, lightweight ASP.net MVC framework base on Unit of work pattern.
 
 Demo: http://uowmvc.deepleo.com  admin 123456
 
+Admin Theme: http://uowmvc.com/npts_10_cvl.zip
+
 Wiki: https://github.com/night-king/UowMVC/wiki
 
 
