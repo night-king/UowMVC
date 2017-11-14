@@ -25,8 +25,4 @@ Wiki: https://github.com/night-king/UowMVC/wiki
 
 3.欢迎加入讨论组：279717371（敲门砖：UowMVC）
 
-4.基于此项目开发了灵活轻量级的CMS系统：UowMVC-CMS，欢迎订阅：https://github.com/night-king/UowMVC-CMS
-
-5.基于UowMVC + WeixinSDK (https://github.com/night-king/weixinSDK) 
-  
-  计划开发微信公众号管理系统：UowMVC-Weixin ( https://github.com/night-king/UowMVC-Weixin ) ，Star过 1000，正式启动，O(∩_∩)O。
+4.基于此项目开发了灵活轻量级的CMS系统：UowMVC-Mutoulin，欢迎体验：https://www.mutoulin.com/
