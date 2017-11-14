@@ -25,4 +25,4 @@ Wiki: https://github.com/night-king/UowMVC/wiki
 
 3.欢迎加入讨论组：279717371（敲门砖：UowMVC）
 
-4.基于此项目开发了灵活轻量级的CMS系统：UowMVC-Mutoulin，欢迎体验：https://www.mutoulin.com/
+4.基于此项目开发的系统：UowMVC-Mutoulin，欢迎体验：http://www.mutoulin.com/
