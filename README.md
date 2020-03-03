@@ -4,9 +4,9 @@ A simple, lightweight ASP.net MVC framework base on Unit of work pattern.
 
 一个简单的、轻量级、兼容移动端的基于Unit of work工作单元模式的ASP.net MVC快速开发框架。
 
-Demo: http://uowmvc.com  admin 123456
+Demo: http://uowmvc.deepleo.com  admin 123456
 
-Admin Theme: http://uowmvc.com/npts_10_cvl.zip
+Admin Theme: http://uowmvc.deepleo.com/npts_10_cvl.zip
 
 Wiki: https://github.com/night-king/UowMVC/wiki
 
