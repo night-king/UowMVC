@@ -15,7 +15,6 @@ namespace UowMVC.Repository
         IDbSet<T> Set<T>() where T : class;
         void Commit();
 
-        DefaultDataContext Context { get; }
     }
     [Serializable]
     public class EntityValidationException : Exception
@@ -36,10 +35,6 @@ namespace UowMVC.Repository
     public class UnitOfWork : IUnitOfWork
     {
         private DefaultDataContext _context;
-        public DefaultDataContext Context
-        {
-            get { return _context; }
-        }
         public UnitOfWork(DefaultDataContext context)
         {
             _context = context;
